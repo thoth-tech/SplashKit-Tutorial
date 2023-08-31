@@ -8,8 +8,8 @@ In this tutorial we are going the cover how to build splashkit core library in o
 
 - Download and Install MSYS in https://www.msys2.org/
 - prompt these commands:
->pacman -S git --noconfirm --disable-download-timeout
->bash <(curl -s https://raw.githubusercontent.com/splashkit/skm/master/install-scripts/skm-install.sh)
+```pacman -S git --noconfirm --disable-download-timeout```
+```bash <(curl -s https://raw.githubusercontent.com/splashkit/skm/master/install-scripts/skm-install.sh)```
 - promt skm ensure everything is good to go
 - Install compilers:
 >pacman --disable-download-timeout -S mingw-w64-{x86_64,i686}-gcc mingw-w64-{i686,x86_64}-gdb
