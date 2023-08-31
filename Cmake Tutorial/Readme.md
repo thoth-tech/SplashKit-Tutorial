@@ -21,7 +21,7 @@ In this tutorial we are going the cover how to build splashkit core library in o
 - fork and clone splashkit:
 >git clone --recursive -j2 https://github.com/<username>/splashkit-core.git
 
-[I have made a script that automatically run everything below, check "issue troubleshot and other things (On windows)"]
+[I have made a script that automatically runs everything below, check "issue troubleshot and other things (On windows)"]
 - Change directory and run cmake:
 >cd projects/cmake
 >cmake -G "Unix Makefiles" .
