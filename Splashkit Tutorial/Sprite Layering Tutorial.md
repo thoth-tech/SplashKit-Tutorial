@@ -114,3 +114,6 @@ while (!quit_requested()){
 ```
 That's all the code implementation, here's the result:
 
+https://github.com/MangoS9/SplashKit-Tutorial/assets/128771372/1ff549f6-2207-41f9-bb06-d47bf9b2f1d5
+
+
