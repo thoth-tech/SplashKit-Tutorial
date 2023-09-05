@@ -15,7 +15,7 @@ Before diving into this tutorial, it is essential to have the following prerequi
    understanding of coding practices.
 1. **C++/C# Programming Language:** Understanding of the C++ and/or C# programming languages,
    including variables, functions, loops, and conditional statements.
-1. **Integrated Development Environment (IDE):** An IDE set up for C development, such as
+1. **Integrated Development Environment (IDE):** An IDE set up for C++ development, such as
    [Visual Studio Code](https://code.visualstudio.com/)
 1. **Splashkit Framework:** Installation of the Splashkit framework on your system. You can find
    installation instructions for your operating system on the
