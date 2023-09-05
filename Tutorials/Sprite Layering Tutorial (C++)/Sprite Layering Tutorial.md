@@ -1,8 +1,17 @@
-# Tutorial: Sprite Layering
+## Title: Sprite Layering tutorial
+### Introduction
 In this tutorial, we are going to cover the concept of sprite layering. Before we get dive into it let's look at what does layering mean. Before we dive into it, let's first understand what layering means. Think of layers like sheets of paper stacked on top of each other. In short, layering involves stacking 'layers' on top of each other to achieve the desired result.
 Here's an example of layering looks like:
 [I Made the PERFECT 3D Pokémon Cards!!! by Jazza](https://www.youtube.com/watch?app=desktop&v=JCfpVvy5Rhs)
-## Apply the method to Splashkit sprite
+
+### Functions Used (Link to Splashkit documentation)
+
+1. [Create Sprite](https://splashkit.io/api/sprites/#create-sprite)
+2. [Sprite Add Layer](https://splashkit.io/api/sprites/#sprite-add-layer)
+3. [Sprite Hide Layer](https://splashkit.io/api/sprites/#sprite-hide-layer-named)
+4. [Sprite Show Layer](https://splashkit.io/api/sprites/#group-sprite-show-layer)
+
+### Apply the method to Splashkit sprite
 To demonstrate this, we are going to create a simple move around program which uses 4 custom made sprite images. Those 4 images represent 4 sided face:
 ```
 LEFT
@@ -115,5 +124,25 @@ while (!quit_requested()){
 That's all the code implementation, here's the result:
 
 https://github.com/MangoS9/SplashKit-Tutorial/assets/128771372/1ff549f6-2207-41f9-bb06-d47bf9b2f1d5
+
+### Other functions 
+While this is one basic example of using layering, there are other functions that we haven't use but it's good to know them incase we ever needed them:
+1. [sprite_bring_layer_to_front(sprite s, int visible_layer)](https://splashkit.io/api/sprites/#sprite-bring-layer-to-front) : Brings the layer to the front of other layers
+2. [sprite_bring_layer_forward(sprite s, int visible_layer) ](https://splashkit.io/api/sprites/#sprite-bring-layer-forward) : Bring a layer 1 step forward of another layer.
+
+### Expected Learning Outcomes
+
+The learning outcome that the reader can expect to have gained after completing this series of
+tutorials is to have gained an understanding of Sprite Layering, including a theoretical
+understanding of the concept including how Splashkit specifically interacts with layered sprites, as
+well as a practical showcase of the concept
+
+### Conclusion
+
+The importance of this tutorial comes from the required ability to be able further interact with
+Sprites as apart of the Splashkit library. Easing workflows and system process management via Sprite
+layering rather than raw Sprite manipulation and management allows for a greater understanding of
+the framework and concept as a whole and further entrenches students with the ability to use and
+understand Sprites.
 
 
