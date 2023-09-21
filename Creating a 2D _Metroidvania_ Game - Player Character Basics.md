@@ -26,15 +26,20 @@ Following the tutorial of a game concept, where you have mapped out your ideas a
 
 Depending on your style of gameplay, you may require more, or less user inputs. For a top down style of gameplay (Such as Undertale) ![Undertale](https://coal.gamemaker.io/sites/5d75794b3c84c70006700381/content_entry5e6a48c646214800085d75a1/5f4d1565dbb160000725787c/files/1-undertale.png?1678442263)
 You may find you require Up, Down, left and right inputs. This can be mapped to WASD, or your arrow keys. This would also require the use of collision detection, such as your walls and maping specific paths according to your map. For typical side scroller Mario like games, you would utilise left and right arrow keys for movement, and either the Up button for jumping or a different specified key (space bar, W, etc), or down to enter new areas (like pipes)
+
 ![Mario](https://i.insider.com/560ebbe7dd0895325c8b458e?width=700)
+
 Keep in mind the style, and how you want your character to move - Are they moving left to right in a side scroller, can they go up and enter new rooms? These are things to keep in mind.
 
 For this tutorial, we will use the basic left and right side scrolling pattern for our user inputs, and using a rectangle to represent our character. Please keep in mind that when drawing your character to make them still visible.
 
 ## Creating Your Character.
 You have created your window, you have a bitmap loaded, and you have drawn yourself a rectangle from the previous tutorial.
+
 🎉 Congratulations. 🎉
+
 ![Celebration](https://media.gettyimages.com/id/542095594/photo/birthday-party-in-the-office.jpg?s=612x612&w=gi&k=20&c=UhvAsMS7-SHC2XzGdM3qv84JSMe8wviEVbGrpjM5WGI=)
+
 You're on your way to making your first game. Although this is just the beginning, take a chance to appreciate the hard work you've put in into learning a new coding language and embiggen your creativity. Celebrate every little victory, even this one.
 
 Let's make some minor adjustments to our coding.
