@@ -3,12 +3,15 @@
 ## Basics of an environment
 Metroidvania games typically feature a large, interconnected world where various areas are linked together. Players should be able to revisit previous locations with newfound abilities to access previously unreachable areas. This interconnectedness encourages exploration and backtracking. As such, an environment should include obstacles or barriers that require specific abilities or items to overcome. These act as progression gates, motivating players to acquire new skills or items to advance. Examples include locked doors, high ledges, or hazardous terrain. Environments should vary in terms of aesthetics and gameplay challenges. Different biomes or areas can have unique visual themes, enemies, and obstacles, providing a sense of variety and discovery as players explore the world. 
 An example of this can be seen within Legend of Zelda.
+
 ![LoZ](https://cdn.wikimg.net/en/strategywiki/images/thumb/0/03/TLOZMM_Termina_Field_Map.jpg/600px-TLOZMM_Termina_Field_Map.jpg)
+
 As you can see, we have 4 different areas that contain different biomes. We have a Snowhead Region, of ice, winter and cold. Ikana region of sand, caves and deserts. Woodfall Region, of grassy forests and lakebeds. And Great Bay Region, for the ocean and water theme of biomes. Each area, biome and landmark holds significance in providing the user various areas that are linked together, can be revisted, and provide variety in terms of skills and problem solving. And as such, each area conveys their own feelings; they contain their own soundtracks, their own atmosphere and their own significant role.
 
 Environment, and in conjunction, level design is designed to be both open and explorative, and within this tutorial, we will discuss creating an environment with bitmaps and sprites to create an open environment.
 ## Colour schemes and what makes a good environment
 Before we design and work on applying environments to our Metroidvania style game, let's look at some examples to inspire us.
+
 ![Undertale Ending](https://i.pinimg.com/564x/62/a1/2e/62a12edf977bd901f3a92024d86d5013.jpg)
 ![Example 2](https://i.pinimg.com/564x/f9/0c/46/f90c4678fcdba1e53e1596a90582569e.jpg)
 ![Example 3](https://i.pinimg.com/564x/38/f4/93/38f49380c10015dcc9f1007ace85e870.jpg)
@@ -38,6 +41,7 @@ Regardless of the style of art you decide to venture down (which is typically ce
 ![Simple Pixel](https://qph.cf2.quoracdn.net/main-qimg-09c3f49439fcb263b57bc9a4ce907bd8-lq)
 ![Detailed pixel](https://qph.cf2.quoracdn.net/main-qimg-3b04ff295dcb2a379bbe2237ee526a87-lq)
 ![Hollow Knight](https://qph.cf2.quoracdn.net/main-qimg-621803903906ad642ba1c5a4d545b92f-lq)
+
 I've chosen these 3 different variants of pixel art to demonstrate your environments and atmospheres.
 The reason these 3 examples are chosen is to show you how less can be more. Example 1 is 'typical' pixel art; you can make out each individual 'pixel' and its rough and blocky. But the detail is limited - there is not a lot of shading or highlighting, and simply uses basic shapes. Similar to your traditional Super Mario Bros. Example 2 is more "detailed" but is still pixel art - it's smoother, uses highlights and shading, but is limited to its schemes and colours. and Example 3 is the most detailed pixel art - because it doesn't look like pixel art. Its smooth, and curved and rounded. And doesn't depict traditional pixel games.
 But, looking over all 3 examples, we can see that less is more. You can achieve more detail, and even assume textures and feelings by limited how much is shown, and letting the mind fill in the blanks. Even in art styles as "simple" as example 1 can still provide a level of detail - We can see blood having dripped on the walls, the lit fuses and the "3d" design of the floor. 
@@ -57,6 +61,7 @@ Just as we did with our background function, which is:
 
 We can use the same function for our tiles. 
 ![Example](https://i.ibb.co/vHNvJzD/image-2023-09-17-040617935.png)
+
 As you can see in my example, I have made a few changes. I have added a new pixel art background, and added in 5 new sprites of grass. 
 
 The way we can use this line of grass sprites can be done in multiple ways.
@@ -261,6 +266,7 @@ With this coding example, you'll have created a ground you can walk upon with yo
 
 # Celebrate
 ![Celebrate](https://static9.depositphotos.com/1594308/1166/i/450/depositphotos_11666010-stock-photo-festive-atmosphere.jpg)
+
 Congratulations. You have used a looping function to create a repititon of bitmap to create your ground. With the knowledge you have obtained, you can create an environment that specifically allows sprites to sit in specific areas, and add layers to your environment to create an adaptive and thrilling atmosphere determined by your goals.
 In the inspiring words of Triple H:
 ![Triple H](https://www.azquotes.com/picture-quotes/quote-this-game-is-not-over-it-is-just-beginning-triple-h-63-29-46.jpg)
