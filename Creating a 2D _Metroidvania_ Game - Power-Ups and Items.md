@@ -13,7 +13,9 @@ While these are bare and simple, they provide an important plan for our metroidv
 
 These same items, and power-ups, can also be used for secondary gameplay goals - Completing side quests, hidden secrets, or simply achieving 100% completion simply for the sake of finding every nook and cranny. If you want to go the extra step for secondary gameplay goals, there is no harm in being inspired from older games.
 Take for instance, DOOM II, a classic MS-DOS First Person Shooter (FPS). The level 'Icon of Sin' played a particularly chilling message - a reverse message. Although originally pressumed to be saying "I will lie in bricks at the end of the ambush", it was actually a secret message by one of their own developers; John Romero. 
+
 ![John Romero](https://i.imgur.com/FH2ZuNV.jpg)
+
 This gruesome stake of a developers head is fitting for the game of DOOM II, but we're not here to reminisce of old games (Although, that would be very fun); This little easter egg for players to find within DOOM II was the **true** final boss of DOOM II. 
 Here's a video of the easter egg in action: https://www.youtube.com/watch?v=NpcN1rX8tno
 As we can see within DOOM II, we can see the following:
