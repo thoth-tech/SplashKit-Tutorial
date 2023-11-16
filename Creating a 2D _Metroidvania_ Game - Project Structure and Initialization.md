@@ -5,11 +5,11 @@ Creating a 2D Metroidvania game involves not just creativity and vision, but als
 ## Project Structure: Organizing Your Game's Framework
 A well-organized project structure is crucial for efficient game development. It helps in maintaining the code, assets, and other resources in an orderly manner. Here’s a basic structure you can follow:
 
-- src (Source): This directory contains all the source code files of your game. It typically includes subdirectories for different components like characters, levels, and utilities.
-- assets: This folder houses all the game assets such as images, sprites, audio files, and fonts. Organize them into subfolders like images, sounds, fonts for easy access.
-- lib (Library): Here you store third-party libraries or frameworks that your game might use.
-- docs: Documentation of your game’s design, mechanics, and development notes go here.
-- tests: If your project includes automated tests, they are placed in this directory.
+- **src (Source)**: This directory contains all the source code files of your game. It typically includes subdirectories for different components like characters, levels, and utilities.
+- **assets**: This folder houses all the game assets such as images, sprites, audio files, and fonts. Organize them into subfolders like **images, sounds, fonts** for easy access.
+- **lib (Library)**: Here you store third-party libraries or frameworks that your game might use.
+- **docs**: Documentation of your game’s design, mechanics, and development notes go here.
+- **tests**: If your project includes automated tests, they are placed in this directory.
 
 ## Game Initialization: Laying the Foundation
 Initializing your Metroidvania game involves setting up the game window, loading assets, and preparing the game loop. Here's how to start:
