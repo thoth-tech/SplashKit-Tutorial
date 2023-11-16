@@ -16,31 +16,36 @@ Initializing your Metroidvania game involves setting up the game window, loading
 
 ### 1.Creating the Game Window:
 - The first step in initializing your game is to open a window where your game will be rendered. Determine the size and title of your window based on your game's requirements.
-    open_window("Metroidvania Adventure", 800, 600);
+
+    'open_window("Metroidvania Adventure", 800, 600);'
 
 ### 2.Loading Assets:
 - Set up important game variables such as player health, score counters, or game state flags.
 
+    ```
     bitmap hero_sprite = load_bitmap("hero", "assets/images/hero.png");
     music background_music = load_music("adventure_theme", "assets/sounds/theme.mp3");
-
+    ```
 
 ### 3.Initializing Game Variables:
 - Set up important game variables such as player health, score counters, or game state flags.
 
+    ```
     int player_health = 100;
     int score = 0;
     bool game_over = false; 
+    ```
 
 ### 4.Game Loop:
 - The game loop is where the magic happens. It continuously updates game states and renders the graphics on the screen until the game is exited.
+    ```
     while (!window_close_requested("Metroidvania Adventure"))
-{
-    process_events();
-    update_game();
-    draw_game();
-}
-
+    {
+        rocess_events();
+        update_game();
+        draw_game();
+    }
+    ```
 
 ## Ready to Start Your Adventure
 With the project structure set and the game initialization in place, you're ready to dive deeper into the development of your Metroidvania game. Remember, the way you structure and initialize your game can significantly impact the development process and the final quality of your game.
