@@ -17,7 +17,7 @@ In SplashKit, JSON functionality allows developers to efficiently manage game se
 
 ### Basic Structure of a JSON File
 A simple JSON file might look like this:
-'''
+```
 {
   "gameTitle": "Metroidvania Adventures",
   "screenSize": {
@@ -26,7 +26,7 @@ A simple JSON file might look like this:
   },
   "levels": ["level1", "level2", "level3"]
 }
-'''
+```
 In this example, **gameTitle** is a string, **screenSize** is an object with two numeric values (width and height), and levels is an array of strings.
 
 ### Overview of JSON in SplashKit
@@ -39,14 +39,14 @@ SplashKit simplifies the process of working with JSON files in your games. Wheth
 ### Getting Started with JSON in SplashKit
 To begin using JSON in SplashKit, you need to understand how to include the necessary SplashKit libraries in your project. Here's a simple way to start:
 - 1. Include SplashKit Library:
-'#include "splashkit.h"'
+`#include "splashkit.h"`
 - 2. Load a JSON File:
-'json game_data = load_json("game_data.json");'
+`json game_data = load_json("game_data.json");`
 - 3. Accessing Data:
-'''
+```
 string title = json_read_string(game_data, "gameTitle");
 int width = json_read_int(game_data, "screenSize.width");
-'''
+```
 In the next part of this tutorial, we will delve deeper into reading JSON data, demonstrating how to navigate through JSON objects and arrays to extract various types of data. Stay tuned!
 
 ## Part 2: Reading JSON Data in SplashKit
@@ -57,7 +57,7 @@ After understanding the basics of JSON in SplashKit, this part of the tutorial f
 To work with JSON in SplashKit, the first step is to load the JSON file. SplashKit provides functions to easily handle this.
 
 Example: Loading a JSON File
-'''
+```
 #include "splashkit.h"
 
 int main() {
@@ -74,7 +74,7 @@ int main() {
 
     // Proceed with reading data...
 }
-'''
+```
 
 In this example, **load_json** is used to load the JSON file named **"game_data.json"**. After loading, it's good practice to check if the JSON data is valid using **json_is_invalid**.
 
@@ -83,30 +83,30 @@ JSON data is often structured as a combination of objects and arrays. Understand
 
 ### Accessing Simple Values
 To access simple values like strings, numbers, or booleans, you can use functions like **json_read_string**, **json_read_int**, or **json_read_bool**.
-'''
+```
 string title = json_read_string(game_data, "gameTitle");
 int width = json_read_int(game_data, "screenSize.width");
 bool isFullScreen = json_read_bool(game_data, "fullScreenMode");
-'''
+```
 
 ### Working with JSON Arrays
 If the data is an array, you can loop through the array using **json_read_array_length** and **json_read_string** (or other similar functions).
-'''
+```
 int level_count = json_read_array_length(game_data, "levels");
 for (int i = 0; i < level_count; i++) {
     string level_name = json_read_string(game_data, "levels[" + to_string(i) + "]");
     // Process each level name...
 }
-'''
+```
 
 ### Extracting Different Data Types
 SplashKit's JSON functionality allows you to extract various types of data, including strings, integers, floats, booleans, and even nested JSON objects.
 
 Example: Extracting Nested Data
-'''
+```
 json settings = json_read_object(game_data, "settings");
 int volume = json_read_int(settings, "volume");
-'''
+```
 
 In this example, **json_read_object** is used to extract a nested JSON object, and then values are read from this nested object.
 
@@ -123,7 +123,7 @@ Having covered how to read JSON data in SplashKit, this part of the tutorial wil
 In SplashKit, you can programmatically create JSON objects and arrays, which then can be populated with data.
 
 Example: Creating a New JSON Object
-'''
+```
 #include "splashkit.h"
 
 int main() {
@@ -146,27 +146,27 @@ int main() {
 
     // Proceed with saving the JSON object...
 }
-'''
+```
 In this example, **create_json** is used to create a new JSON object, and **create_json_array** to create a new JSON array. Data is then added to these structures using functions like **json_add_string**, **json_add_number**, and **json_add_to_array**.
 
 ### Writing JSON Data to a File
 After creating and populating a JSON object or array, you can write the data to a file. This is useful for saving configurations or game states.
 
 Example: Saving JSON to a File
-'''
+```
 // Save the JSON object to a file
 save_json(new_game_data, "new_game_data.json");
 
 // Free the JSON object
 free_json(new_game_data);
-'''
+```
 In this example, **save_json** is used to write the JSON data to a file named **"new_game_data.json"**. After saving, it's a good practice to free the JSON object from memory using **free_json**.
 
 ### Modifying Existing JSON Data
 You can also load an existing JSON file, modify its contents, and save the changes back to the file.
 
 Example: Modifying and Saving Existing JSON Data
-'''
+```
 // Load existing JSON data
 json existing_data = load_json("existing_game_data.json");
 
@@ -178,7 +178,7 @@ save_json(existing_data, "existing_game_data.json");
 
 // Free the JSON object
 free_json(existing_data);
-'''
+```
 In this example, an existing JSON file is loaded, modified, and then the changes are saved back to the same file.
 
 ### Conclusion
@@ -192,7 +192,7 @@ This section of the tutorial will demonstrate a practical application of JSON in
 
 ### Step 1: Creating the Game Settings JSON File
 First, we'll create a JSON file named **game_settings.json** that contains some basic settings for the game.
-'''
+```
 {
     "screen": {
         "width": 800,
@@ -204,14 +204,14 @@ First, we'll create a JSON file named **game_settings.json** that contains some 
         "sfxVolume": 80
     }
 }
-'''
+```
 This file includes settings for screen dimensions, fullscreen mode, and audio volumes.
 
 ### Step 2: Reading Game Settings
 Next, we'll write code to load these settings when the game starts.
 
 Example: Loading Game Settings
-'''
+```
 #include "splashkit.h"
 
 json load_game_settings(const string &filename) {
@@ -243,14 +243,14 @@ int main() {
     apply_settings(settings);
     // Rest of the game loop...
 }
-'''
+```
 In this example, the settings are loaded from **game_settings.json**, and then applied using **apply_settings**.
 
 ### Step 3: Modifying and Saving Settings
 Let's add the functionality to modify and save these settings, perhaps from an in-game settings menu.
 
 Example: Modifying and Saving Settings
-'''
+```
 void update_and_save_settings(json &settings, const string &filename) {
     // Update settings based on user input (e.g., from a settings menu)
     json_write_number(settings, "audio.musicVolume", newMusicVolume);
@@ -259,7 +259,7 @@ void update_and_save_settings(json &settings, const string &filename) {
     // Save the updated settings
     save_json(settings, filename);
 }
-'''
+```
 In this example, the **update_and_save_settings** function is used to update and save the settings, which can be triggered from an in-game settings menu.
 
 ### Conclusion
@@ -276,7 +276,7 @@ Often, JSON data structures can be deeply nested. Understanding how to navigate 
 
 Example: Accessing Nested Data
 Consider a JSON structure representing a character with nested attributes:
-'''
+```
 {
     "character": {
         "name": "Hero",
@@ -287,24 +287,24 @@ Consider a JSON structure representing a character with nested attributes:
         }
     }
 }
-'''
+```
 Accessing nested attributes like the character's health can be done as follows:
-'''
+```
 json game_data = load_json("game_data.json");
 int health = json_read_int(game_data, "character.stats.health");
-'''
+```
 
 ### Error Handling and Debugging JSON
 Proper error handling is essential when working with JSON to ensure your game behaves as expected even when encountering malformed or unexpected data.
 
 Example: Robust JSON Reading
-'''
+```
 if (json_has_key(game_data, "character.stats.health")) {
     int health = json_read_int(game_data, "character.stats.health");
 } else {
     write_line("Health data is missing");
 }
-'''
+```
 Here, **json_has_key** is used to check if the health data is present before attempting to read it, preventing potential errors.
 
 ### Conclusion

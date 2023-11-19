@@ -21,7 +21,7 @@ In many platformer games, the camera follows the character in a way that allows 
 3. Updating Camera Position:
     - In your game loop, update the camera position based on the character's position.
     - Ensure the camera movement is smooth and follows the character's movement at the edges of the screen.
-    '''
+    ```cpp
     void update_camera_position(character &player, camera &game_camera) {
     // Define the central area where the camera doesn't move
     rectangle central_area = ...; // Define the central area
@@ -33,7 +33,7 @@ In many platformer games, the camera follows the character in a way that allows 
         game_camera.y = ...; // Logic to update camera y-coordinate
         }
     }
-    '''
+    ```
 
 [Example of Lazy Character Movement](https://www.youtube.com/watch?app=desktop&v=ZYZkLe0r0aY)
 
@@ -51,7 +51,7 @@ Parallax scrolling is a technique where background images move by the camera slo
 
 3. Rendering Backgrounds:
     - Render each background layer in order, from the farthest to the nearest, before rendering the game's main content.
-    '''
+    ```cpp
     void render_backgrounds(camera &game_camera) {
     for (background_layer &layer : background_layers) {
         // Calculate the background's position based on the camera position and layer speed
@@ -59,7 +59,7 @@ Parallax scrolling is a technique where background images move by the camera slo
         draw_bitmap(layer.image, layer.x - parallax_offset, layer.y);
         }
     }
-    '''
+    ```
     In this example, **background_layers** is a collection of background layers, each with its own image, position, and **parallax_speed**.
 
 [Example of Parallax Scrolling](https://www.youtube.com/watch?v=z9tBce8eFqE&t=94s)
