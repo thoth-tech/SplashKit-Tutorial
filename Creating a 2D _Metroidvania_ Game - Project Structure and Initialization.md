@@ -5,11 +5,25 @@ Creating a 2D Metroidvania game involves not just creativity and vision, but als
 ## Project Structure: Organizing Your Game's Framework
 A well-organized project structure is crucial for efficient game development. It helps in maintaining the code, assets, and other resources in an orderly manner. Here’s a basic structure you can follow:
 
-- **src (Source)**: This directory contains all the source code files of your game. It typically includes subdirectories for different components like characters, levels, and utilities.
-- **assets**: This folder houses all the game assets such as images, sprites, audio files, and fonts. Organize them into subfolders like **images, sounds, fonts** for easy access.
-- **lib (Library)**: Here you store third-party libraries or frameworks that your game might use.
-- **docs**: Documentation of your game’s design, mechanics, and development notes go here.
-- **tests**: If your project includes automated tests, they are placed in this directory.
+### Code and Assets Directories:
+- **Source Code(e.g., .cpp/.h files)**: Contains the game’s main codebase, including scripts for gameplay, UI, and game mechanics.
+![Source Example](images/src.jpg)
+- **Assets (e.g. fonts, images, sounds)**: A broad directory that includes all game assets such as sprites, audio files, textures, and scripts. It's often organized into subdirectories for better management.
+![Assets Example](images/assets.jpg)
+
+### Library and External Dependencies:
+- **Libraries (e.g., Slashkit)**: This directory houses external libraries or frameworks your game uses, such as physics engines, rendering tools, or AI systems.
+![Libraries Example](images/lib.jpg)
+
+### Configuration and Build Scripts:
+- **Build Configurations (e.g., 'builds' or 'bin')**: Contains compiled game builds or scripts for building the game on various platforms.
+![Build Example](images/bin.jpg)
+- **Configuration Files**: These may include settings for game engines, development tools, or project-specific configurations.
+![Configuration Example](images/config.jpg)
+
+### Documentation:
+- Holds files related to game design documentation, mechanics explanations, and development notes.
+![Documentation Example](images/doc.jpg)
 
 ## Game Initialization: Laying the Foundation
 Initializing your Metroidvania game involves setting up the game window, loading assets, and preparing the game loop. Here's how to start:
