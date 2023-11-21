@@ -32,7 +32,7 @@ Create a new directory for your project `mkdir my_metroidvania_game`.
 Then enter your project directory `cd my_metroidvania_game`.
 Create a SplashKit C++ project `skm new c++`.
 Now you can see include/SplashKit and program.cpp have been created in the project directory.
-![Example of Create a New SplashKit Project](images/Create%20a%20New%20SplashKit%20Project1.jpg)
+![Example of Create a New SplashKit Project1](images/Create%20a%20New%20SplashKit%20Project1.jpg)
 
 2. **Adding Necessary Folders**: In the **my_metroidvania_game** directory, create the following folders:
 - **src**: To store your source code files.
@@ -40,6 +40,7 @@ Now you can see include/SplashKit and program.cpp have been created in the proje
 - **lib**: To store third-party library files (if you plan to use any).
 
 3. **Moving and Organizing Initial Files**: Move the **program.cpp** file to **src** directory. Create and edit your source code files (.cpp and .h) in the src folder. You can start writing the logic of the game, such as character control, game interface, and the game loop.
+![Example of Create a New SplashKit Project2](images/Create%20a%20New%20SplashKit%20Project2.jpg)
 
 ## Game Initialization: Laying the Foundation
 Initializing your Metroidvania game involves setting up the game window, loading assets, and preparing the game loop. Here's how to start:
