@@ -21,21 +21,71 @@ In many platformer games, the camera follows the character in a way that allows 
 3. Updating Camera Position:
     - In your game loop, update the camera position based on the character's position.
     - Ensure the camera movement is smooth and follows the character's movement at the edges of the screen.
-    ```cpp
-    void update_camera_position(character &player, camera &game_camera) {
-    // Define the central area where the camera doesn't move
-    rectangle central_area = ...; // Define the central area
 
-    // Check if the character is outside the central area
-    if (!rectangle_contains(central_area, player.position)) {
-        // Adjust the camera position to follow the character
-        game_camera.x = ...; // Logic to update camera x-coordinate
-        game_camera.y = ...; // Logic to update camera y-coordinate
-        }
+Here is a Lazy Camera Movement example.
+- The camera gradually follows after player starts moving. This kind of lazy camera movement allows players to better predict and plan their moves, while also enhancing the visual appeal of the game. 
+
+![Lazy Camera Movement Example](images/Lazy%20Character%20Movement.gif)
+
+- The following code demonstrates basic methods to implement lazy camera movement in SplashKit.
+```cpp
+#include "splashkit.h"
+
+// Define the character structure
+struct character {
+    sprite character_sprite;
+    point_2d position;
+};
+
+// Initialize the character
+character create_character() {
+    character result;
+    result.character_sprite = load_sprite("Character", "images/character.png");
+    result.position = point_at(400, 300); // Initial position
+    return result;
+}
+
+// Update the character's position and camera
+void update_character(character &player, camera &game_camera) {
+    // Character movement logic
+    if (key_down(LEFT_KEY)) {
+        player.position.x -= 2;
     }
-    ```
+    if (key_down(RIGHT_KEY)) {
+        player.position.x += 2;
+    }
+    // Additional movement logic...
 
-[Example of Lazy Character Movement](https://www.youtube.com/watch?app=desktop&v=ZYZkLe0r0aY)
+    // Update character sprite position
+    sprite_set_x(player.character_sprite, player.position.x);
+    sprite_set_y(player.character_sprite, player.position.y);
+
+    // Lazy camera logic
+    if (player.position.x < screen_width() / 4) {
+        game_camera.x = player.position.x - screen_width() / 4;
+    }
+    if (player.position.x > 3 * screen_width() / 4) {
+        game_camera.x = player.position.x - 3 * screen_width() / 4;
+    }
+    // Camera Y-axis logic...
+}
+
+int main() {
+    open_window("Metroidvania Game", 800, 600);
+    character player = create_character();
+    camera game_camera = create_camera();
+
+    while (not quit_requested()) {
+        process_events();
+        clear_screen(COLOR_WHITE);
+        update_character(player, game_camera);
+        draw_sprite(player.character_sprite);
+        refresh_screen();
+    }
+    return 0;
+}
+```
+[Example of Lazy Character Movement Video](https://www.youtube.com/watch?app=desktop&v=ZYZkLe0r0aY)
 
 ## Parallax Scrolling for Depth
 Parallax scrolling is a technique where background images move by the camera slower than foreground images, creating an illusion of depth in a 2D scene.
@@ -51,18 +101,51 @@ Parallax scrolling is a technique where background images move by the camera slo
 
 3. Rendering Backgrounds:
     - Render each background layer in order, from the farthest to the nearest, before rendering the game's main content.
-    ```cpp
-    void render_backgrounds(camera &game_camera) {
-    for (background_layer &layer : background_layers) {
-        // Calculate the background's position based on the camera position and layer speed
-        float parallax_offset = game_camera.x * layer.parallax_speed;
-        draw_bitmap(layer.image, layer.x - parallax_offset, layer.y);
-        }
-    }
-    ```
-    In this example, **background_layers** is a collection of background layers, each with its own image, position, and **parallax_speed**.
 
-[Example of Parallax Scrolling](https://www.youtube.com/watch?v=z9tBce8eFqE&t=94s)
+Here is a Parallax Scrolling example.
+- This technique creates an illusion of depth and motion by moving multiple layers of the background at different speeds. This effect gives the scene more dimension and a dynamic feel, often used to enhance visual appeal and create a more immersive user experience.
+
+![Parallax Scrolling Example](images/Parallax%20Scrolling.gif)
+
+- The following code demonstrates basic methods to implement parallax scrolling in SplashKit.
+```cpp
+#include "splashkit.h"
+
+// Define the background layer structure
+struct background_layer {
+    bitmap image;
+    float parallax_speed;
+};
+
+// Render backgrounds with parallax scrolling effect
+void render_backgrounds(camera &game_camera, vector<background_layer> &layers) {
+    for (background_layer &layer : layers) {
+        float parallax_offset = game_camera.x * layer.parallax_speed;
+        draw_bitmap(layer.image, -parallax_offset, 0);
+    }
+}
+
+int main() {
+    open_window("Metroidvania Game", 800, 600);
+    camera game_camera = create_camera();
+
+    // Set up background layers
+    vector<background_layer> layers = {
+        { load_bitmap("background_far", "images/background_far.png"), 0.5 },
+        { load_bitmap("background_near", "images/background_near.png"), 1.0 }
+    };
+
+    while (not quit_requested()) {
+        process_events();
+        clear_screen(COLOR_WHITE);
+        render_backgrounds(game_camera, layers);
+        // Update and draw characters, etc...
+        refresh_screen();
+    }
+    return 0;
+}
+```
+[Example of Parallax Scrolling Video](https://www.youtube.com/watch?v=z9tBce8eFqE&t=94s)
 
 ## Conclusion
 By implementing lazy camera movement and parallax scrolling, you add a significant degree of polish and depth to your 2D "Metroidvania" game. These techniques create a more dynamic and engaging player experience and are staples in modern 2D game design. Experiment with different movement speeds and layering to achieve the desired visual effect for your game.
