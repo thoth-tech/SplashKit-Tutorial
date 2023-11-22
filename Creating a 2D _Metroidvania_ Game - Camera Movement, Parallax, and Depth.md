@@ -11,16 +11,11 @@ In many platformer games, the camera follows the character in a way that allows 
 
 ### Implementing Lazy Camera Movement
 1. Character Positioning:
-    - Keep track of the character's position using a point_2d or similar structure.
+    - Keep track of the character's position using a **sprite** structure.
     - Implement character movement logic allowing them to move freely within a defined central area of the screen.
 
-2. Camera Logic:
-    - Determine the boundaries within which the character can move without moving the camera. This can be a rectangle in the center of the screen.
-    - When the character moves beyond these boundaries, adjust the camera's position to follow the character.
-
-3. Updating Camera Position:
-    - In your game loop, update the camera position based on the character's position.
-    - Ensure the camera movement is smooth and follows the character's movement at the edges of the screen.
+2. Using **center_camera_on**:
+    - Use the **center_camera_on** function to make the camera follow the character. You can specify offsets to adjust the camera's central focus area on the screen.
 
 Here is a Lazy Camera Movement example.
 - The camera gradually follows after player starts moving. This kind of lazy camera movement allows players to better predict and plan their moves, while also enhancing the visual appeal of the game. 
@@ -59,15 +54,6 @@ void update_character(character &player, camera &game_camera) {
     // Update character sprite position
     sprite_set_x(player.character_sprite, player.position.x);
     sprite_set_y(player.character_sprite, player.position.y);
-
-    // Lazy camera logic
-    if (player.position.x < screen_width() / 4) {
-        game_camera.x = player.position.x - screen_width() / 4;
-    }
-    if (player.position.x > 3 * screen_width() / 4) {
-        game_camera.x = player.position.x - 3 * screen_width() / 4;
-    }
-    // Camera Y-axis logic...
 }
 
 int main() {
@@ -77,8 +63,9 @@ int main() {
 
     while (not quit_requested()) {
         process_events();
+        update_character(player);
+        center_camera_on(player.character_sprite, 0, 0); 
         clear_screen(COLOR_WHITE);
-        update_character(player, game_camera);
         draw_sprite(player.character_sprite);
         refresh_screen();
     }
