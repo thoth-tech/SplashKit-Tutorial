@@ -13,7 +13,7 @@ A well-organized project structure is crucial for efficient game development. It
 - **Assets (e.g. fonts, images, sounds)**: A broad directory that includes all game assets such as sprites, audio files, textures, and scripts. It's often organized into subdirectories for better management.
 
 ### Library and External Dependencies:
-- **Libraries (e.g., Slashkit)**: This directory houses external libraries or frameworks your game uses, such as physics engines, rendering tools, or AI systems.
+- **Libraries (e.g., SlashKit)**: This directory houses external libraries or frameworks your game uses, such as physics engines, rendering tools, or AI systems.
 
 ### Configuration and Build Scripts:
 - **Build Configurations (e.g., 'builds' or 'bin')**: Contains compiled game builds or scripts for building the game on various platforms.
@@ -72,7 +72,7 @@ Initializing your Metroidvania game involves setting up the game window, loading
     ```cpp
     while (!window_close_requested("Metroidvania Adventure"))
     {
-        rocess_events();
+        process_events();
         update_game();
         draw_game();
     }
