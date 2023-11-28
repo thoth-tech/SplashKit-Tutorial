@@ -11,6 +11,9 @@ In this tutorial, we will explore implementing level design and progression in a
 2. Level Elements and Challenges:
 - Design levels that contain puzzles and challenges, requiring players to use newly acquired skills or tools to unlock new areas.
 
+Here is an example from the game **Castlevania: Symphony of the Night**. The protagonist needs to acquire the ability to turn into mist to pass through certain areas.
+![Example of Level Design](https://castlevania.fandom.com/wiki/Mist_Form?file=Mist_from%28STON%291.gif)
+
 The following code shows basic methods for implementing level design principles in SplashKit.
 
 ```cpp
@@ -54,7 +57,24 @@ Levels and Layouts:
 - Use JSON files to define the layout, enemy placements, and item locations of levels.
 - Load and parse JSON files in the game to create dynamic levels.
 
-The following code shows basic methods for implementing the use of JSON resources in SplashKit.
+Here is an example.
+If the JSON file has data like:
+```cpp
+{
+    "platforms": [
+        {"x": 100, "y": 150, "width": 200, "height": 20},
+        {"x": 350, "y": 200, "width": 150, "height": 20}
+    ],
+    "enemies": [
+        {"type": "flying", "x": 400, "y": 100},
+        {"type": "ground", "x": 200, "y": 140}
+    ],
+    ...
+}
+```
+The corresponding in-game screenshot should show a level where platforms are placed at the specified x and y coordinates with the given dimensions, and enemies are located where the JSON file places them.
+
+And the following code shows basic methods for implementing the use of JSON resources in SplashKit.
 ```cpp
 #include "splashkit.h"
 #include "json.h"
@@ -85,6 +105,9 @@ int main() {
 Transition Logic:
 - Design logic for smooth transitions between different areas in the game.
 - Use SplashKit functionalities to handle the logic of moving the character from one area to another.
+
+Here is an example from the game **Hollow Knight**. 
+![Example of Area Transitions](images/Transitions.gif)
 
 The following code shows basic methods for implementing area transitions in SplashKit.
 ```cpp
