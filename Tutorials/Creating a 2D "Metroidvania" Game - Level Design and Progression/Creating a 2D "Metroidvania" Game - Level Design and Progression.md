@@ -12,7 +12,7 @@ In this tutorial, we will explore implementing level design and progression in a
 - Design levels that contain puzzles and challenges, requiring players to use newly acquired skills or tools to unlock new areas.
 
 Here is an example from the game **Castlevania: Symphony of the Night**. The protagonist needs to acquire the ability to turn into mist to pass through certain areas.
-![Example of Level Design](https://castlevania.fandom.com/wiki/Mist_Form?file=Mist_from%28STON%291.gif)
+![Example of Level Design](images/level.gif)
 
 The following code shows basic methods for implementing level design principles in SplashKit.
 
