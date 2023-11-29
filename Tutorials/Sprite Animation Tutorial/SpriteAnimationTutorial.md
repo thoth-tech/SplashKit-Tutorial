@@ -254,10 +254,22 @@ void handle_animations(animation player_animation)
 Next, add the following lines inside `handle_animations` to start the walking animations when the character starts walking.
 
 ```cpp
-if (key_typed(LEFT_KEY)) assign_animation(player_animation, "WalkLeft");
-if (key_typed(RIGHT_KEY)) assign_animation(player_animation, "WalkRight");
-if (key_typed(UP_KEY)) assign_animation(player_animation, "WalkBack");
-if (key_typed(DOWN_KEY)) assign_animation(player_animation, "WalkFront");
+if (key_typed(LEFT_KEY)) 
+{
+    assign_animation(player_animation, "WalkLeft");
+}
+if (key_typed(RIGHT_KEY)) 
+{
+    assign_animation(player_animation, "WalkRight");
+}
+if (key_typed(UP_KEY)) 
+{
+    assign_animation (player_animation, "WalkBack");
+}
+if (key_typed(DOWN_KEY)) 
+{
+    assign_animation(player_animation, "WalkFront"); 
+}
 ```
 
 You also need code to stop the walking animations when the character stops moving. The walk animations can be stopped by using `key_released` to assign the standing animations when the movement keys are released.
@@ -265,10 +277,22 @@ You also need code to stop the walking animations when the character stops movin
 ```cpp
 if (!key_down(LEFT_KEY) and !key_down(RIGHT_KEY) and !key_down(UP_KEY) and !key_down(DOWN_KEY))
 {
-	if (key_released(LEFT_KEY)) assign_animation(player_animation, "StandLeft");
-	if (key_released(RIGHT_KEY)) assign_animation(player_animation, "StandRight");
-	if (key_released(UP_KEY)) assign_animation(player_animation, "StandBack");
-	if (key_released(DOWN_KEY)) assign_animation(player_animation, "StandFront");
+    if (key_released(LEFT_KEY)) 
+    {
+        assign_animation(player_animation, "StandLeft");
+    }
+    if (key_released(RIGHT_KEY)) 
+    {
+        assign_animation(player_animation, "StandRight");
+    }
+    if (key_released(UP_KEY)) 
+    {
+        assign_animation(player_animation, "StandBack");
+    }
+    if (key_released(DOWN_KEY)) 
+    {
+        assign_animation(player_animation, "StandFront");
+    }
 }
 ```
 
@@ -291,35 +315,59 @@ The following C++ code example combines all the previous steps to create a sprit
 void handle_animations(animation player_animation)
 {
     // Walking animations
-	if (key_typed(LEFT_KEY)) assign_animation(player_animation, "WalkLeft");
-	if (key_typed(RIGHT_KEY)) assign_animation(player_animation, "WalkRight");
-    if (key_typed(UP_KEY)) assign_animation(player_animation, "WalkBack");
-    if (key_typed(DOWN_KEY)) assign_animation(player_animation, "WalkFront");
-
+    if (key_typed(LEFT_KEY)) 
+    {
+        assign_animation(player_animation, "WalkLeft");
+    }
+    if (key_typed(RIGHT_KEY)) 
+    {
+        assign_animation(player_animation, "WalkRight");
+    }
+    if (key_typed(UP_KEY)) 
+    {
+        assign_animation (player_animation, "WalkBack");
+    }
+    if (key_typed(DOWN_KEY)) 
+    {
+        assign_animation(player_animation, "WalkFront"); 
+    }
+    
     // Standing animations
-	if (!key_down(LEFT_KEY) and !key_down(RIGHT_KEY) and !key_down(UP_KEY) and !key_down(DOWN_KEY))
-	{
-		if (key_released(LEFT_KEY)) assign_animation(player_animation, "StandLeft");
-		if (key_released(RIGHT_KEY)) assign_animation(player_animation, "StandRight");
-        if (key_released(UP_KEY)) assign_animation(player_animation, "StandBack");
-        if (key_released(DOWN_KEY)) assign_animation(player_animation, "StandFront");
-	}
+    if (!key_down(LEFT_KEY) and !key_down(RIGHT_KEY) and !key_down(UP_KEY) and !key_down(DOWN_KEY))
+    {
+        if (key_released(LEFT_KEY)) 
+        {
+            assign_animation(player_animation, "StandLeft");
+        }
+        if (key_released(RIGHT_KEY)) 
+        {
+            assign_animation(player_animation, "StandRight");
+        }
+        if (key_released(UP_KEY)) 
+        {
+            assign_animation(player_animation, "StandBack");
+        }
+        if (key_released(DOWN_KEY)) 
+        {
+            assign_animation(player_animation, "StandFront");
+        }
+    }
 }
 
 int main()
 {
-	// Declare variables for window dimensions
+    // Declare variables for window dimensions
     int width = 800;
     int height = 600;
 
     // Open a game window with specified title and dimensions
     open_window("Sprite Animation", width, height);
 
-	// Load player spritesheet and set its cell details
+    // Load player spritesheet and set its cell details
     bitmap player_sprites = load_bitmap("FrogBmp", "Frog.png");
     bitmap_set_cell_details(player_sprites, 73, 105, 4, 4, 16); // cell width, height, cols, rows, count
 
-	// Load the animation script
+    // Load the animation script
     animation_script player_script = load_animation_script("PlayerScript", "player_animations.txt");
 
     // Create the animation
@@ -328,49 +376,49 @@ int main()
     // Create a drawing option
     drawing_options opt = option_with_animation(player_animation);
 
-	// Declare variables for rectangle dimensions
-	double w = bitmap_cell_width(player_sprites);
-	double h = bitmap_cell_height(player_sprites);
+    // Declare variables for rectangle dimensions
+    double w = bitmap_cell_width(player_sprites);
+    double h = bitmap_cell_height(player_sprites);
 
-	// Calculate the position to center the rectangle
-	double x = width / 2 - w / 2;
-	double y = height / 2 - h / 2;
+    // Calculate the position to center the rectangle
+    double x = width / 2 - w / 2;
+    double y = height / 2 - h / 2;
 
-	// Declare speed of player movement
-	int speed = 5;
+    // Declare speed of player movement
+    int speed = 5;
 
     // Basic event loop
-	while ( not quit_requested() ) 
-	{
-		// Draw the bitmap - using opt to link to animation
+    while ( not quit_requested() ) 
+    {
+        // Draw the bitmap - using opt to link to animation
         clear_screen(COLOR_WHITE);
         draw_bitmap(player_sprites, x, y, opt);
-		refresh_screen(60);
+        refresh_screen(60);
 
         // Update the animation
-		update_animation(player_animation);
+        update_animation(player_animation);
         handle_animations(player_animation);
         
         process_events();
-		
+
         // Player controls
-		if (key_down(LEFT_KEY) and x > 0)
-		{
-			x -= speed;
-		}
-		if (key_down(RIGHT_KEY) and x < width - w)
-		{
-			x += speed;
-		}
-		if (key_down(UP_KEY) and y > 0)
-		{
-			y -= speed;
-		}
-		if (key_down(DOWN_KEY) and y < height - h)
-		{
-			y += speed;
-		}
-	}
+        if (key_down(LEFT_KEY) and x > 0)
+        {
+            x -= speed;
+        }
+        if (key_down(RIGHT_KEY) and x < width - w)
+        {
+            x += speed;
+        }
+        if (key_down(UP_KEY) and y > 0)
+        {
+            y -= speed;
+        }
+        if (key_down(DOWN_KEY) and y < height - h)
+        {
+            y += speed;
+        }
+    }
 }
 ```
 
