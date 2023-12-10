@@ -65,6 +65,9 @@ int main() {
 }
 ```
 
+For instance, in the forest and cave scenes of the game Hollow Knight, you can observe the layering effects of trees and rocks, adding rich details and depth to the game world.
+![Example of Visual Enhancements](images/1.jpg)
+
 ## Transparency and Effects
 ### Implementing transparency for richer visual effects
 Transparency in sprites can be used to create various effects, such as ghost-like appearances, magic effects, or to indicate that an object is not currently interactable. In SplashKit, sprite transparency can be controlled through the alpha channel of the sprite's color.
@@ -110,6 +113,9 @@ int main() {
     return 0;
 }
 ```
+
+In the game Castlevania: Symphony of the Night, the protagonist Alucard uses a variety of magic and skills, some of which display transparency effects, such as transforming into mist. The visual effects of these skills utilize transparency to convey the ethereal nature of these special abilities.
+![Example of Transparency and Effects](images/2.jpg)
 
 ## Gameplay Refinement: Fine-Tuning Animations and Mechanics
 ### Animation Refinement
@@ -221,6 +227,9 @@ int main() {
 }
 ```
 
+In the game Ori and the Blind Forest, the fluidity of Ori's movements, from running and jumping to more complex actions, demonstrates meticulous attention to animation detail. Each movement seamlessly transitions into the next, providing a smooth gameplay experience.
+![Example of Gameplay Refinement](images/3.gif)
+
 ## Optimization Strategies: Performance Optimization and Bug Resolution
 ### Performance Optimization
 In a "Metroidvania" game, performance optimization is crucial to provide a smooth gaming experience, especially as the game complexity increases. Here are some key strategies:
@@ -328,3 +337,22 @@ Reflecting on the journey of creating "Voidbound" with SplashKit provides valuab
 - Discuss the importance of playtesting and feedback in refining the game.
 
 ### Encouraging Future Exploration
+The journey of creating "Voidbound" is just the beginning. You can take the skills and knowledge you have acquired to explore your own game development adventures.
+
+1. Continued Learning and Experimentation:
+- Try different game genres or integrating more complex mechanics and storytelling elements.
+
+Here is an example: 
+#### Addressing Resource Management and Memory Leaks
+In the development of our game "Voidbound", we encountered a common challenge: efficient resource management and preventing memory leaks. In the early stages of development, we noticed that the game began to slow down and even crash after running for a while. Upon investigation, we identified the issue as improper resource management and memory leaks.
+
+**Problem Identification:**
+- A large number of sprites and sound effects were being loaded and created using SplashKit, but they were not being properly released when no longer needed.
+- The continuous loading of the same resources led to an increasing consumption of memory.
+
+**Solution Implementation:**
+- We started implementing stricter resource management in our code. For sprites and other resources that were no longer needed, we ensured to use functions like **release_sprite** to free up memory.
+
+**Lesson Learned:**
+- An important lesson we learned was that ongoing resource management and memory optimization are crucial for maintaining game performance and stability.
+- This challenge highlighted the importance of regular performance assessments during game development to identify and address such issues early.
