@@ -22,6 +22,10 @@ successful use of the `skm new` command on windows as well as a successful compi
 1. **[Installing and compiling a C++ Splashkit programme on windows]**
 
    - Installation of the MSYS2 terminal
+   Download the correct version of MSYS2 (32bit or 64bit depending on your computer)
+   ![MSYS2 Installation Step 1](https://splashkit.io/gifs/windows/1.gif)
+   Run the installer and follow the installation wizard, with default values. (Do not install in a location with spaces in the path!)
+   ![MSYS2 Installation Step 2](https://splashkit.io/gifs/windows/2.gif)
    - Installation of the Splashkit SDK
    - Installation of Visual Studio Code / Language Tools
    - Hello World compile
