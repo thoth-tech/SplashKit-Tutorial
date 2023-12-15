@@ -17,7 +17,7 @@ A well-organized project structure is crucial for efficient game development. It
 
 ### Configuration and Build Scripts:
 - **Build Configurations (e.g., 'bin')**: This section holds compiled game builds or scripts for various platforms. SplashKit usually creates a 'bin' folder for this purpose.
-- **Configuration Files**: Include files for engine settings, development tools, or project-specific configurations. Explain how to configure SplashKit-specific settings here.
+- **Configuration Files**: The .vscode hidden folder contains the common configuration files for IDE settings and project-specific configurations.
 
 ### Documentation:
 - Holds files related to game design documentation, mechanics explanations, and development notes.
@@ -31,7 +31,7 @@ When you start a new project with SplashKit, the generated structure serves as a
 
 2. **Adding Necessary Folders**: In the **my_metroidvania_game** directory, create the following folders:
 - **src**: To store your source code files.
-- **Resources**: Use `skm resources` to set up this folder for storing game assets like images, sounds, and fonts.
+- **Resources**: Use `skm resources` command in the terminal in the base folder to set up this directory.
 - **lib**: To store third-party library files (if you plan to use any).
 
 3. **Organizing Initial Files**: Move the **program.cpp** file to **src** directory. Create and edit your source code files (.cpp and .h) in the src folder. You can start writing the logic of the game, such as character control, game interface, and the game loop.
@@ -65,8 +65,11 @@ Initializing your Metroidvania game involves setting up the game window, loading
     ```
 
 ### 4.Game Loop:
-- The `update_game` function might include code for player movement, collision detection, enemy updates, and other game mechanics. Here's a simplified example:
-    ```cpp
+- The `update_game` function might include code for player movement, collision detection, enemy updates, and other game mechanics. 
+- The `draw_game` function is responsible for drawing everything on the screen. This includes the player, enemies, backgrounds, UI elements like health bars, etc.
+- Then put it all together in the game loop. Make sure to define all necessary variables and load your assets before the game loop starts. Here is an example.
+
+```cpp
     void update_game()
     {
     // Update player position, handle input, etc.
@@ -87,9 +90,7 @@ Initializing your Metroidvania game involves setting up the game window, loading
     //     game_over = true;
     // }
     }
-    ```
-- The `draw_game` function is responsible for drawing everything on the screen. This includes the player, enemies, backgrounds, UI elements like health bars, etc.
-    ```cpp
+
     void draw_game()
     {
     clear_screen(COLOR_WHITE); // Clear the screen to a background color
@@ -104,16 +105,14 @@ Initializing your Metroidvania game involves setting up the game window, loading
 
     refresh_screen(); // Refresh the screen to show the updated drawings
     }
-    ```
-- Now, let's put it all together in the game loop. Make sure to define all necessary variables and load your assets before the game loop starts.
-    ```cpp
+
     while (!window_close_requested("Metroidvania Adventure"))
     {
         process_events(); // Process user input and other events
         update_game(); // Update game state
         draw_game(); // Draw the game to the screen
     }
-    ```
+```
 
 ## Ready to Start Your Adventure
 Conclusion
