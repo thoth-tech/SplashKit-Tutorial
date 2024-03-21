@@ -1,3 +1,7 @@
+---
+title: Arcade Controls
+---
+<!-- TODO: Move this into the 'arcade-games' repo and then remove -->
 ## Controls
 
 The following keys are required to be the functional keys of your game to be compatible with the

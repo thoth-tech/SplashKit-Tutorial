@@ -1,4 +1,6 @@
-# Title: [Tutorial Title]
+---
+title: Tutorial Title
+---
 
 ## Introduction
 
@@ -10,26 +12,38 @@ reader will learn from it.
 List any prerequisites or prior knowledge required for the tutorial, such as programming skills,
 familiarity with specific tools or libraries, or any other relevant background.
 
-## Functions Used (Link to Splashkit documentation)
+## Functions Used
+<!-- (Link to Splashkit documentation) -->
 
-1. `Function1`
-1. `Function2`
+- [Function1](link to function on splashkit.io)
+- [Function1](link to function on splashkit.io)
+- [Function1](link to function on splashkit.io)
 
 ## Table of Contents
 
-1. **[Section 1 Title]**
-   - [Subtopic 1]
-   - [Subtopic 2]
-   - [Subtopic 3]
-1. **[Section 2 Title]**
-   - [Subtopic 1]
-   - [Subtopic 2]
-   - [Subtopic 3]
+1. [**Tutorial Details**](#tutorial-details)
+    - [Tutorial Structure](#tutorial-structure)
+    - [Level of Difficulty](#level-of-difficulty)
+    - [Other headings](#other-headings)
+
+    <!-- Add other headings -->
+2. [**Section 2 Title**]
+    - [Subtopic 1]
+    - [Subtopic 2]
+    - [Subtopic 3]
 
 ## Tutorial Details
 
-Explain the structure of the tutorial and how it will be presented. Mention the level of difficulty
-and the target audience for the tutorial.
+### Tutorial Structure
+
+Explain the structure of the tutorial and how it will be presented. Create a general overview diagram (UML/structure chart).
+
+### Level of Difficulty
+
+Mention the level of difficulty and the target audience for the tutorial.
+
+### Other headings
+<!-- Update to add other heading for any more tutorial details -->
 
 ## Expected Learning Outcomes
 

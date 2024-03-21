@@ -1,14 +1,14 @@
 ---
-title: "Basic Drawing and Graphics Tutorial"
+title: "Creating a 2D Metroidvania in Splashkit: Basic Drawing and Graphics"
 description:
   Learn how to create a basic SplashKit program that opens a game window, displays a background
   image, draws a centered red rectangle, and provides a pause for observation.
 author: Coskun Kilinc
 date: 05/09/2023
 tags: game development, programming, Splashkit, functions
+sidebar: 
+   label: " - 2: Basic Drawing and Graphics"
 ---
-
-# Tutorial 2: Basic Drawing and Graphics
 
 ## Window Setup
 

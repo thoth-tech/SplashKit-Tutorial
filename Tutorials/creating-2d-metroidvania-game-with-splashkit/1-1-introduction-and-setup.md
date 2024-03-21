@@ -6,11 +6,11 @@ description:
 author: Coskun Kilinc
 date: 29/08/2023
 tags: game development, programming, Splashkit, functions
+sidebar: 
+   label: " - 1.1: Introduction and Setup"
 ---
 
-# Tutorial 1: Introduction and Setup
-
-## Introduction
+## Tutorial 1: Introduction and Setup
 
 Welcome to the first tutorial in the "_Creating a 2D 'Metroidvania' Game Using Splashkit_" series.
 In this tutorial, we'll embark on an exciting journey to create a 2D side-scrolling "Metroidvania"
