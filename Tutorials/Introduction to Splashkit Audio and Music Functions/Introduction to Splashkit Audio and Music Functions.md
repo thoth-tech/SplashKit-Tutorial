@@ -25,31 +25,6 @@ Splashkit supports various common audio file formats, including but not limited 
 - MP3: Suitable for longer music files with smaller file sizes but may compromise some sound quality.
 - WAV: Provides higher sound quality, ideal for sound effects and short music clips, but with larger file sizes.
 
-### Basic Implementation:
-Integrating audio into games or applications involves loading and playing audio files. Splashkit offers intuitive functions to handle these tasks.
-
-A simple example demonstrates loading and playing a music file:
-```cpp
-#include "splashkit.h"
-
-int main() {
-    open_window("Audio Example", 800, 600);
-    music track = load_music("my_music", "background.mp3");
-    play_music(track);
-
-    while (!window_close_requested("Audio Example")) {
-        process_events();
-        clear_screen(COLOR_WHITE);
-        refresh_screen();
-    }
-
-    // Properly release music resources
-    stop_music();
-    free_music(track);
-    return 0;
-}
-```
-
 ## Part II: Loading and Playing Music
 ### Loading and Playing Music
 - Load and play music with the option to loop and specify volume:
@@ -103,7 +78,29 @@ music next_track = load_music("next_scene_music", "next_scene.mp3");
 fade_music_in(next_track, 3000);
 ```
 
-**Here is an example for the pause feature:**
+## Code Examples
+### A simple example demonstrates loading and playing a music file:
+```cpp
+#include "splashkit.h"
+
+int main() {
+    open_window("Audio Example", 800, 600);
+    music track = load_music("my_music", "background.mp3");
+    play_music(track);
+
+    while (!window_close_requested("Audio Example")) {
+        process_events();
+        clear_screen(COLOR_WHITE);
+        refresh_screen();
+    }
+
+    stop_music();
+    free_music(track);
+    return 0;
+}
+```
+
+### Here is an example for the pause feature:
 ```cpp
 #include "splashkit.h"
 
