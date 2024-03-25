@@ -8,58 +8,86 @@ This tutorial aims to equip you with the skills necessary to enhance your games 
 - A configured IDE for C++ or C# development, like Visual Studio Code.
 - SplashKit framework installed. Refer to the [SplashKit installation guide](https://splashkit.io/installation/).
 
-## Detailed Examples of Audio Functions
-- **Loading Music from Files**
+## Part I: Understanding Splashkit’s Audio System
+### Overview:
+Splashkit's audio system offers a comprehensive framework for audio processing in game and application development. It enables developers to easily incorporate rich audio experiences into their projects, supporting the loading, playing, and controlling of music and sound effects.
+
+### Key Features:
+The primary audio functionalities of the system include:
+- Playback Control: Play, pause, resume, and stop music.
+- Volume Adjustment: Adjust the volume level of audio files.
+- Track Management: Handle the loading and playback of multiple audio tracks.
+
+### Supported Formats:
+Splashkit supports various common audio file formats, including but not limited to MP3 and WAV.
+
+### Format Considerations:
+- MP3: Suitable for longer music files with smaller file sizes but may compromise some sound quality.
+- WAV: Provides higher sound quality, ideal for sound effects and short music clips, but with larger file sizes.
+
+### Basic Implementation:
+Integrating audio into games or applications involves loading and playing audio files. Splashkit offers intuitive functions to handle these tasks.
+
+A simple example demonstrates loading and playing a music file:
 ```cpp
-// Loading music asynchronously to prevent UI blocking
-async music load_music_async(string name, string filename) {
-    return load_music(name, filename);
+#include "splashkit.h"
+
+int main() {
+    open_window("Audio Example", 800, 600);
+    music track = load_music("my_music", "background.mp3");
+    play_music(track);
+
+    while (!window_close_requested("Audio Example")) {
+        process_events();
+        clear_screen(COLOR_WHITE);
+        refresh_screen();
+    }
+
+    // Properly release music resources
+    stop_music();
+    free_music(track);
+    return 0;
 }
-
-music background_music = load_music_async("background", "path/to/background.mp3");
 ```
 
-- **Playing and Controlling Music Playback**
-Play music with looping and specified volume:
+## Part II: Loading and Playing Music
+### Loading and Playing Music
+- Load and play music with the option to loop and specify volume:
 ```cpp
-play_music(background_music, true, 0.5); // Loop indefinitely at 50% volume
+music background_music = load_music("background", "path/to/background.mp3");
+play_music(background_music, -1, 0.5); // -1 for looping indefinitely, 1 for looping only once
 ```
 
-Pause and resume music:
+- Pause, resume, and stop music, ensuring resources are freed when no longer needed:
 ```cpp
 // To pause the music
 pause_music();
-
-// Code to check game state or user action
-
-// To resume the music
+// To resume music
 resume_music();
-```
-
-Stop music and unload it from memory:
-```cpp
+// Stop and free music resource
 stop_music(background_music);
 free_music(background_music); // Always remember to free resources
 ```
-- **Advanced Playback Control**
-Conditional playback based on game events, such as a victory or loss:
+
+### Advanced Playback Control
+Control playback based on game events, like playing victory or defeat music:
 ```cpp
 if (player_wins) {
-    play_music(victory_music, false, 0.75); // Play once at 75% volume
+    play_music(victory_music, 1, 0.5); // Play once at 50% volume
 } else if (player_loses) {
-    play_music(defeat_music, false, 0.75); // Play once at 75% volume
+    play_music(defeat_music, 1, 0.5); // Play once at 50% volume
 }
 ```
 
-- **Dynamic Volume Adjustment**
+## Part III: Controlling Music Volume
+### Dynamic Volume Adjustment
 Adjusting music volume in real-time, perhaps in response to an in-game event or user settings:
 ```cpp
-// Assuming volume is a float that ranges from 0.0 (mute) to 1.0 (max)
-float volume = user_settings.music_volume;
-music_volume(background_music, volume);
+// Adjust the volume to 50%
+set_music_volume(0.5);
 ```
 
-- **Fading Music In and Out**
+### Fading Music In and Out
 Smooth transitions using fading effects for scene changes:
 ```cpp
 // Fade out current music over 2 seconds
@@ -71,55 +99,49 @@ delay(2000);
 // Load the next track
 music next_track = load_music("next_scene_music", "next_scene.mp3");
 
-// Fade in next music over 3 seconds to 80% volume
-fade_music_in(next_track, 3000, 0.8);
+// Fade in next music over 3 seconds
+fade_music_in(next_track, 3000);
 ```
 
-- **Managing Game State Audio**
+**Here is an example for the pause feature:**
 ```cpp
 #include "splashkit.h"
 
-void manage_game_audio(game_state state) {
-    static music current_music = load_music("game_music", "game_background.mp3");
+// Assume this is your game loop or similar function
+void game_loop()
+{
+    bool game_paused = false; // A variable to track whether the game is paused
+    music background_music = load_music("background", "background.mp3");
 
-    switch (state) {
-        case GAME_START:
-            play_music(current_music, true, 0.5);
-            break;
-        case GAME_PAUSE:
-            pause_music();
-            break;
-        case GAME_RESUME:
-            resume_music();
-            break;
-        case GAME_OVER:
-            fade_music_out(current_music, 1000);
-            break;
-    }
-}
+    // Start playing the background music
+    play_music(background_music, -1, 0.5); // -1 for looping indefinitely, 0.5 is the volume
 
-int main() {
-    open_window("SplashKit Audio Example", 800, 600);
-
-    // Initial game state
-    game_state state = GAME_START;
-    manage_game_audio(state);
-
-    // Main game loop
-    while (!window_close_requested()) {
+    while (not quit_requested())
+    {
+        // Process game events
         process_events();
 
-        if (key_typed(SPACE_KEY)) {
-            // Toggle pause and resume with space key
-            state = (state == GAME_PAUSE) ? GAME_RESUME : GAME_PAUSE;
-            manage_game_audio(state);
+        // Check if the game is paused
+        if (key_typed(SPACE_KEY)) // Assuming the space key is used to pause and resume the game
+        {
+            game_paused = !game_paused; // Toggle the game pause state
+
+            if (game_paused)
+            {
+                // Pause the music
+                pause_music();
+            }
+            else
+            {
+                // Resume the music
+                resume_music();
+            }
         }
 
-        clear_screen(COLOR_WHITE);
-        refresh_screen(60);
-    }
+        // Game update and render code...
 
-    return 0;
+        refresh_screen();
+    }
 }
 ```
 
