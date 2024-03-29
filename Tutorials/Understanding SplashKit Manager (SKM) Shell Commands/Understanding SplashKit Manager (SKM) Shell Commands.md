@@ -1,4 +1,6 @@
-﻿# Understanding SplashKit Manager (SKM) Shell Commands
+﻿---
+title: Understanding SplashKit Manager (SKM) Shell Commands
+---
 
 ## Introduction
 
@@ -44,6 +46,8 @@ Let's delve into the newly introduced commands, providing a detailed explanation
 - **Example**: Before adding images or sound files to your project, use this command to ensure the resources folder is properly set up.
 - **Use Cases**: Organizing and accessing project assets like images, sounds, and other media.
 
+![Resources](images/Resources.jpg)
+
 #### Version Management Commands (`update`, `revert`)
 
 - **Function**: Manages SplashKit library versions.
@@ -55,56 +59,27 @@ Let's delve into the newly introduced commands, providing a detailed explanation
     `skm revert` if the latest version causes issues with your project.
 - **Use Cases**: Keeping your development environment up-to-date or ensuring compatibility with project dependencies.
 
-#### The `clean` Command
+![Update](images/Update.jpg)
+![Revert](images/Revert.jpg)
 
-- **Function**: Cleans up build files and temporary files generated during the compilation process.
-- **Usage**: `skm clean`
-- **Example**: Running `skm clean` in your project directory will remove all the temporary files that are no longer needed, freeing up disk space and ensuring a clean working environment.
-- **Use Cases**: Ideal for maintaining a clean project directory, especially before pushing changes to a repository or archiving projects.
+#### The `clang++` and `g++` Command
 
-#### The `config` Command
-
-- **Function**: Views or sets global SKM configuration options.
-- **Usage**: `skm config [option] [value]`
-- **Example**: `skm config editor vscode` could set Visual Studio Code as the default editor for SKM projects.
-- **Use Cases**: Customizing SKM behavior to suit your development preferences, such as specifying a default IDE, configuring default project paths, or setting up proxy settings for internet access.
-
-#### The `clone` Command
-
-- **Function**: Clones an existing SplashKit project from a remote repository.
-- **Usage**: `skm clone [repository-url]`
-- **Example**: `skm clone https://github.com/user/project.git` would clone the project from the specified URL into the current directory, setting up any necessary SplashKit dependencies.
+- **Function**: Compile C++ projects using the `clang++` or `g++` compilers.
+- **Usage**: `skm clang++ [options] [source files]` or `skm g++ [options] [source files]`
+- **Example**: `skm clang++ -o MyGame main.cpp` or `skm g++ -o MyGame main.cpp` would compile a source file named `main.cpp` and produce an executable named MyGame..
 - **Use Cases**: Quickly starting work on an existing SplashKit project by setting up all its dependencies with a single command.
 
-#### The `deploy` Command
-
-- **Function**: Prepares and deploys your SplashKit project to various platforms, such as WebAssembly, mobile, or desktop.
-- **Usage**: `skm deploy [platform]`
-- **Example**: `skm deploy web` could compile the project for WebAssembly and provide instructions or perform actions to deploy it to a web server.
-- **Use Cases**: Simplifying the deployment process for developers looking to share or test their projects on different platforms.
-
-#### The `test` Command
-
-- **Function**: Runs unit tests or integration tests for your SplashKit project.
-- **Usage**: `skm test [options]`
-- **Example**: `skm test --all` would run all tests within the project, reporting any failures and summarizing test coverage.
-- **Use Cases**: Essential for maintaining code quality and reliability, especially in larger projects or teams.
+![Clang++](images/Clang.jpg)
 
 #### The `uninstall` Command
 
 - **Function**: Removes SKM and SplashKit from your system.
 - **Usage**: `skm uninstall`
 - **Example**: `skm uninstall` when you no longer need SplashKit installed on your machine.
-- **Use Cases**: Cleaning up your development environment or preparing to reinstall SplashKit.
+- **Use Cases**: Ideal for compiling C++ projects with SplashKit libraries, allowing developers to create executable games or applications directly from the command line.
+
+![Uninstall](images/Uninstall.jpg)
 
 ## Integration with IDEs and Build Systems
 
 Seamlessly integrating SKM with your preferred Integrated Development Environment (IDE) and build systems enhances your productivity. This tutorial covers practical steps for setting up SKM with popular IDEs such as Visual Studio Code, and demonstrates how to incorporate SKM commands into your build processes, ensuring a smooth development workflow.
-
-## Expected Learning Outcomes
-
-Upon completing this tutorial, you will be proficient in:
-
-- Installing and configuring SplashKit Manager (SKM) for your development projects.
-- Utilizing various SKM commands to manage and compile SplashKit projects.
-- Creating new projects and managing resources efficiently
