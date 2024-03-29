@@ -37,20 +37,6 @@ The fundamental usage pattern of SKM is straightforward: initiate the command wi
 
 Let's delve into the newly introduced commands, providing a detailed explanation, usage examples, and common use cases for each.
 
-#### The `new` Command
-
-- **Function**: Creates a new SplashKit project.
-- **Usage**: `skm new [language]`
-- **Example**: `skm new cpp`
-- **Use Cases**: Starting a new game or software project.
-
-#### The `fix` Command
-
-- **Function**: Fixes common path-related issues within SplashKit projects.
-- **Usage**: `skm fix`
-- **Example**: Suppose you're experiencing issues where the compiler cannot find SplashKit resources. The `fix` command can rectify these path discrepancies.
-- **Use Cases**: Resolving path errors after moving project files or updating SplashKit.
-
 #### The `resources` Command
 
 - **Function**: Creates or manages the resources folder for a project.
