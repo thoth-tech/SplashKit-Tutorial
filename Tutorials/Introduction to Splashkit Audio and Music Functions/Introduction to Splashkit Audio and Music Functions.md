@@ -1,10 +1,6 @@
-<<<<<<< Updated upstream
 ---
 title: Introduction to Music Functions in SplashKit
 ---
-=======
-# Introduction to Splashkit Audio and Music Functions
->>>>>>> Stashed changes
 
 ## Introduction
 
@@ -17,7 +13,6 @@ This tutorial aims to equip you with the skills necessary to enhance your games 
 - A configured IDE for C++ or C# development, like Visual Studio Code.
 - SplashKit framework installed. Refer to the [SplashKit installation guide](https://splashkit.io/installation/).
 
-<<<<<<< Updated upstream
 ## Part I: Understanding Splashkit’s Music Management
 
 ### Overview
@@ -26,32 +21,13 @@ SplashKit's music management system offers a dedicated framework designed specif
 
 ### Key Features
 
-=======
-## Part I: Understanding Splashkit’s Audio System
-
-### Overview
-
-Splashkit's audio system offers a comprehensive framework for audio processing in game and application development. It enables developers to easily incorporate rich audio experiences into their projects, supporting the loading, playing, and controlling of music and sound effects.
-
-### Key Features
-
->>>>>>> Stashed changes
 The primary audio functionalities of the system include:
 
 - Playback Control: Play, pause, resume, and stop music.
 - Volume Adjustment: Adjust the volume level of audio files.
 
-<<<<<<< Updated upstream
 ### Format Considerations
 
-=======
-### Supported Formats
-
-Splashkit supports various common audio file formats, including but not limited to MP3 and WAV.
-
-### Format Considerations
-
->>>>>>> Stashed changes
 - MP3: Suitable for longer music files with smaller file sizes but may compromise some sound quality.
 - WAV: Provides higher sound quality, ideal for sound effects and short music clips, but with larger file sizes.
 
