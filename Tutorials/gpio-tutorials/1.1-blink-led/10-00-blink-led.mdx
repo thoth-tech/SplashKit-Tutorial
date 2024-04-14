@@ -1,0 +1,283 @@
+---
+title: Get Started with SplashKit GPIO
+description:
+  General-purpose input/output, or GPIO, pins are a type of pin found on many microcontrollers that
+  can be used for a variety of purposes. In this guide we'll use them to control the state of an
+  LED.
+category: Guides
+author: Jonathan Tynan
+lastupdated: Apr 14 2024
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+**{frontmatter.description}**
+
+_Written by {frontmatter.author} on {frontmatter.lastupdated}_
+
+:::caution[Before you begin.]
+When working with Raspberry Pi GPIO pins, it's crucial to handle the
+setup and cleanup processes carefully.
+
+- Always ensure that the GPIO pins are properly initialised before use and cleaned up afterwards to
+  prevent any damage to your Raspberry Pi
+- Be mindful of static electricity which can pose a serious risk to the sensitive electronic
+  components on the board
+- Before touching the Raspberry Pi or any connected components, ground yourself to eliminate any
+  static charge that may have accumulated.
+
+These precautions will help to protect your device from potential harm caused by electrostatic
+discharges.
+:::
+
+General-purpose input/output, or GPIO, pins are a type of pin found on many microcontrollers that
+can be used for a variety of purposes. These pins can be used to receive signals from sensors, or
+send them to control LEDs or motors, and so much more. The ability to effectively use these
+interfaces will enable a huge range of interesting projects with real-world impact. In this guide,
+we'll cover the basics of GPIO pins and how to use them in your projects.
+
+In a Raspberry Pi all pins are digital and individual GPIO pins are defined with two unique numbers,
+the physical pin number and the Broadcom SOC Channel (BCM) pin number. They are easily found on the
+internet by searching for a "Raspberry Pi Pinout". In SplashKit, we use the physical pin numbers to
+reference the GPIO pins.
+
+:::tip[Digital Signals]
+As mentioned previously, the GPIO pins on a Raspberry Pi are all digital, this means that it can
+either be powered at a certain voltage or unpowered, which can then be read as a one or zero. In
+analog signals the voltage continously varies, however this needs particular hardware which the
+Raspberry Pi lacks and is out of the scope of this guide.
+:::
+
+### Components
+
+#### Breadboard
+
+Breadboards are reusable devices used to build and test circuits. They are made up of a number of
+holes that are connected by hidden metal strips. Along the top and bottoms are the ground and power
+rails, and in the middle there are two sections seperated by a channel. Each hole in a section is
+connected to the adjacent vertical holes. More information can be found at
+[Sparkfun - How to Use a Breadboard](https://learn.sparkfun.com/tutorials/how-to-use-a-breadboard/all).
+
+#### LED
+
+An LED (Light Emitting Diode) is a device that emits light when an electric current passes through
+it. They feature two legs, a longer positive leg (the [anode](https://en.wikipedia.org/wiki/Anode))
+and a shorter negative leg (the [cathode](https://en.wikipedia.org/wiki/Cathode)). The longer leg is
+often kinked so that both legs protrude the same distance from the LED. We will connect the positive
+lead to the GPIO pin and the negative lead to a ground pin. More information can be found at
+[Sparkfun - Light-Emitting Diodes (LEDs)](https://learn.sparkfun.com/tutorials/light-emitting-diodes-leds/all)
+
+#### 220 Ω Resistor
+
+The power that the Raspberry Pi can provide is actually too much for these LEDs. To prevent the LED
+from burning out, we need to add a resistor to the circuit. The resistor will limit the current that
+flows through the LED, preventing it from burning out. The exact value of the resistor is not
+critical, but too high a value will not allow enough illumination of the LED. A resistor in the
+range of 220 Ω to 1 kΩ should work well. More information on resistors can be found at
+[Sparkfun - Resistors](https://learn.sparkfun.com/tutorials/resistors/all)
+
+:::tip[Resistor Colour Code]
+The colours on a resistor indicate the resistance value. Each coloured band corresponds to specific
+numbers and multipliers which can be used to calculate the resistance value. More information
+can be found at [Electronic Color Code](https://en.wikipedia.org/wiki/Electronic_color_code)
+:::
+
+#### Jumper Wires
+
+Jumper Wires, or DuPont wires, are used to make a temporary connection different components. They
+can be M/M, M/F, or F/F. We will use M/F jumper wires in this guide.
+
+### The Circuit
+
+Below we can see the circuit diagram for this project. We have the cathode of the LED connected to
+GPIO Pin 11, while the anode is connected to ground pin 6 through a resistor.
+
+<img
+    alt="Circuit Diagram for Blinking an LED"
+    src="/images/articles/gpio/circuits/blinkled.png"
+    width="480" height="360">
+</img>
+
+And the physical circuit looks like the following image, in which we've connected an M/F jumper wire
+from Pin 11 to the cathode of the LED. The anode of the LED is connected to the resistor, which is
+then connected to the ground pin through another M/F jumper wire.
+
+<img
+    alt="Photograph of a circuit to blink an LED"
+    src="/images/articles/gpio/circuits/blink_led_circuit.jpg"
+    width="480" height="360">
+ </img>
+
+### Starting the Daemon
+
+:::tip[Daemons]
+A daemon is a background process that runs continuously, waiting for requests to
+perform some action. In this case, the daemon is waiting for requests to change the state of the
+GPIO pins. This allows us to run multiple programs that interact with the GPIO pins.
+:::
+
+Underneath SplashKit we use the [Pigpio library](https://abyz.me.uk/rpi/pigpio), specifically its
+daemon. To interface with this daemon, it needs to be running. If it is not running we can expect
+some output like the following:
+
+```bash
+gpio_init() must be called before any other GPIO functions
+```
+
+We can check if its running by using the following command:
+
+```bash
+ps aux | grep pigpiod
+```
+
+If the daemon is not running, we can start it by using:
+
+```bash
+sudo pigpiod
+```
+
+To stop the daemon from running we can use the command:
+
+```bash
+sudo killall pigpiod
+```
+
+### The Code
+
+Once the daemon is running, we can then create our program. Here is an example program that will
+blink an LED on and off.
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    #include "splashkit.h"
+
+    int main()
+    {
+        raspi_init();
+        pins led_pin = PIN_11;
+        raspi_set_mode(led_pin, GPIO_OUTPUT);
+
+        timer run_timer = create_timer("run_timer");
+        start_timer(run_timer);)
+
+        while(timer_ticks(run_timer) < 10000)
+        {
+            raspi_write(led_pin, GPIO_HIGH);
+            delay(500);
+            raspi_write(led_pin, GPIO_LOW);
+            delay(500);
+        }
+
+        stop_timer(run_timer);
+        free_all_timers();
+        raspi_cleanup();
+        return 0;
+    }
+
+
+    ```
+    </TabItem>
+
+    <TabItem label="C#">
+    ```csharp
+        using SpaskKitSDK;
+
+        namespace BlinkLED
+        {
+            public class Program
+            {
+                public static void Main()
+                {
+                    SplashKit.RaspiInit();
+                    SplashKitSDK.Pins ledPin = (SplashKitSDK.Pins)11;
+                    SplashKit.RaspiSetMode(led_pin, (SplahKitSDK.PinModes) 1);
+
+                    var run_timer = SplashKit.CreateTimer("run_timer");
+                    SplashKit.StartTimer(run_timer);
+
+                    while(SplashKit.TimerTicks(run_timer) < 10000)
+                    {
+                        SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinState) 1);
+                        SplashKit.Delay(500);
+                        SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinState) 0);
+                        SplashK.Delay(500);
+                    }
+                    SplashKit.StopTimer(run_timer);
+                    SplashKit.FreeAllTimers();
+                    SplashKit.RaspiCleanup();
+                }
+            }
+        }
+    ```
+    </TabItem>
+
+</Tabs>
+
+In the code above the first thing we are doing is initialising the pins by calling
+[`raspi_init()`](/api/raspberry/#raspi-init). We then define a variable that points to the specific
+pin we're using and set the pin to be an output pin by passing it to
+[`raspi_set_mode()`](/api/raspberry/#raspi-set-mode) along with `GPIO_OUTPUT`. This is one of the
+[Pin Modes](api/types/#pin-modes) that can be set, each pin has alternative modes but we are only
+interested in the output mode for now.
+
+We then create a timer by calling [`create_timer()`](/api/timer/#create-timer) and passing it a
+name. We then start the timer by calling [`start_timer()`](/api/timer/#start-timer) and passing the
+timer object to it. Then, we enter a while loop that continues as long as the timer has not reached
+10,000 milliseconds (or 10 seconds). We check this by calling
+[`timer_ticks()`](/api/timer/#timer-ticks) and passing the timer object to it.
+
+We turn the LED on by calling [`raspi_write()`](/api/raspberry/#raspi-write) with the pin and the
+state that we want the pin to be in, GPIO_HIGH or GPIO_LOW. These are the
+[Pin Values](/api/types/#pin-values) that can be set. In between this we introduce a small delay so
+that we are able to see the change in the LED. Once the timer has reached 10 seconds, we stop the
+timer by calling [`stop_timer()`](/api/timer/#stop-timer) and passing the timer object to it. We
+then free all timers by calling [`free_all_timers()`](/api/timer/#free-all-timers) and finally we
+clean up the pins by calling [`raspi_cleanup()`](/api/raspberry/#raspi-cleanup).
+
+:::tip[Program Shutdown]
+It is crucial we plan for the program's shutdown procedure, because if we
+instead used CTRL+C to stop the program then cleanup is not performed and the GPIO pins will remain
+in the state they were in when the program was stopped. We do not want to unintentionally keep pins
+active.
+:::
+
+We can build this program with the following command:
+
+<Tabs>
+    <TabItem label="C++">
+    ```bash
+    g++ led_blink.cpp -lSplashKit -o led_blink
+    ```
+    </TabItem>
+
+    <TabItem label="C#">
+    ```bash
+    dotnet build
+    ```
+    </TabItem>
+
+</Tabs>
+
+We can then run the program with the following command:
+
+<Tabs>
+    <TabItem label="C++">
+    ```bash
+    ./led_blink
+    ```
+    </TabItem>
+
+    <TabItem label="C#">
+    ```bash
+    dotnet run
+    ```
+    </TabItem>
+
+</Tabs>
+
+This will blink the LED on and off as you can see below. This will continue until the 10 seconds has
+elapsed, and after we exit the while loop, [`raspi_cleanup()`](/api/raspberry/#raspi-cleanup) is
+called and the GPIO pins are reset.
+
+![A GIF of the LED blinking on and off.](./blink_led.gif)
