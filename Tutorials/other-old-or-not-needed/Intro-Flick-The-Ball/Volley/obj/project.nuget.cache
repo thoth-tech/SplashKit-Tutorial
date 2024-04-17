@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "sJXgsXnGR4kWdNkwjCb2ydXn1hCUZZno/gs2OXq4feaM8CnIAIssNwb3hQEh4xag8clWRQFdZUFy0mYwQ2KINg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\casti\\Desktop\\uni\\Game2\\Game.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\casti\\.nuget\\packages\\splashkit\\1.1.4\\splashkit.1.1.4.nupkg.sha512"
+  ],
+  "logs": []
+}
