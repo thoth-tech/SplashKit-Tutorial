@@ -1,4 +1,17 @@
-# Title: Getting Started With Sprites in Splashkit - C#
+---
+title: Getting Started With Sprites
+description: This article provide a quick overview of getting started with Sprites in SplashKit. It includes how to create Sprite objects, and how to manipulate them on a basic level.
+category: Tutorials
+author: Ashley T
+lastupdated: April 10 2024
+---
+
+**{frontmatter.description}**
+_Written by {frontmatter.author} on {frontmatter.lastupdated}_
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+In this article you will see how to get started with SplashKit with some simple drawing operations. Once you have this working you will be able to start exploring the different features you can work with.
 
 ## What _is_ a Sprite in Splashkit?
 
@@ -11,8 +24,8 @@ In order to be able to draw an image to a screen, we first have to provide some 
 Splashkit. We have to have Bitmap images to pass into our
 [Create Sprite](https://splashkit.io/api/sprites/#create-sprite) function so that it can create a
 workable _Sprite_ file type for us. This looks something like this inside our Main() method:
-
-```csharp
+  
+```bash
 Private Bitmap happySun;
 Private Sprite happySunSprite;
 ```
@@ -22,7 +35,7 @@ Line by line, this can be broken down as:
 1. Instantiate a new Object happySun, of Type [Bitmap](https://splashkit.io/api/types/#bitmap)
 
 ```csharp
-Bitmap HappySun;
+Bitmap happySun;
 ```
 
 Relevant overloads are shown below, we pass in a string name, and we can either give a filename to
@@ -48,8 +61,8 @@ Bitmap(string name, int width int height);
    [the method where we provide a String and a Bitmap object](https://splashkit.io/api/sprites/#create-sprite-named)
 
 ```csharp
-         HappySun = new Bitmap("Happy Sun", "sprite01.png");
-         HappySunSprite = SplashKit.CreateSprite("Happy Sun", happySun);
+         happySun = new Bitmap("Happy Sun", "sprite01.png");
+         happySunSprite = SplashKit.CreateSprite("Happy Sun", happySun);
 ```
 
 After these steps, we now have an instantiated Bitmap and Sprite for us to play with.
@@ -99,7 +112,11 @@ SplashKit.Delay(5000);
 
 You will see our little `Sprite` sitting there in the window.
 
-![image](image.png)
+<img
+  alt="Window with Sprite drawn"
+  src="/drawnSun.png"
+  style="width: 700px"
+></img>
 
 At this point, our Main() method should look something like this:
 
@@ -142,7 +159,7 @@ namespace learningSprites
 
 Now that we have a working `Sprite`, let's implement a simple `For` loop to showcase moving it from
 one side of the screen to the other. It's important to have some basis in your mind of how we might
-do this before copying the below code, as well as knowing that their are plenty of other ways and
+do this before copying the below code, as well as knowing that there are plenty of other ways and
 this method is mostly for simplicity and readability.
 
 Let's just start with our simple code:
@@ -166,7 +183,11 @@ itself -3 (3 pixels to the left) and the same Y postion (so it doesn't move vert
 just call `DrawSprite` on `happySunSprite` again, refresh our window, and give a small delay until
 it repeats this. This ends up looking like:
 
-![unbuffered sun](image2.png)
+<img
+  alt="Window with Sprite drawn"
+  src="/noClear.png"
+  style="width: 700px"
+></img>
 
 Not exactly what we wanted, have a small think about why this might be happening yourself before
 reading on ahead. What specific process are we missing that would cause _every_ drawn
@@ -179,7 +200,7 @@ Truth is it's just a single line, if we add in
 ```
 
 to the start of our for loop, before every iteration of calling `MoveSpriteTo` and `DrawSprite`, we
-clear the window and subsequently the last drawn Sprite of the sun. With out updated code below:
+clear the window and subsequently the last drawn Sprite of the sun. With our updated code below:
 
 ```csharp
 for (int i = 0; i < 150; i++)
@@ -197,7 +218,11 @@ for (int i = 0; i < 150; i++)
 
 we get:
 
-![Alt text](movingsun.gif)
+<img
+  alt="Window with Sprite drawn"
+  src="movingSun.gif"
+  style="width: 700px"
+></img>
 
 And there we go. A basic and simple tutorial outling creation and modification of Sprite objects in
 SplashKit. Remember it's important to do practical self-taught projects and lessons to incentivize
@@ -205,6 +230,9 @@ learning and memory building. Try and have the Sun react to a button input, or m
 even change Sprites once it's reached a certain position!
 
 Our final code snippet:
+
+<Tabs>
+  <TabItem label="C# 'OOP'">
 
 ```csharp
 using System;
@@ -233,8 +261,8 @@ public class Program{
             SplashKit.DrawSprite(happySunSprite);
 
             //    //Update the screen and hold
-            //    spriteWindow.Refresh(60);
-            //    SplashKit.Delay(5000);
+                spriteWindow.Refresh(60);
+                SplashKit.Delay(5000);
 
             //Loop through and iterate happySunSprite position
             for (int i = 0; i < 150; i++)
@@ -253,3 +281,14 @@ public class Program{
       }
 }
 ```
+
+  </TabItem>
+<TabItem label="C# 'pure'">
+  **Coming soon**
+  </TabItem>
+
+<TabItem label="C++">
+  **Coming soon, requires full tutorial re-write**
+  </TabItem>
+
+</Tabs>
