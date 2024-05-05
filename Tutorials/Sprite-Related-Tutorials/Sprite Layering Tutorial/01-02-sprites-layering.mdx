@@ -26,6 +26,8 @@ bitmap objects to reference and have appear "on top" of each other, and have it 
 us, it's going to be a man, a cowboy hat, and a sherrif's badge. We can start off with simple
 initialization of our bitmaps, and even our `Sprite` that we will assign our layers to.
 
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 //Creation of Window Object to showcase sprites and layers
 Window spriteLayers = new Window("Layering with Sprites!", 800, 800);
@@ -37,6 +39,26 @@ Bitmap starBit = new Bitmap("base star", "sprite03.png");
 
 Sprite bodySprite = SplashKit.CreateSprite("body", bodyBit);                // layer idx 0, name body
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+//Creation of Window Object to showcase sprites and layers
+
+window w = open_window("Learning Sprite Layering", 800, 800);
+
+//Instantiation of each bitmap used for create_sprite() and sprite_add_layer()
+
+bitmap bodyBit = load_bitmap("base body", "sprite01.png");
+bitmap hatBit = load_bitmap("base hat", "sprite02.png");
+bitmap starBit = load_bitmap("base star", "sprite03.png");
+
+//Creating initial Sprite and adding Layers
+sprite bodySprite = create_sprite("body", bodyBit);
+```
+</TabItem>
+</Tabs> 
+
+
 
 It isn't explicitly said anywhere, but SplashKit creates Sprite objects with a 0th indexing layer.
 Since SpriteKit also has functionality for either index or layer name referencing, we can assign a
@@ -47,56 +69,118 @@ With our code at this stage, we basically just have a single-layered `Sprite`. U
 cases, but let's say we want to have user input, or specific functionality of the game "show" layers
 of a singular `Sprite`? Well, using our already-defined bitmaps, it's relatively simple.
 
+
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 SplashKit.SpriteAddLayer(bodySprite, hatBit, "hat");                        // layer 1
 SplashKit.SpriteAddLayer(bodySprite, starBit, "star");                      // layer 2
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+SplashKit.SpriteAddLayer(bodySprite, hatBit, "hat");                        // layer 1
+SplashKit.SpriteAddLayer(bodySprite, starBit, "star");                      // layer 2
+```
+</TabItem>
+</Tabs> 
 
 Using `SplashKit.SpriteAddLayer(Sprite, Bitmap, name)`, with our according parameters, we can add
 layers to our first `Sprite` object for later use. For reference, if you'd like to confirm that the
 layer indexes are correct, or see for yourself for debugging / testing purposes, the function
-`SpriteAddLayer()` has a return type of an integer, which corresponds to the assigned layer index
-value, which can be wrapped as:
+[SpriteLayerCount()](https://splashkit.io/api/sprites/#sprite-layer-count) has a return type of an integer, which can be wrapped as:
 
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 SplashKit.WriteLine(SplashKit.SpriteLayerCount(bodySprite));
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+write_line(sprite_layer_count(bodySprite));
+```
+</TabItem>
+</Tabs> 
+
+
+
 
 ## Showing and manipulating layers
 
 So now we have our created `Sprite`, our layers, and we can get to drawing our content to the
 screen, simple enough, right?
 
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 SplashKit.DrawSprite(bodySprite);
 spriteLayers.Refresh();
 SplashKit.Delay(2000);
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+draw_sprite(bodySprite);
+refresh_window(current_window());
+delay(1000);
+```
+</TabItem>
+</Tabs> 
+
 
 And, our layers aren't showing. It's important to know that layers aren't shown by default, so in
 order to show our added layers to our initial `Sprite` object, we call a function called
-`SplashKit.SpriteShowLayer(Sprite, idx);` with our parameters. For us, this looks something like:
+[ShowSpriteLayer()](https://splashkit.io/api/sprites/#sprite-show-layer) with our parameters. For us, this looks something like:
 
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 SplashKit.SpriteShowLayer(bodySprite, 1);
 SplashKit.DrawSprite(bodySprite);
 spriteLayers.Refresh();
 SplashKit.Delay(2000);
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+sprite_show_layer(bodySprite, 1);
+clear_screen(COLOR_WHITE);
+draw_sprite(bodySprite);
+refresh_window(current_window());
+delay(1000);
+```
+</TabItem>
+</Tabs> 
+
 
 Referencing the 1st layer (remember, 0th based indexing from initialization of a `Sprite` object),
 and then re-drawing and refreshing our screen will have the second layer show up as well. Copying
 this code for our third, our Man slowly puts on his cowboy hat and earns his sheriff badge.
 
 But what if you want to hide a layer afterwards? Maybe our Sheriff loses his hat, or his badge? It's
-simple enough, we can just call a `SplashKit.SpriteHideLayer(Sprite, idx)` function as follows:
+simple enough, we can just call a [SpriteHideLayer()](https://splashkit.io/api/sprites/#sprite-hide-layer) function as follows:
 
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 SplashKit.SpriteHideLayer(bodySprite, 2);
 SplashKit.DrawSprite(bodySprite);
 spriteLayers.Refresh();
 SplashKit.Delay(2000);
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+SplashKit.SpriteHideLayer(bodySprite, 2);
+SplashKit.ClearScreen(Color.White);
+SplashKit.DrawSprite(bodySprite);
+spriteLayers.Refresh();
+SplashKit.Delay(2000);
+```
+</TabItem>
+</Tabs> 
+
 
 Running and compiling this you'll notice an error, we're not clearing our screen, so when we hide a
 layer and redraw, the older drawn `Sprite` that had the layer shown is still visible, causing some
@@ -173,7 +257,55 @@ namespace spritelayering
 </TabItem>
 
 <TabItem label="C++">
-**Coming soon, requires full tutorial re-write**
+```c++
+#include "splashkit.h"
+
+int main()
+{
+
+    //Creation of Window Object to showcase sprites and layers
+
+    window w = open_window("Learning Sprite Layering", 800, 800);
+
+    //Instantiation of each bitmap used for create_sprite() and sprite_add_layer()
+
+    bitmap bodyBit = load_bitmap("base body", "sprite01.png");
+    bitmap hatBit = load_bitmap("base hat", "sprite02.png");
+    bitmap starBit = load_bitmap("base star", "sprite03.png");
+
+    //Creating initial Sprite and adding Layers
+    sprite bodySprite = create_sprite("body", bodyBit);
+    sprite_add_layer(bodySprite, hatBit, "hat");
+    sprite_add_layer(bodySprite, starBit, "star");
+
+    //Initial draw: one (base) layer shown
+    draw_sprite(bodySprite);
+    refresh_window(current_window());
+    delay(1000);
+
+    //First re-draw, two layers shown
+    sprite_show_layer(bodySprite, 1);
+    clear_screen(COLOR_WHITE);
+    draw_sprite(bodySprite);
+    refresh_window(current_window());
+    delay(1000);
+
+    //Second re-draw, three layers shown
+    sprite_show_layer(bodySprite, 2);
+    clear_screen(COLOR_WHITE);
+    draw_sprite(bodySprite);
+    refresh_window(current_window());
+    delay(1000);
+
+    //Third re-draw, two layers shown, one removed
+    sprite_hide_layer(bodySprite, 2);
+    clear_screen(COLOR_WHITE);
+    draw_sprite(bodySprite);
+    refresh_window(current_window());
+    delay(1000);
+
+    return 0;
+    ```
 </TabItem>
 
 </Tabs>
