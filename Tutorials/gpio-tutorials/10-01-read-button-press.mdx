@@ -1,0 +1,338 @@
+---
+title: Reading Button Presses
+description:
+  Reading GPIO inputs is a crucial component of creating responsive projects. In this guide we learn
+  to read GPIO inputs by using a simple button to turn an LED on and off.
+category: Guides
+author: Jonathan Tynan
+lastupdated: Apr 27 2024
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Aside } from '@astrojs/starlight/components';
+
+**{frontmatter.description}**
+
+Written by {frontmatter.author} on {frontmatter.lastupdated}
+
+:::caution[Before you begin.]
+When working with Raspberry Pi GPIO pins, it's crucial to handle the setup and cleanup processes carefully.
+
+- Always ensure that the GPIO pins are properly initialised before use and cleaned up afterwards to prevent any damage to your Raspberry Pi
+- Be mindful of static electricity which can pose a serious risk to the sensitive electronic components on the board
+- Before touching the Raspberry Pi or any connected components, ground yourself to eliminate any static charge that may have accumulated.
+
+These precautions help to protect your device from potential harm caused by electrostatic discharges.
+:::
+
+In this guide, we explore how to use the GPIO pins on a Raspberry Pi to read button presses. This ability is crucial for projects involving user input, like interactive installations or basic controls for robotics. We look at the basics of setting up a circuit with a button, how to use the SplashKit library to detect the button press and briefly introduce more advanced topics like the concept of floating pins and debouncing.
+
+### Components
+
+#### Breadboard
+
+Breadboards are invaluable for testing and building circuits without the need for soldering. Arranged in rows and columns of holes, each row internally connected. See [Blink LED Tutorial](/guides/gpio/10-00-blink-led/#components) for more details.
+
+#### Push Button
+
+A push button allows electricity to flow between its two contacts by physically moving strips of metal together when pressed. This connects the circuit and provides power to our input pin. This pushbutton has four pins and each diagonal pin is paired with each other. It's a simple switch mechanism which we can detect and use.
+
+<img
+  alt="Push button with connections highlighted."
+  src="/images/articles/gpio/components/pushbutton.png"
+></img>
+
+#### Jumper Wires
+
+Jumper wires connect our components on the breadboard to the Raspberry Pi and each other. We use M/F jumper wires for this setup. See [Blink LED Tutorial](/guides/gpio/10-00-blink-led/#components) for more details.
+
+### The Circuit
+
+Below is the circuit diagram for this project. We connect the power and ground to the appropriate rails on the breadboard and connect our components ground or power connections to these rails. We can have the LED directly connected to Pin 11 on the Raspberry Pi, and the button to Pin 29.
+
+<img
+  alt="Circuit Diagram for reading a button press"
+  src="/images/articles/gpio/circuits/buttonpush.png"
+></img>
+
+The physical circuit is show in the below image, where we can see the physical implementation of the provided circuit diagram. Note: The power and ground rail connections are swapped in the below image due to the orientation of the breadboard, ensure your connections are correct.
+
+<img
+  alt="Photograph of circuit for reading a button press"
+  src="/images/articles/gpio/circuits/push_button_circuit.jpg"
+></img>
+
+### The Code
+
+:::caution[Before running the code.]
+This code requires the `pigpio` daemon, so make sure it is running! For more information see: [Starting the Daemon](/guides/gpio/10-00-blink-led/#starting-the-daemon)
+:::
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    #include <splashkit.h>
+
+    int main()
+    {
+        raspi_init();
+        pins button_pin = PIN_29;
+        pins led_pin = PIN_11;
+        pin_values led_state = GPIO_LOW;
+
+        raspi_set_mode(button_pin, GPIO_INPUT);
+        raspi_set_mode(led_pin, GPIO_OUTPUT);
+
+        raspi_set_pull_up_down(button_pin, PUD_DOWN);
+
+        timer run_timer = create_timer("run_timer");
+        start_timer(run_timer);
+        while(timer_ticks(run_timer) < 30000)
+        {
+            if(raspi_read(button_pin) == GPIO_HIGH)
+            {
+                led_state = raspi_read(led_pin);
+                if(led_state == GPIO_LOW)
+                {
+                    raspi_write(led_pin, GPIO_HIGH);
+                }
+                else
+                {
+                    raspi_write(led_pin, GPIO_LOW);
+                }
+            }
+        }
+
+        stop_timer(run_timer);
+        free_all_timers();
+        raspi_cleanup();
+        return 0;
+    }
+    ```
+    </TabItem>
+
+    <TabItem label="C#">
+    ```csharp
+    using SplashKitSDK;
+    namespace ButtonProgram
+    {
+        public class Program
+        {
+            public static void Main()
+            {
+                SplashKit.RaspiInit();
+                SplashKitSDK.Pins button_pin = (SplashKitSDK.Pins)29;
+                SplashKitSDK.Pins led_pin = (SplashKitSDK.Pins)11;
+                SplashKitSDK.PinValues led_state = (SplashKitSDK.PinValues) 0;
+
+                SplashKit.RaspiSetMode(button_pin, (SplashKitSDK.PinModes) 0);
+                SplashKit.RaspiSetMode(led_pin, (SplashKitSDK.PinModes) 1);
+
+                SplashKit.RaspiSetPullUpDown(button_pin, (SplashKitSDK.PullUpDown) 1);
+
+                var run_timer = SplashKit.CreateTimer("run_timer");
+                SplashKit.StartTimer(run_timer);
+
+                while(SplashKit.TimerTicks(run_timer) < 30000)
+                {
+                    if(SplashKit.RaspiRead(button_pin) == (SplashKitSDK.PinValues) 1)
+                    {
+                        led_state = SplashKit.RaspiRead(led_pin);
+                        if(led_state == (SplashKitSDK.PinValues) 0)
+                        {
+                            SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinValues) 1);
+                        }
+                        else
+                        {
+                            SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinValues) 0);
+                        }
+                    }
+                }
+                SplashKit.StopTimer(run_timer);
+                SplashKit.FreeAllTimers();
+                SplashKit.RaspiCleanup();
+            }
+        }
+    }
+    ```
+    </TabItem>
+
+</Tabs>
+
+Lets break down this code and analyse it in sections.
+
+1.
+    <Tabs>
+        <TabItem label="C++">
+        ```cpp
+        raspi_init();
+        pins button_pin = PIN_29;
+        pins led_pin = PIN_11;
+        pin_values led_state = GPIO_LOW;
+        ```
+        </TabItem>
+        <TabItem label="C#">
+        ```csharp
+        SplashKit.RaspiInit();
+        SplashKitSDK.Pins button_pin = (SplashKitSDK.Pins)29;
+        SplashKitSDK.Pins led_pin = (SplashKitSDK.Pins)11;
+        SplashKitSDK.PinValues led_state = (SplashKitSDK.PinValues) 0;
+        ```
+        </TabItem>
+    </Tabs>
+
+    We start this code by initialising our hardware through [`raspi_init()`](/api/raspberry/#raspi-init), we then define the [pins](/api/types/#pins) that we're are using for the button (Pin 29), and the LED (Pin 11). We also initialise a variable, `led_state`, to hold the state of the LED at any point in time. We use `led_state` later to determine whether to switch the LED on, or off.
+2.
+    <Tabs>
+        <TabItem label="C++">
+        ```cpp
+        raspi_set_mode(button_pin, GPIO_INPUT);
+        raspi_set_mode(led_pin, GPIO_OUTPUT);
+
+        raspi_set_pull_up_down(button_pin, PUD_DOWN);
+        ```
+        </TabItem>
+        <TabItem label="C#">
+        ```csharp
+        SplashKit.RaspiSetMode(button_pin, (SplashKitSDK.PinModes) 0);
+        SplashKit.RaspiSetMode(led_pin, (SplashKitSDK.PinModes) 1);
+
+        SplashKit.RaspiSetPullUpDown(button_pin, (SplashKitSDK.PullUpDown) 1);
+        ```
+        </TabItem>
+    </Tabs>
+
+    We begin by setting the mode for each pin using [`raspi_set_mode()`](/api/raspberry/#raspi-set-mode). The button pin is set to [`GPIO_INPUT`](/api/types/#pin-modes) and the LED pin is set to [`GPIO_OUTPUT`](/api/types/#pin-modes). We do this as in this program we are detecting the input of the button and are writing the output of the LED. Then we use [`raspi_set_pull_up_down`](/api/raspberry/#raspi-set-pull-up-down) on the button pin with the argument [`PUD_DOWN`](/api/types/#pull-up-down). This sets the internal pull-down resistor to prevent the pin from being a ["floating pin."](#floating-pins)
+3.
+    <Tabs>
+        <TabItem label="C++">
+        ```cpp
+        timer run_timer = create_timer("run_timer");
+        start_timer(run_timer);
+        while(timer_ticks(run_timer) < 30000)
+        {
+            ...
+        }
+        ```
+        </TabItem>
+        <TabItem label="C#">
+        ```csharp
+        var run_timer = SplashKit.CreateTimer("run_timer");
+        SplashKit.StartTimer(run_timer);
+
+        while(SplashKit.TimerTicks(run_timer) < 30000)
+        {
+            ...
+        }
+        ```
+        </TabItem>
+    </Tabs>
+
+    Just like in the [first tutorial](/guides/gpio/10-00-blink-led), we create a timer that limits how long our program runs for. We do this so we know that our pins are cleaned properly upon exiting the program.
+
+4.
+    <Tabs>
+        <TabItem label="C++">
+        ```cpp
+        if(raspi_read(button_pin) == GPIO_HIGH)
+        {
+            led_state = raspi_read(led_pin);
+            if(led_state == GPIO_LOW)
+            {
+                raspi_write(led_pin, GPIO_HIGH);
+            }
+            else
+            {
+                raspi_write(led_pin, GPIO_LOW);
+            }
+        }
+        ```
+        </TabItem>
+        <TabItem label="C#">
+        ```csharp
+        if(SplashKit.RaspiRead(button_pin) == (SplashKitSDK.PinValues) 1)
+        {
+            led_state = SplashKit.RaspiRead(led_pin);
+            if(led_state == (SplashKitSDK.PinValues) 0)
+            {
+                SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinValues) 1);
+            }
+            else
+            {
+                SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinValues) 0);
+            }
+        }
+        ```
+        </TabItem>
+    </Tabs>
+
+    Above is the main section of this code. On each loop we read the state of the button pin using [`raspi_read()`](/api/raspberry/#raspi-read) and if the result is `GPIO_HIGH`, then this indicates that the button has been pressed. We then read the state of the led, which can either be `GPIO_LOW` indicated the LED is not on, or `GPIO_HIGH` indicating that the LED is on. Once we have this state we can use [`raspi_write()`](/api/raspberry/#raspi-write) to change the pin to the opposite of what has been read.
+
+5.
+    <Tabs>
+        <TabItem label="C++">
+        ```cpp
+        stop_timer(run_timer);
+        free_all_timers();
+        raspi_cleanup();
+        return 0;
+        ```
+        </TabItem>
+        <TabItem label="C#">
+        ```csharp
+        SplashKit.StopTimer(run_timer);
+        SplashKit.FreeAllTimers();
+        SplashKit.RaspiCleanup();
+        ```
+        </TabItem>
+    </Tabs>
+    Just like in the [first tutorial](/guides/gpio/10-00-blink-led) and most projects involving GPIO pins, we must ensure that the hardware and resources we've used are cleaned properly, and we do this by stopping and freeing our timers and calling [`raspi_cleanup()](/api/raspberry/#raspi-cleanup).
+
+We can build this program with the following command:
+
+<Tabs>
+    <TabItem label="C++">
+    ```shell
+    g++ button_press.cpp -lSplashKit -o button_press
+    ```
+    </TabItem>
+    <TabItem label="C#">
+    ```shell
+    dotnet build
+    ```
+    </TabItem>
+
+</Tabs>
+
+We can then run the program with the following command:
+
+<Tabs>
+    <TabItem label="C++">
+    ```shell
+    ./button_press
+    ```
+    </TabItem>
+    <TabItem label="C#">
+    ```shell
+    dotnet run
+    ```
+    </TabItem>
+
+</Tabs>
+
+<img
+  alt="GIF of the button press circuit in action."
+  src="/gifs/articles/gpio/push_button.gif"
+></img>
+
+### Further Information
+
+#### Floating Pins
+
+A 'floating' pin is one that is not actively driven high (connected to some kind of power) or driven low (connected to ground). When this is the case the pin is said to be 'floating' as the state of the pin can change due to electrical noise or interference. If we were to read the pin in this state, then the value returned would be randomly either [`GPIO_HIGH`](/api/raspberry/#pin-values) or [`GPIO_LOW`](/api/raspberry/#pin-values)
+
+In this tutorial we've used an internal pull-down resistor to prevent this. A pull-down resistor connects the pin to ground which effectively neutralises the electrical interference. Doing this ensures the pin only reads[`GPIO_LOW`](/api/raspberry/#pin-values) until the button is actually pressed and the pin is powered.
+
+#### Debouncing
+
+The button that is used in this tutorial works by physically moving a strip of metal against another strip of metal to complete a circuit. When you press or release the button, these electrical contacts can physically bounce and create multiple on-off signals. This phenomenon is known as 'debouncing' and can be remedied through hardware and software solutions. One basic way to address this in software is create a non-blocking delay when reading the input (in this case the button). To do this we record the time when we last read the input and take it away from the current time in the loop. We then only read the button when this result is greater than some interval we've set.
