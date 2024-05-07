@@ -12,6 +12,7 @@ To follow along with this tutorial, readers should have:
 - Basic knowledge of programming concepts.
 - Familiarity with the Splashkit library.
 - Installed Splashkit and set up their development environment.
+- Here is the link for installing splashkit in various operating systems: https://splashkit.io/installation/
 
 ## Functions Used
 
