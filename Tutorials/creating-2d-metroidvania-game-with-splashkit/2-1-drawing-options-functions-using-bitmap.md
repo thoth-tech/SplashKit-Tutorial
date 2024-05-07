@@ -22,9 +22,9 @@ To begin utilizing drawing options functions in Splashkit, set up the game windo
    ```cpp
     int main()
     {
-    open_window("Advanced Drawing", 800, 600);
-    load_resource_bundle("game_resources", "r");
-    return 0;
+       open_window("Advanced Drawing", 800, 600);
+       load_resource_bundle("game_resources", "r");
+       return 0;
     }
     ```
 ## Drawing Options Functions
@@ -46,23 +46,26 @@ In this example, we'll demonstrate how to use 'Option Part Bmp' to draw a sectio
 
 1. **Example Usage:**
 
-   For instance, draw a window with dimensions of `800` pixels width and `600` pixels height. Here is the code snippet where we load a bitmap and applies 'Option Part Bmp' to draw only a 100x100 region of it at coordinates (100, 100). The function `load_resource_bundle` loads a resource bundle named `game_resources` from the specified folder `resource_folder`. Resource bundles typically contain images, sounds, and other assets used in the game.`bitmap bmp` loads a bitmap image named `my_bitmap` from the file `Resources/images/bitmap.png`. The bitmap is stored in the variable bmp for later use.
+   For instance, draw a window with dimensions of `800` pixels width and `600` pixels height. Here is the code snippet where we load a bitmap and applies 'Option Part Bmp' to draw only a 
+   100x100 region of it at coordinates (100, 100). The function `load_resource_bundle` loads a resource bundle named `game_resources` from the specified folder `resource_folder`.
+   Resource bundles typically contain images, sounds, and other assets used in the game.`bitmap bmp` loads a bitmap image named `my_bitmap` from the file `Resources/images/bitmap.png`.
+   The bitmap is stored in the variable bmp for later use.
 
    ```cpp
    int main()
     {
-    open_window("Drawing", 800, 600);
-    load_resource_bundle("game_resources", "resource_folder");
+       open_window("Drawing", 800, 600);
+       load_resource_bundle("game_resources", "resource_folder");
 
-    bitmap bmp = load_bitmap("my_bitmap", "Resources/images/bitmap.png");
-    drawing_options opts = option_part_bmp(0, 0, 100, 100); // Cropping a 100x100 region
+       bitmap bmp = load_bitmap("my_bitmap", "Resources/images/bitmap.png");
+       drawing_options opts = option_part_bmp(0, 0, 100, 100);
 
-    draw_bitmap(bmp, 100, 100, opts);
+       draw_bitmap(bmp, 100, 100, opts);
 
-    delay(5000); // Pause for observation
+       delay(5000); // Pause for observation
 
-    close_all_windows();
-    return 0;
+       close_all_windows();
+       return 0;
     }
 
 ## Example 2: Applying Option Rotate Bmp:
@@ -85,18 +88,18 @@ In this example, we'll showcase how to use 'Option Rotate Bmp' to dynamically ro
    ```cpp
    int main()
     {
-    open_window("Drawing", 800, 600);
-    load_resource_bundle("game_resources", "resource_folder");
+       open_window("Drawing", 800, 600);
+       load_resource_bundle("game_resources", "resource_folder");
 
-    bitmap bmp = load_bitmap("my_bitmap", "Resources/images/bitmap.png");
-    drawing_options opts = option_rotate_bmp(45); // Rotate bitmap by 45 degrees
+       bitmap bmp = load_bitmap("my_bitmap", "Resources/images/bitmap.png");
+       drawing_options opts = option_rotate_bmp(45);
 
-    draw_bitmap(bmp, 100, 100, opts);
+       draw_bitmap(bmp, 100, 100, opts);
 
-    delay(5000); // Pause for observation
+       delay(5000);
 
-    close_all_windows();
-    return 0;
+       close_all_windows();
+       return 0;
     }
 
 ## Example 3: Applying Option Scale Bmp:
@@ -120,21 +123,21 @@ In this example, we'll illustrate how to use 'Option Scale Bmp' to scale a bitma
    ```cpp
    int main()
     {
-    open_window("Drawing", 800, 600);
-    load_resource_bundle("game_resources", "resource_folder");
+       open_window("Drawing", 800, 600);
+       load_resource_bundle("game_resources", "resource_folder");
 
-    bitmap bmp = load_bitmap("my_bitmap", "Resources/images/bitmap.png");
-    drawing_options opts = option_scale_bmp(1.5, 1.5); // Scale bitmap to 150% of its original size
+       bitmap bmp = load_bitmap("my_bitmap", "Resources/images/bitmap.png");
+       drawing_options opts = option_scale_bmp(1.5, 1.5);
 
-    draw_bitmap(bmp, 100, 100, opts);
+       draw_bitmap(bmp, 100, 100, opts);
 
-    delay(5000); // Pause for observation
+       delay(5000);
 
-    close_all_windows();
-    return 0;
+       close_all_windows();
+       return 0;
     }
 
-## Example 4: Applying Option Scale Bmp:
+## Example 4: Combining Options:
 
 In this example, we'll combine drawing option functions to create dynamic animations with depth.
 
@@ -145,21 +148,21 @@ In this example, we'll combine drawing option functions to create dynamic animat
    ```cpp
    int main()
     {
-    open_window("Drawing", 800, 600);
-    load_resource_bundle("game_resources", "resource_folder");
+       open_window("Drawing", 800, 600);
+       load_resource_bundle("game_resources", "resource_folder");
 
-    bitmap bmp = load_bitmap("my_bitmap", "Resources/images/bitmap.png");
-    drawing_options opts_rotate = option_rotate_bmp(45); // Rotate bitmap by 45 degrees
-    drawing_options opts_scale = option_scale_bmp(1.5, 1.5); // Scale bitmap to 150% of its original size
+       bitmap bmp = load_bitmap("my_bitmap", "Resources/images/bitmap.png");
+       drawing_options opts_rotate = option_rotate_bmp(45);
+       drawing_options opts_scale = option_scale_bmp(1.5, 1.5);
 
-    // Combine rotation and scaling effects
-    draw_bitmap(bmp, 100, 100, opts_rotate);
-    draw_bitmap(bmp, 200, 200, opts_scale);
+       // Combine rotation and scaling effects
+       draw_bitmap(bmp, 100, 100, opts_rotate);
+       draw_bitmap(bmp, 200, 200, opts_scale);
 
-    delay(5000); // Pause for observation
+       delay(5000);
 
-    close_all_windows();
-    return 0;
+       close_all_windows();
+       return 0;
     }
 
 **Conclusion:**
