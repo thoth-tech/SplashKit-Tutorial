@@ -13,24 +13,6 @@ sidebar:
 
 Welcome to the setup guide for SplashKit in preparation for developing the Car Race Game. SplashKit is a versatile game development toolkit that provides a wide range of features and functions to simplify the game development process. In this tutorial, we'll walk you through the steps to [install and configure SplashKit](https://splashkit.io/articles/installation/), set up your project, and get ready to start building your game.
 
-## SplashKit Overview
-
-Before we dive into the setup process, let's briefly overview some key function categories in SplashKit:
-
-- **[Animations](https://splashkit.io/api/animations/)**: Allows for smooth movement between cells in bitmaps and sprites.
-- **[Audio](https://splashkit.io/api/audio/)**: Provides functions to load and play music and sound effects in your game.
-- **[Camera](https://splashkit.io/api/camera/)**: Enables you to move a virtual camera around your game world for dynamic perspectives.
-- **[Color](https://splashkit.io/api/color/)**: Offers utilities for creating, modifying, and converting colors to enhance visual aesthetics.
-- **[Database](https://splashkit.io/api/database/)**: Allows you to create, query, and manipulate databases for storing game data.
-- **[Graphics](https://splashkit.io/api/graphics/)**: Provides functions for drawing text, bitmaps, and sprites to graphic windows.
-- **[Input](https://splashkit.io/api/input/)**: Handles user interaction and events like keypresses and mouse clicks.
-- **[JSON](https://splashkit.io/api/json/)**: Works with JSON objects for data serialization and deserialization.
-- **[Physics](https://splashkit.io/api/physics/)**: Performs collision detection and provides vector and matrix functions for 2D coordinates.
-- **[Resource Bundles](https://splashkit.io/api/resource-bundles/)**: Quickly loads various resources from the project's `Resources` folder.
-- **[Resources](https://splashkit.io/api/resources/)**: Locates resources in the project's `Resources` folder.
-- **[Sprites](https://splashkit.io/api/sprites/)**: Creates movable and animated images with support for collision detection.
-- **[Windows](https://splashkit.io/api/windows/)**: Manages the creation and manipulation of graphics windows for displaying your game.
-
 ## Environment Setup
 
 Let's get started with setting up SplashKit for your Car Race Game project:
@@ -40,7 +22,7 @@ Let's get started with setting up SplashKit for your Car Race Game project:
 To install SplashKit, follow these steps:
 
 1. Visit the [SplashKit website](https://splashkit.io/articles/installation/) and find the installation guide for your operating system (Windows, macOS, or Linux).
-2. Follow the instructions provided in the installation guide to download and install SplashKit on your computer.
+2. Follow the instructions provid ed in the installation guide to download and install SplashKit on your computer.
 3. Make sure to install any additional programs or libraries required by SplashKit as indicated in the installation guide.
 
 ### Creating Your Project

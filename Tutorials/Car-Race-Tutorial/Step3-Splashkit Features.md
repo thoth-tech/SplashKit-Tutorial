@@ -14,24 +14,47 @@ Welcome to the SplashKit Library Features tutorial. In this tutorial, we'll dive
 
 1. **Sprite Creation**:
    - Sprites are movable and animated images used to represent game objects.
+   - Here we created the sprite to change the color of car skin
    - Create a sprite from a bitmap:
+
      ```cpp
-     bitmap player_bitmap = load_bitmap("player.png");
-     sprite player_sprite = create_sprite(player_bitmap);
+     void switch_car_skin(car_data &car)
+     {
+     bitmap other = car_bitmap(YELLOW);
+     bitmap_set_cell_details(other, 75, 120, 3, 1, 3);
+     sprite_add_layer(car.car_sprite, other, "YELLOW");
+     sprite_hide_layer(car.car_sprite, 1);
+
+     if (car.model == RED)
+     {
+        car.model = YELLOW;
+        sprite_hide_layer(car.car_sprite, 0);
+        sprite_show_layer(car.car_sprite, 1);
+     }
+     else if (car.model == YELLOW)
+     {
+        car.model = RED;
+        sprite_hide_layer(car.car_sprite, 1);
+        sprite_show_layer(car.car_sprite, 0);
+     }
+     }
      ```
 
 2. **Drawing Sprites**:
    - Draw a sprite on the screen:
      ```cpp
-     draw_sprite(player_sprite);
+     // Function to draw the car
+     void draw_car(car_data &car)
+     {
+     draw_sprite(car.car_sprite);
+     }
      ```
 
 3. **Animation**:
    - Animate a sprite by changing its position, rotation, and image frame over time:
+   - While creating new car we declared the animation of the car
      ```cpp
-     void animate_player() {
-         animate_sprite(player_sprite, "run");
-     }
+     animation_script carAnimation = load_animation_script("carAnimation", "carAnimation.txt");
      ```
 
 ## Bitmap Loading and Manipulation
@@ -39,35 +62,20 @@ Welcome to the SplashKit Library Features tutorial. In this tutorial, we'll dive
 1. **Bitmap Loading**:
    - Load bitmap images from files:
      ```cpp
-     bitmap background_bitmap = load_bitmap("background.png");
+     // Used on many occassions
+     draw_bitmap("game", 0, 0, option_to_screen()); // used while drawing the game
+     bitmap default_bitmap = car_bitmap(model); // getting the car image
      ```
 
 2. **Bitmap Manipulation**:
    - Modify bitmap properties such as size, color, and transparency:
      ```cpp
-     set_bitmap_transparency(player_bitmap, 50);
+       bitmap_set_cell_details(default_bitmap, 75, 120, 3, 1, 3); // setting the car position
      ```
 
-## Sound Effect Loading and Playback
-
-1. **Sound Effect Loading**:
-   - Load sound effects in various formats such as WAV, MP3, or OGG:
-     ```cpp
-     sound_effect explosion_sound = load_sound_effect("explosion.wav");
-     ```
-
-2. **Sound Effect Playback**:
-   - Play sound effects at specific times or in response to game events:
-     ```cpp
-     void play_explosion_sound() {
-         play_sound_effect(explosion_sound);
-     }
-     ```
 
 ## Conclusion
 
 Congratulations! You've explored the key features of the SplashKit library for game development. With SplashKit, you can create dynamic and engaging games with ease. Experiment with sprite creation, bitmap loading, sound effect playback, and more to bring your game ideas to life!
-
-For more information and detailed documentation, visit the [SplashKit website](https://www.splashkit.io/) and explore the [SplashKit API reference](https://www.splashkit.io/reference). 
 
 Happy game development!🚗💨
