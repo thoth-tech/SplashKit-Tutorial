@@ -1,0 +1,17 @@
+C:\Users\casti\desktop\uni\game\bin\Debug\net8.0\Game.exe
+C:\Users\casti\desktop\uni\game\bin\Debug\net8.0\Game.deps.json
+C:\Users\casti\desktop\uni\game\bin\Debug\net8.0\Game.runtimeconfig.json
+C:\Users\casti\desktop\uni\game\bin\Debug\net8.0\Game.dll
+C:\Users\casti\desktop\uni\game\bin\Debug\net8.0\Game.pdb
+C:\Users\casti\desktop\uni\game\bin\Debug\net8.0\SplashKitSDK.dll
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\Game.csproj.AssemblyReference.cache
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\Game.AssemblyInfoInputs.cache
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\Game.AssemblyInfo.cs
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\Game.csproj.CoreCompileInputs.cache
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\Game.csproj.Up2Date
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\Game.dll
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\refint\Game.dll
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\Game.pdb
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\Game.genruntimeconfig.cache
+C:\Users\casti\desktop\uni\game\obj\Debug\net8.0\ref\Game.dll

@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Game/1.0.0": {
+        "dependencies": {
+          "SplashKit": "1.1.4"
+        },
+        "runtime": {
+          "Game.dll": {}
+        }
+      },
+      "SplashKit/1.1.4": {
+        "runtime": {
+          "lib/net8.0/SplashKitSDK.dll": {
+            "assemblyVersion": "1.1.4.0",
+            "fileVersion": "1.1.4.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Game/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SplashKit/1.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-N+qAwS+sJnchVWV6uHO7QAnRNeYpAyiLCrio1sX55iILbURJ/nAqyJlZmLtbV6AfJ+W9BrrgPLWG6ah6tgzg6Q==",
+      "path": "splashkit/1.1.4",
+      "hashPath": "splashkit.1.1.4.nupkg.sha512"
+    }
+  }
+}

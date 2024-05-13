@@ -1,0 +1,107 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "SplashKit/1.1.4": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/SplashKitSDK.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/SplashKitSDK.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SplashKit/1.1.4": {
+      "sha512": "N+qAwS+sJnchVWV6uHO7QAnRNeYpAyiLCrio1sX55iILbURJ/nAqyJlZmLtbV6AfJ+W9BrrgPLWG6ah6tgzg6Q==",
+      "type": "package",
+      "path": "splashkit/1.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net6.0/SplashKitSDK.dll",
+        "lib/net7.0/SplashKitSDK.dll",
+        "lib/net8.0/SplashKitSDK.dll",
+        "readme.md",
+        "splashkit.1.1.4.nupkg.sha512",
+        "splashkit.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "SplashKit >= 1.1.4"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\casti\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\casti\\Desktop\\uni\\Game2\\Game.csproj",
+      "projectName": "Game",
+      "projectPath": "C:\\Users\\casti\\Desktop\\uni\\Game2\\Game.csproj",
+      "packagesPath": "C:\\Users\\casti\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\casti\\Desktop\\uni\\Game2\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\casti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "dependencies": {
+          "SplashKit": {
+            "target": "Package",
+            "version": "[1.1.4, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
