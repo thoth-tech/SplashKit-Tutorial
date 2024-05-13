@@ -79,8 +79,8 @@ SplashKit.SpriteAddLayer(bodySprite, starBit, "star");                      // l
   </TabItem>
   <TabItem label="C++">
 ```c++
-SplashKit.SpriteAddLayer(bodySprite, hatBit, "hat");                        // layer 1
-SplashKit.SpriteAddLayer(bodySprite, starBit, "star");                      // layer 2
+sprite_add_layer(bodySprite, hatBit, "hat");                                // layer 1
+sprite_add_layer(bodySprite, starBit, "star");                              // layer 2
 ```
 </TabItem>
 </Tabs> 
@@ -137,6 +137,7 @@ order to show our added layers to our initial `Sprite` object, we call a functio
   <TabItem label="C#">
 ```csharp
 SplashKit.SpriteShowLayer(bodySprite, 1);
+SplashKit.ClearScreen(Color.White);
 SplashKit.DrawSprite(bodySprite);
 spriteLayers.Refresh();
 SplashKit.Delay(2000);
@@ -165,6 +166,7 @@ simple enough, we can just call a [SpriteHideLayer()](https://splashkit.io/api/s
   <TabItem label="C#">
 ```csharp
 SplashKit.SpriteHideLayer(bodySprite, 2);
+SplashKit.ClearScreen(Color.White);
 SplashKit.DrawSprite(bodySprite);
 spriteLayers.Refresh();
 SplashKit.Delay(2000);

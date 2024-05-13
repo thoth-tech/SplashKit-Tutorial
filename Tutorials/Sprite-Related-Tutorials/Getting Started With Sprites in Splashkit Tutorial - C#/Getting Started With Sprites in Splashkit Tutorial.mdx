@@ -33,7 +33,6 @@ Line by line, this can be broken down as:
   <TabItem label="C#">
   ```csharp
 Bitmap happySun;
-Sprite happySunSprite;
 ```
   </TabItem>
 
@@ -60,8 +59,8 @@ Bitmap(string name, int width int height);
   </TabItem>
   <TabItem label="C++">
 ```c++
-public static Bitmap SplashKit.CreateBitmap(string name, int width, int height);
-public Bitmap(string name, int width, int height);
+bitmap load_bitmap(string name, string filename)
+bitmap create_bitmap(string name, int width, int height)
 ```
 </TabItem>
 </Tabs> 
@@ -76,7 +75,7 @@ public Bitmap(string name, int width, int height);
   </TabItem>
   <TabItem label="C++">
 ```c++
-    sprite happySunSprite = create_sprite("Happy Sun", HappySun);
+    sprite happySunSprite;
 ```
 </TabItem>
 </Tabs> 
@@ -120,8 +119,8 @@ spriteWindow = new Window("Learning Sprites!, 800, 800);
   </TabItem>
   <TabItem label="C++">
 ```c++
-public static Window SplashKit.OpenWindow(string caption, int width, int height);
-public Window(string caption, int width, int height);
+Window spriteWindow;
+spriteWindow = open_window("Learning Sprites!, 800, 800);
 ```
 </TabItem>
 </Tabs> 
@@ -174,7 +173,7 @@ SplashKit.Delay(5000);
   </TabItem>
   <TabItem label="C++">
 ```c++
-  refresh_screen();
+  refresh_screen(60);
   delay(5000);
 ```
 </TabItem>
@@ -239,8 +238,8 @@ int main()
     sprite HappySunSprite = create_sprite("Happy Sun", HappySun);
 
     // Creation of Window
-    open_window("Learning Sprites!", 800, 800);
-
+    Window spriteWindow = open_window("Learning Sprites!", 800, 800);
+    
     // Set Sprite position, then draw it to the window
     move_sprite_to(HappySunSprite, 400, 400);
     draw_sprite(HappySunSprite);
@@ -322,7 +321,7 @@ Truth is it's just a single line, if we add in
   </TabItem>
   <TabItem label="C++">
 ```c++
-clear_window(window wind, color clr)
+clear_window(COLOR_WHITE)
 ```
 </TabItem>
 </Tabs> 
@@ -460,7 +459,7 @@ int main()
     delay(5000);
 
     for (int i = 0; i < 150; i++)
-{
+  {
     clear_window(current_window(), COLOR_WHITE);
     move_sprite_to(HappySunSprite, (sprite_x(HappySunSprite)), (sprite_y(HappySunSprite)));
 
@@ -468,9 +467,9 @@ int main()
 
     refresh_screen();
     delay(10);
-}
+  }
     return 0;
-}
+  }
 ```
   </TabItem>
 
