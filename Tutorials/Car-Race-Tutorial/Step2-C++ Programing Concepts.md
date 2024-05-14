@@ -140,6 +140,9 @@ Welcome to the C++ Programming Concepts tutorial. In this tutorial, we'll cover 
      ```
 
 2. **While Loop**:
+
+   Add the code to program.cpp in main file 
+
    - While loops repeatedly execute a block of code as long as a specified condition is true.
    - I used the while loop in my main file so that game could keep on running till the time user doesn't want to quit
    - Example usage:
@@ -211,6 +214,9 @@ Welcome to the C++ Programming Concepts tutorial. In this tutorial, we'll cover 
      std::vector
      ```
 
+## Flow Chart 
+
+![image](images/flowchart%20%20step%202.png)
 
 ## Conclusion
 

@@ -12,6 +12,11 @@ Welcome to the Car Handling tutorial with SplashKit. In this tutorial, we'll exp
 
 ## Car Models Creation
 
+Make a car.cpp file and car.h file where user will start with basic libraries #include "splashkit.h"
+#include <vector>
+#include "car.h"
+using namespace std; and then start with code where first part is bitmap loading.
+
 1. **Car Bitmap Loading**:
    - Load bitmap images for different car models:
    - In this we made the fuction to call all the cars we are using in the game
@@ -35,6 +40,13 @@ Welcome to the Car Handling tutorial with SplashKit. In this tutorial, we'll exp
      ```
 
 2. **Car Model Enumeration**:
+
+ In header file user will start with basic libraries #ifndef CAR_RACE_CAR
+ #define CAR_RACE_CAR
+
+ #include "splashkit.h"
+ #include <vector> and then start coding from enums 
+
    - Define an enumeration for different car models:
      ```cpp
      enum car_model {
@@ -47,17 +59,22 @@ Welcome to the Car Handling tutorial with SplashKit. In this tutorial, we'll exp
 
 ## Drawing and Updating Car Position
 
+ In the same header file after enums user will add the code for struct
+
 1. **Car Structure Definition**:
    - Define a structure to store car data:
      ```cpp
      struct car_data {
-         sprite car_sprite;
-         car_model model;
-         double speed;
+         sprite car_sprite; // sprite representing the car  
+         car_model model;   // Model of the car
+         double speed;     // Speed of the car
      };
      ```
 
 2. **Car Creation**:
+
+   In the car.cpp file now add create the car code after bitmap loading
+
    - Create a new car with specified model, speed, and position:
      ```cpp
      // Function to create a new car
@@ -90,6 +107,9 @@ Welcome to the Car Handling tutorial with SplashKit. In this tutorial, we'll exp
      ```
 
 3. **Drawing Car**:
+
+   In the car.cpp file add the code after the switching car function
+
    - Draw the car sprite on the screen:
      ```cpp
      void draw_car(car_data &car)
@@ -99,6 +119,9 @@ Welcome to the Car Handling tutorial with SplashKit. In this tutorial, we'll exp
      ```
 
 4. **Updating Car Position**:
+
+   In the car.cpp file add the code after the drawing car fucntion 
+
    - Update the car's position based on its speed:
      ```cpp
      void update_car(car_data &car)
@@ -108,7 +131,11 @@ Welcome to the Car Handling tutorial with SplashKit. In this tutorial, we'll exp
      }
      ```
 
+![image](images/carrace-demo-01.png)
+
 ## Switching Car Skin During Gameplay
+
+   Add the code to car.cpp after create a car function
 
 1. **Switching Car Skin Function**:
    - Implement a function to switch the car's skin during gameplay:
@@ -136,7 +163,13 @@ Welcome to the Car Handling tutorial with SplashKit. In this tutorial, we'll exp
      }
      ```
 
+![image](images/redcar.png)
+![image](images/yellowcar.png)
+
 2. **Handling User Input**:
+
+   Add the code in gam.cpp file after randomly spawn obstacle cars
+
    - Handle user input in the fucntion:
      ```cpp
      void handleInput(game_data &game)
@@ -182,6 +215,8 @@ Welcome to the Car Handling tutorial with SplashKit. In this tutorial, we'll exp
 
 ## Collision Detection
 
+Add the code to the game.cpp after function to remove cars that have gone out of range
+
 Collision detection is crucial for handling interactions between game objects:
 
 1. **Basic Collision Detection**:
@@ -202,6 +237,9 @@ Collision detection is crucial for handling interactions between game objects:
      }
      ```
 
+## Flow Chart 
+
+![image](images/flowchart%20step%205.png)
 
 ## Conclusion
 

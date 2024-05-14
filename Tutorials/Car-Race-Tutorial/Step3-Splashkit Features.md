@@ -74,6 +74,10 @@ Welcome to the SplashKit Library Features tutorial. In this tutorial, we'll dive
      ```
 
 
+## Flow Chart 
+
+![image](images/flowchart%20step%203.png)
+
 ## Conclusion
 
 Congratulations! You've explored the key features of the SplashKit library for game development. With SplashKit, you can create dynamic and engaging games with ease. Experiment with sprite creation, bitmap loading, sound effect playback, and more to bring your game ideas to life!

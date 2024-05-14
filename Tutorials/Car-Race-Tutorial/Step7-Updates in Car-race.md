@@ -2,6 +2,8 @@
 
  Important Notice : The previous car-racing need to be compiled successfully and working
 
+ [Watch the Tutorial Video Of Updated Game](https://youtu.be/eWJ1rshG5yE)
+
 ## 1. Updating car.cpp
 
 **Additions for Two Player Mode:** This update adds functionality to support a two-player mode in the game.
@@ -32,6 +34,7 @@ void update_car(car_data &car) {
     }
 }
 ```
+![image](images/Two%20Playres%20together.png)
 
 ## 2. Updating car.h
 
@@ -74,6 +77,10 @@ struct game_data {
     sprite finish_line;
 };
 ```
+![image](images/game2.png)
+![image](images/selectscreen.png)
+![image](images/pause%20menu.png)
+![image](images/levelup.png)
 
 ## 4. Updating powerup.cpp
 - powerup_bitmap Function: This function takes a powerup_type enum as input and returns the corresponding bitmap for the given powerup type. It uses a switch statement to select the appropriate bitmap based on the powerup type.
@@ -137,6 +144,7 @@ int main()
 }
 
 ```
+![image](images/Powerups%20display.png)
 
 ## 5. Updating powerup.h
 - The explanation of code as follows :
@@ -273,6 +281,8 @@ void out_range_barricade(std::vector<barricade_data> &barricades)
 
 ```
 
+![image](images/barricade%20and%20level%20up.png)
+
 ## 7. Updating barricade.h
 - The explanation of code as follows : 
 - barricade.h defines the structure and functions related to barricades in the game.
@@ -312,5 +322,10 @@ void out_range_barricade(std::vector<barricade_data> &barricades);
 #endif
 
 ```
+## FInal Flow Chart 
+
+![image](images/updated%20flow%20chart.png)
+
+
 ## 8. Conclusion
 In conclusion, these code files provide a foundation for creating a dynamic and engaging car racing game with features such as multiple car models, powerups, obstacles, and two-player mode. By utilizing SplashKit's functionality and these code structures, developers can easily extend and customize the game to suit their preferences and requirements.

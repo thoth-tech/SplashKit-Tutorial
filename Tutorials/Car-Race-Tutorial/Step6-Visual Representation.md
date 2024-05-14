@@ -41,3 +41,7 @@ Welcome to the Car Racing Game! Here's how to play:
 ## Conclusion
 Now that you know the controls and how to play, it's time to rev up your engines and hit the race track! Compete against other drivers, set new records, and become the ultimate champion!
 
+## FInal Flow Chart 
+
+![image](images/flowchart%20final.png)
+

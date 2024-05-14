@@ -32,13 +32,19 @@ After installing SplashKit, it's time to create your Car Race Game project:
 1. Create a new directory for your project on your computer. You can name it something like "CarRaceGame".
 2. Use SplashKit Manager (SKM) to set up a new C++ project by running the command `skm new c++` in your project directory. This command initializes a new C++ project with SplashKit dependencies.
 3. Generate resource folders for your project using the command `skm resources`. This command creates a "resources" folder where you can store game assets such as images, sounds, and fonts.
+4. In this projet we have files car.cpp, game.cpp, car.h, game.h, and main program.cpp
+5. The folder starting has libraries and then main files
+
+![image](images/folder1.png)
+![image](images/Folder2.png)
 
 ### Configuring Your IDE
 
 If you're using Visual Studio Code (VS Code) as your code editor:
 
 1. Open VS Code and navigate to your project directory.
-2. Set up your project configuration and compile your code using SKM commands in the VS Code terminal. You can use commands like `skm build` to compile your project and `skm run` to execute it.
+2. Set up your project configuration and compile your code using SKM commands in the VS Code terminal. You can use commands like `skm clang++ *.cpp -0 output` to compile your project and `./output.exe` to execute it.
+
 
 ## Conclusion
 

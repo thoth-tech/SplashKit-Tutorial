@@ -15,6 +15,9 @@ Welcome to the Game Management tutorial with SplashKit. In this tutorial, we'll 
 Initializing the game environment involves setting up necessary resources, such as images, sounds, and initial game state:
 
 1. **Game State Setup**:
+    
+   Add the code to game.cpp file after handle user input
+
    - Create and initialize game data structures, such as player's car, obstacle cars, and score.
    - Example code snippet:
      ```cpp
@@ -40,12 +43,16 @@ Initializing the game environment involves setting up necessary resources, such 
      }
      ```
 
+![image](images/game.png)
 
 ## Obstacle Spawning and Updating the game state
 
 Spawn and update obstacle cars to create challenging gameplay:
 
 1. **Random Obstacle Spawning**:
+
+   In game.cpp after map setup add the code 
+
    - Randomly spawn obstacle cars at predefined intervals or positions.
    - Example code snippet:
      ```cpp
@@ -80,6 +87,9 @@ Spawn and update obstacle cars to create challenging gameplay:
      ```
 
 2. **Updating game state**:
+
+   At the end of the game.cpp file add the code
+
    - Update positions and states of obstacle cars based on game logic.
    - Example code snippet:
      ```cpp
@@ -112,6 +122,8 @@ Spawn and update obstacle cars to create challenging gameplay:
 
 ## Score Tracking and Game Over Conditions
 
+Add the code in program.cpp at the end in the else condition
+
 Track player's score and determine game over conditions for a satisfying gameplay experience:
 
    - Increment score based on game progress or achievements.
@@ -135,8 +147,11 @@ Track player's score and determine game over conditions for a satisfying gamepla
      }
      ```
 
+![image](images/carrace-gameover.png)
 
 ## Playing Sound Effects
+
+Add the code to car.cpp wherever you want the sound effects and stop in program.cpp file in else condition
 
 1. **Sound Effect Loading**:
    - Load sound effects for car movement and collisions:
@@ -145,6 +160,11 @@ Track player's score and determine game over conditions for a satisfying gamepla
      play_sound_effect("carcrash", 1);
      stop_sound_effect("carmotor");
      ```
+
+
+## Flow Chart 
+
+![image](images/flowchart%20step%204.png)
 
 ## Conclusion
 
