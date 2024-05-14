@@ -18,4 +18,4 @@ Now we will right the splashkit command in the terminal to create a new project.
 ```bash
 skm new c++
 ```
-![creating a new project](https://www.loom.com/share/ad4052914c0e43778e151535990437b4?sid=ba29589d-b475-4aa2-a13e-6b1a1a6f24c2)
+![creating a new project](https://github.com/kay-kaushik/SplashKit-Tutorial/blob/main/Tutorials/splashkit-mario-game-tutorial/new%20project%20gif.gif)
