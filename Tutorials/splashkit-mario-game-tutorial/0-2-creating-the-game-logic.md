@@ -1,13 +1,16 @@
 ---
 title: Game logic
 ---
+
+## character movement 
+
 ### character movement - left & right
 
 Now that we have all the sprites drawn, we can work on user input and character input. The splashkit library handles user input very well, making it easy for game developers like yourself  
 to make games more easily. The key down() function takes one parameter which is the key name. We will use this function to make our charcter move.
 
 ```cpp
-if (key_down(RIGHT_KEY))
+        if (key_down(RIGHT_KEY))
         {
             if (sprite_animation_name(playerRunR) != "runr")
             {
@@ -25,7 +28,7 @@ In this code snippet above you can see that we have use an if block, in which th
 After setting the animation, we call another splashkit function which is sprite set x(), this function updates the sprites location on the x axis (horizontly). There are two calls as we have an idle sprite as well which also needs to be updated. Finally isMoving is a bool variable which we set True. This will be used ahead as if the charcted is not moving, we want to set the idle sprite animation otherwise the movement sprite animation. Following is the code for left movement which has the same functionality. 
 
 ```cpp
-else if (key_down(LEFT_KEY))
+        else if (key_down(LEFT_KEY))
         {
             if (sprite_animation_name(playerRunR) != "runl")
             {
@@ -43,7 +46,7 @@ else if (key_down(LEFT_KEY))
 When it comes to jumping, we want a smooth curve for our jump. Instead of having the sprite move by pixel units, we are going to use velocity and gravity. Splashkit has great resources for making game development easy. One of the functions in splashkit, sprite set velocity() lets you set the velocity of the sprite. Now lets see you we will use this in conjuction with gravity to create a smooth jump sequence. 
 
 ```cpp
- else if (key_typed(UP_KEY))
+        else if (key_typed(UP_KEY))
         {
             sprite_set_velocity(playerRunR, vec);
             isJumping = true;
@@ -67,7 +70,7 @@ In the above snippet, we have created three vector_2d variables. We have also us
 Before the jumping key is typed, there is no velocity set for the player sprite. Once, the up key if statement gets executed, the velocity is set to `vec` which is set to 1 on the x axis and -1.25 at y axis. Another thing that gets executed is isJumping is now set to true. We will use this bool variable to add gravity to our player sprite. Here is the code snippet for the logic.
 
 ```cpp 
-if (isJumping)
+        if (isJumping)
         {
 
             // add the gravity to the player's velocity
@@ -87,7 +90,106 @@ So, the logic here is, once the player is in the air due to up key being typed w
 
 ![player jump gif](/Tutorials/splashkit-mario-game-tutorial/images%20and%20gifs/player%20jumping%20gif.gif)
 
-### Enemy logic 
+## Enemy logic 
 
-A good game requires some level of difficulty, that's what make them fun to play. In the first part of this tutorial we added the data for the enemy in the game which is 
+A good game requires some level of difficulty, that's what make them fun to play. In the first part of this tutorial we added the data for the enemy in the game which is a zombie which keeps coming towards the player and in classic mario fashion we have to jump over it in order to not die in the game. You can find the data for the zombie [here](/0-0-setting-up.md). 
 
+we don't want the zombie to move in any direction other than towards the player, that is from left to right. While setting up the data for the zombie, we have set the x and y for the zombie sprite. But to make the zombie keep coming at the player we will add some logic to the game loop. Here is the code snippet for zombie movement
+
+```cpp
+        if (sprite_offscreen(zombRun))
+        {
+            //move_sprite_to(zombRun, screen_width() - 10 ,charGround);
+            sprite_set_x(zombRun, screen_width() - 10);
+            sprite_set_y(zombRun, charGround);
+        }
+        else
+        {
+            draw_sprite(zombRun);
+        }
+```
+In the above snippet you can see that we have used the splashkit function called sprite_offscreen(). This function returns a bool value and takes in one parameter which is the sprite for which you want to check the condition. So, if the zombie goes out of the screen, we will reset it's x and y positions. The x position is set 10 pixels less than the screen width and y remains the same. 
+
+if its not out of the screen, we simply draw the zombie sprite. Here is a look at how this actually looks in the game.
+
+[zombie movement gif](/Tutorials/splashkit-mario-game-tutorial/images%20and%20gifs/zombie%20movement%20gif.gif)
+
+### enemy collission logic
+
+Now, we have the zombie moving towards the player but it does nothing as we haven't added that logic. We want the player to die the momment it hits the zombie. Here is the code snippet for that.
+
+```cpp
+        if (bitmap_collision(player, sprite_position(playerRunR), zomb, sprite_position(zombRun)))
+        {
+            clear_screen(COLOR_BLACK);
+
+            draw_text("GAME OVER", COLOR_WHITE, 300, 300);
+            refresh_screen();
+
+            delay(5000);
+            close_window(start);
+        }
+```
+In the above code snippet we have used the function bitmap collision to detect collsion between two game objects. There is another function for that, which we will discuss later in this tutorial. This function takes the bitmap of the game object, it's position which is another data type point 2d, the second bitmap in which the first bitmap is colliding with and its position. 
+So, we pass in the player's bitmap and then for the position we are using sprite_position() function which gives real-time position of the sprite which you pass as parameter. Then we pass the zombie's bitmap and again using the sprite_position function we get the real-time position of the sprite when the game is running. 
+
+Once, this condition is true. We clear the screen with color black and we draw text game over in the center of the screen. We delay this game over screen for 5 seconds and we finally close the window. Here is a look at how this logic works in the actual game.
+
+![zombie collision](/Tutorials/splashkit-mario-game-tutorial/images%20and%20gifs/zombie%20collision%20gif.gif)
+
+## scoring logic 
+
+A game is not fun unless you get rewarded for your efforts. That's why most games have a currency or points system. In this game we have coins. We want when the player hits the coin, the coin disappears and the score to be added by 1. Lets see the code for doing it. Before going into the game loop, we want to declare a few variables outside it. 
+
+```cpp
+    bool collected = false;
+    // score
+    int score = 0;
+    string scoreString;
+```
+In the above code, collected is a boolean variable which is set to false, we will use it to create the coin logic. The int score is to increase the score by 1 everytime we hit a coin. The scoreString is a string variable which will store the score converted into a string. Here's the coin logic code. 
+
+```cpp
+        if (sprite_collision(playerRunR,coinSprite))
+        {
+            free_sprite(coinSprite);
+            play_sound_effect("coinCollected");
+            score++;
+            collected = true;      
+        }
+```
+Here we have another method of collision detection, we use the sprite collision() function which takes two sprites as the parameter. Once the sprite collison function returns a true value. The if block is triggered. Now, we use another function called free sprite() which frees the resource associated with a sprite. Next we play a sound effect, you can refer to the sound guide [here](link). We increase the value of the score variable by 1. Finally we set the collected value to true. Now to remove the sprite as the coin has been collected we make the following changes. 
+
+```cpp
+        if (!collected)
+        {
+            draw_sprite(coinSprite);
+        }
+
+        if (!collected)
+        {
+            update_sprite_animation(coinSprite);
+            update_sprite(coinSprite);
+        }  
+```
+In the above code snippet, we have changed the draw statements to only run if the coin is not collected. Once its collected the statements won't execute. Here is a look at how this works in the game. 
+
+![coin collected demo](/Tutorials/splashkit-mario-game-tutorial/images%20and%20gifs/coin%20collected%20gif.gif)
+
+
+
+### portal logic 
+
+Now, lets move onto the use of portals in the game. In this game, portals transport you to the ground hovering above. In portals we use sprite collision as well to trigger the movement of the sprite to the hovering ground. Here is the code snippet for it. 
+
+```cpp
+        if(sprite_collision(playerRunR, portal))
+        {
+            int charAirGround = AgroundY - 31;
+            move_sprite_to(playerRunR, sprite_position(playerRunR).x, charAirGround);
+            onAir = true;
+        }
+```
+In the above code snippet you can see we have used sprite collision to trigger movement. Next, we set a new ground height to be parallel to the hovering ground. Next, we have used the splashkit function move_sprite_to() which takes two parameters, sprite, x and y positions. Here we pass the player sprite, and we use the sprite position's x value to keep the x same and we change the y value to the new height. We set the onAir true after that. Here is how it looks in the game. 
+
+![working portal demo](/Tutorials/splashkit-mario-game-tutorial/images%20and%20gifs/portal%20working%20gif.gif)

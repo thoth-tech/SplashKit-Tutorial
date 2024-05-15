@@ -31,7 +31,7 @@ Here is the cpp code snippet, the snippet just shows how to write the draw funct
 draw your own sprites. The code files for this project are [here](https://github.com/kay-kaushik/splashkit-karioGame).
 
 ```cpp
-while (!quit_requested())
+    while (!quit_requested())
     {
         clear_screen(COLOR_BLACK);
         draw_sprite(Aground, -camera_x(), -camera_y());
