@@ -26,7 +26,7 @@ Organizing audio assets systematically offers several benefits:
 
 Before diving into the details of freeing audio resources, let's start with a simple example that plays different audio instances based on key presses. This will help you understand the basics of managing audio in SplashKit.
 
-### Example: Playing Audio with Key Presses
+## Example: Playing Audio with Key Presses
 
 Let's start with a complete example that plays different sounds based on key presses and manages audio resources efficiently.
 Here is the complete example code. We will break it down and explain each part in detail.
@@ -111,9 +111,9 @@ int main()
 }
 ```
 
-### Breaking Down
+## Breaking Down
 
-- **Ensuring Audio System Readiness**
+### Ensuring Audio System Readiness
 
 Before attempting to play audio, check the system's readiness with the `audio_ready` function. If the audio system is not ready, you should open it using `open_audio`.
 
@@ -124,7 +124,7 @@ if (!audio_ready())
 }
 ```
 
-- **Loading Sound Effects**
+### Loading Sound Effects
 
 First, we load the sound effects and background music using the `load_sound_effect` and `load_music` functions. This ensures that the audio resources are available when needed
 
@@ -135,7 +135,7 @@ load_sound_effect("sound3", "sound3.wav");
 music background_music = load_music("background", "background.mp3");
 ```
 
-- **Playing Background Music**
+### Playing Background Music
 
 Next, we play the background music continuously using the `play_music` function.
 
@@ -143,7 +143,7 @@ Next, we play the background music continuously using the `play_music` function.
 play_music(background_music, -1);
 ```
 
-- **Main Loop**
+### Main Loop
 
 The main loop runs until the window is closed. Inside this loop, we process events and check if specific keys are pressed to play the corresponding sound effects or transition music.
 
@@ -189,7 +189,7 @@ while (!window_close_requested("Audio Example"))
 `stop_music()` stops the currently playing music.
 `free_music(variable)` releases the music resource.
 
-- **Freeing Sound Effects and Music**
+### Freeing Sound Effects and Music
 
 After exiting the main loop (when the window is closed), we free all sound effects and music resources to clean up.
 
@@ -198,7 +198,7 @@ free_all_sound_effects();
 free_music(background_music);
 ```
 
-- **Main Function**
+### Main Function
 
 The `main` function sets up the window, ensures the audio system is ready, calls the `play_sounds` function to execute the audio management logic, and finally closes the audio system.
 
