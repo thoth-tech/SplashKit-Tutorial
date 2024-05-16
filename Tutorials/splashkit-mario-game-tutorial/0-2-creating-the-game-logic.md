@@ -112,7 +112,7 @@ In the above snippet you can see that we have used the splashkit function called
 
 if its not out of the screen, we simply draw the zombie sprite. Here is a look at how this actually looks in the game.
 
-[zombie movement gif](/Tutorials/splashkit-mario-game-tutorial/images%20and%20gifs/zombie%20movement%20gif.gif)
+![zombie movement gif](/Tutorials/splashkit-mario-game-tutorial/images%20and%20gifs/zombie%20movement%20gif.gif)
 
 ### enemy collission logic
 
@@ -193,3 +193,38 @@ Now, lets move onto the use of portals in the game. In this game, portals transp
 In the above code snippet you can see we have used sprite collision to trigger movement. Next, we set a new ground height to be parallel to the hovering ground. Next, we have used the splashkit function move_sprite_to() which takes two parameters, sprite, x and y positions. Here we pass the player sprite, and we use the sprite position's x value to keep the x same and we change the y value to the new height. We set the onAir true after that. Here is how it looks in the game. 
 
 ![working portal demo](/Tutorials/splashkit-mario-game-tutorial/images%20and%20gifs/portal%20working%20gif.gif)
+
+### ground logic
+
+The ground in the game is a sprite which we are drawing repeatdely. The ground has to be visible even when the player and the camera moves. In this tutorial for ground, we will be referencing the camera system of the game which we have implemented using the splashkit camera functionality. You can read about it [here](link). 
+
+We will create a new function outisde the main block called draw ground(). Here is the code for it. 
+
+```cpp
+void drawGround(sprite spr, double startx, double starty, double cameraX, double cameraY)
+{
+    double x = 0; 
+    while (x - cameraX < screen_width() + 2000)
+    {
+        sprite_set_x(spr, x - cameraX);
+        sprite_set_y(spr,starty -cameraY);
+        draw_sprite(spr);
+        x = x + sprite_width(spr);
+    }
+}
+```
+In the above code snippet we can see that the function takes a sprite which is the ground, a starting position x, y , camera's x position, camera's y position. We first set x as 0. and we set a while loop to keep running till x doesn't surpass screen_width() + 2000. The 2000 is for level design. I wanted the tutorial to be simple so I removed the functionality of drawing the ground as camera moves. Next we set the ground's x , then the ground's y. Then we draw the sprite. Finally we add the x's value by adding the sprite's width to the x which will result in the next drawing of the ground to start from where the last ground ended. This gives the illusion of the ground being one seamless sprite. Now, we call the function inside the game loop. Here is the code for it. 
+
+```cpp
+drawGround(groundSprite,0,groundY, camera_x(), camera_y());
+```
+Here is how the ground looks in the game.
+
+![ground logic demo](/Tutorials/splashkit-mario-game-tutorial/images%20and%20gifs/ground%20video%20gif.gif)
+
+
+### bacground logic
+
+The background image logic is the same as ground logic, we use the drawground function just like we did above but we pass in the background image sprite. You can see in the above gif that background image works in the same way. 
+
+Now lets move on to using camera in the game. [next](link).
