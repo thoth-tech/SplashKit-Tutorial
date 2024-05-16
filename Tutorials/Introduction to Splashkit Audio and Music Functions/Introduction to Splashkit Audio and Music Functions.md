@@ -29,6 +29,9 @@ void manage_music()
     // Play the background music continuously
     play_music(background_music, -1, 0.5); // -1 for looping indefinitely, volume set to 50%
 
+    bool is_music_paused = false; // Track whether the music is paused
+    float music_volume = 0.5; // Track the current volume level
+
     // Main loop
     while (!window_close_requested("Music Example"))
     {
@@ -37,26 +40,38 @@ void manage_music()
         if (key_typed(SPACE_KEY))
         {
             // Pause or resume the music when space is pressed
-            if (music_paused())
+            if (is_music_paused)
             {
                 resume_music();
+                is_music_paused = false;
             }
             else
             {
                 pause_music();
+                is_music_paused = true;
             }
         }
 
         if (key_typed(UP_KEY))
         {
             // Increase volume
-            set_music_volume(min(get_music_volume() + 0.1, 1.0));
+            music_volume += 0.1;
+            if (music_volume > 1.0)
+            {
+                music_volume = 1.0;
+            }
+            set_music_volume(music_volume);
         }
 
         if (key_typed(DOWN_KEY))
         {
             // Decrease volume
-            set_music_volume(max(get_music_volume() - 0.1, 0.0));
+            music_volume -= 0.1;
+            if (music_volume < 0.0)
+            {
+                music_volume = 0.0;
+            }
+            set_music_volume(music_volume);
         }
 
         delay(100);  // Brief delay to avoid spamming input
@@ -120,6 +135,9 @@ play_music(background_music, -1, 0.5); // -1 for looping indefinitely, volume se
 The main loop runs until the window is closed. Inside this loop, we process events and check if specific keys are pressed to control the music playback and volume.
 
 ```cpp
+bool is_music_paused = false; // Track whether the music is paused
+float music_volume = 0.5; // Track the current volume level
+
 while (!window_close_requested("Music Example"))
 {
     process_events();
@@ -127,26 +145,38 @@ while (!window_close_requested("Music Example"))
     if (key_typed(SPACE_KEY))
     {
         // Pause or resume the music when space is pressed
-        if (music_paused())
+        if (is_music_paused)
         {
             resume_music();
+            is_music_paused = false;
         }
         else
         {
             pause_music();
+            is_music_paused = true;
         }
     }
 
     if (key_typed(UP_KEY))
     {
         // Increase volume
-        set_music_volume(min(get_music_volume() + 0.1, 1.0));
+        music_volume += 0.1;
+        if (music_volume > 1.0)
+        {
+            music_volume = 1.0;
+        }
+        set_music_volume(music_volume);
     }
 
     if (key_typed(DOWN_KEY))
     {
         // Decrease volume
-        set_music_volume(max(get_music_volume() - 0.1, 0.0));
+        music_volume -= 0.1;
+        if (music_volume < 0.0)
+        {
+            music_volume = 0.0;
+        }
+        set_music_volume(music_volume);
     }
 
     delay(100);  // Brief delay to avoid spamming input
@@ -155,11 +185,9 @@ while (!window_close_requested("Music Example"))
 
 - `process_events()` handles any pending events (e.g., keyboard input, window close requests).
 - `key_typed(KEY)` checks if a specific key was pressed.
-- `music_paused()` checks if the music is currently paused.
 - `pause_music()` pauses the currently playing music.
 - `resume_music()` resumes the paused music.
 - `set_music_volume(volume)` sets the volume of the currently playing music.
-- `get_music_volume()` gets the current volume of the playing music.
 - `delay(milliseconds)` adds a brief delay to avoid spamming input.
 
 ### Stopping and Freeing Music
