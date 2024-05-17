@@ -172,7 +172,7 @@ Using these functions and process, we can load all the game data into the game. 
     sprite_set_y(endGate, charGround); 
 ```
 
-Now let's go to the next section [here](link).
+Now let's go to the next section [here](/0-1creating-the-game-loop.md).
 
 
 

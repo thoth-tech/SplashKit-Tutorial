@@ -58,7 +58,7 @@ draw your own sprites. The code files for this project are [here](https://github
     }
 ```
 
-Now that we have created the game loop and drawn our game objects, we can start working on the game logic, go to the next section [here](link).
+Now that we have created the game loop and drawn our game objects, we can start working on the game logic, go to the next section [here](/0-2-creating-the-game-logic.md).
 
 
 
