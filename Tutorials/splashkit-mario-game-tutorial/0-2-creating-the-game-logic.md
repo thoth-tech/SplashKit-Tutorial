@@ -245,4 +245,4 @@ Here is how the ground looks in the game.
 
 The background image logic is the same as ground logic, we use the drawground function just like we did above but we pass in the background image sprite. You can see in the above gif that background image works in the same way. 
 
-Now let's move on to using camera in the game. [next](/0-3-splashkit-camera.md).
+Now let's move on to using camera in the game, here is the next [tutorial](0-3-splashkit-camera.md).
