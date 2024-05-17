@@ -1,0 +1,7 @@
+***
+
+the game files icluding the animation scripts, sprites, audios etc for this tutorial are in a github repository.
+
+Here is the link for it: https://github.com/kay-kaushik/splashkit-karioGame
+
+***
