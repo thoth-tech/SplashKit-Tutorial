@@ -31,7 +31,7 @@ A basic JSON file might look like this:
 }
 ```
 
-In this example, ``gameTitle` is a string, `screenSize` is an object with two numeric values (width and height), and levels is an array of strings.
+JSON objects are made up of values associated with keys. In this example, `gameTitle` is the key associated with the string `"My New Game"`, `screenSize` is the key for an object with two numeric values (width and height), and an array of strings is assigned as the value for the key `levels`.
 
 ### Overview of JSON in SplashKit
 
@@ -45,7 +45,7 @@ To begin using JSON in SplashKit, we must have our files in the correct location
 skm resources
 ```
 
-This command creates sub-folders for each type of resource. One of these is be named `json` and that is where we place our JSON files. To begin lets take the example JSON file above and place it into the `json` folder with the name `game_data.json`. To access the values in this file we can now do the following:
+This command creates sub-folders for each type of resource. One of these is named `json` and that is where we place our JSON files. To begin lets take the example JSON file above and place it into the `json` folder with the name `game_data.json`. To access the values in this file we can now do the following:
 
 <Tabs>
     <TabItem label="C++">
@@ -67,7 +67,7 @@ This command creates sub-folders for each type of resource. One of these is be n
 </Tabs>
 
 In this code example, we're first using [`json_from_file`](/api/json/#json-from-file) to load a JSON object with the details from the `game_data.json` file.
-Then we are getting the value of the key that matches `gameTitle` using [`json_read_string`](/api/json/#json-read-string). We write this to the console and free the JSON object using [`free_json()`](/api/json/#free-json) as we exit. We can build this program with the following command.
+Then we are getting the value of the key that matches `gameTitle` using [`json_read_string`](/api/json/#json-read-string). We write this to the console and free the JSON object using [`free_json()`](/api/json/#free-json) as we exit. By freeing the JSON object we are deallocating any memory that has been assigned to it, preventing any memory-related errors such as a `Segmentation Fault`. We can build this program with the following command.
 
 <Tabs>
     <TabItem label="C++">

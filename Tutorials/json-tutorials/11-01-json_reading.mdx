@@ -47,7 +47,7 @@ To access values in JSON objects like strings, numbers, or booleans, you can use
 
 ### Working with JSON Arrays
 
-If the data is an array, like the value stored for the `levels` key, we can obtain the data through [`json_read_array()`](/api/json/#json-read-array) and store it into a vector. Then we can loop through that vector and do some action with the stored data. Below is an example of this.
+If the data is an array, like the value stored for the `levels` key, we can obtain the data through [`json_read_array()`](/api/json/#json-read-array) and store it into a vector. Then we can loop through the entries in the vector, and do some action with the stored data. To know when to finish looping through the vector we'll use the in-built vector function [`size()`](https://en.cppreference.com/w/cpp/container/vector/size) Below is an example of this.
 
 <Tabs>
     <TabItem label="C++">
