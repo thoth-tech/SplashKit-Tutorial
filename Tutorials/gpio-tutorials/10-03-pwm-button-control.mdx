@@ -31,7 +31,7 @@ See [Read Button Press Tutorial](/guides/gpio/10-01-read-button-press/#component
 
 ### The Circuit
 
-Below we can see the circuit diagram for this project. First we have the Raspberry Pi ground connected to the ground rail of the breadboard and a 3.3V pin connected to the power rail of the bread board. We then have an LED which is connected to the ground rail and to Pin 11 through a 220 Ω  resistor. We then have 2 buttons, where both are connected to the powered rail on the breadboard and the otherside of the buttons are connected to pins 13 and 29.
+Below we can see the circuit diagram for this project. First we have the Raspberry Pi ground connected to the ground rail of the breadboard and a 3.3V pin connected to the power rail of the bread board. We then have an LED which is connected to the ground rail and to Pin 11 through a 220 Ω  resistor. Next we have 2 buttons, where both are connected to the powered rail on the breadboard and the otherside of the buttons are connected to pins 13 and 29.
 
 <img
   alt="Circuit Diagram for using button presses to modify PWM."
@@ -55,7 +55,7 @@ Below we can see the circuit diagram for this project. First we have the Raspber
 This code requires the `pigpio` daemon, so make sure it is running! For more information see: [Starting the Daemon](/guides/gpio/10-00-blink-led/#starting-the-daemon)
 :::
 
-Below is an example program to that will detect button presses to increase or decrease the brightness of an LED.
+Below is an example program that will detect button presses to increase or decrease the brightness of an LED.
 <Tabs>
     <TabItem label="C++">
     ``` cpp
