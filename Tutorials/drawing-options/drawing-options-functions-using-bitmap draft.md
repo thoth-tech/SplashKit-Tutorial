@@ -39,11 +39,11 @@ To begin utilizing drawing options functions in Splashkit, set up the game windo
 
 ## Drawing Options Functions
 
-## Example 1: Applying Option Part Bmp
+### Example 1: Applying Option Part Bmp
 
 In this example, we'll demonstrate how to use 'Option Part Bmp' to draw a section of a bitmap, effectively cropping the image.
 
-1. **Function Syntax:**
+#### Function Syntax (Option_part_bmp)
 
  ```cpp
   drawing_options option_part_bmp(int x, int y, int width, int height);
@@ -54,14 +54,14 @@ In this example, we'll demonstrate how to use 'Option Part Bmp' to draw a sectio
 - `width`: The width of the part of the bitmap to draw.
 - `height`: The height of the part of the bitmap to draw.
 
-1. **Example Usage:**
+#### Example Usage (Option_part_bmp)
 
    For instance, draw a window with dimensions of `800` pixels width and `600` pixels height. Here is the code snippet where we load a bitmap and applies 'Option Part Bmp' to draw only a 100x100 region of it at coordinates (100, 100).`bitmap bmp` loads a bitmap image named `my_bitmap` from the file `bitmap.png`. The bitmap is stored in the variable bmp for later use.
 
    ```cpp
    #include "spalshkit.h"
    int main()
-    {
+   {
        open_window("Drawing", 800, 600);
 
        bitmap bmp = load_bitmap("my_bitmap", "bitmap.png");
@@ -73,13 +73,14 @@ In this example, we'll demonstrate how to use 'Option Part Bmp' to draw a sectio
 
        close_all_windows();
        return 0;
-    }
+   }
+   ```
 
-## Example 2: Applying Option Rotate Bmp
+### Example 2: Applying Option Rotate Bmp
 
 In this example, we'll showcase how to use 'Option Rotate Bmp' to dynamically rotate a bitmap at different angles.
 
-1. **Function Syntax:**
+#### Function Syntax (Option_rotate_bmp)
 
  ```cpp
   drawing_options option_rotate_bmp(double degrees);
@@ -87,14 +88,14 @@ In this example, we'll showcase how to use 'Option Rotate Bmp' to dynamically ro
 
 - `degrees`: The angle of rotation in degrees.
 
-1. **Example Usage:**
+#### Example Usage (Option_rotate_bmp)
 
    In this code snippet, a window titled `Drawing` is initialized with dimensions of `800` pixels in width and `600` pixels in height using the open_window function. Next, a bitmap named `my_bitmap` is loaded from the file path `bitmap.png` using the load_bitmap function. Drawing options are applied to rotate the bitmap by `90 degrees clockwise` using the `option_rotate_bmp` function. Finally, the rotated bitmap is drawn onto the initialized window at coordinates (100, 100) using the `draw_bitmap` function.
 
    ```cpp
    #include "spalshkit.h"
    int main()
-    {
+   {
        open_window("Drawing", 800, 600);
        
        bitmap bmp = load_bitmap("my_bitmap", "bitmap.png");
@@ -106,13 +107,14 @@ In this example, we'll showcase how to use 'Option Rotate Bmp' to dynamically ro
 
        close_all_windows();
        return 0;
-    }
+   }
+   ```
 
-## Example 3: Applying Option Scale Bmp
+### Example 3: Applying Option Scale Bmp
 
 In this example, we'll illustrate how to use 'Option Scale Bmp' to scale a bitmap to a desired size while maintaining its aspect ratio.
 
-1. **Function Syntax:**
+#### Function Syntax (Option_scale_bmp)
 
  ```cpp
   drawing_options option_scale_bmp(double scale_x, double scale_y);
@@ -121,14 +123,14 @@ In this example, we'll illustrate how to use 'Option Scale Bmp' to scale a bitma
 - `scale_x`: Scaling factor for the x-axis.
   `scale_y`: Scaling factor for the y-axis.
 
-1. **Example Usage:**
+#### Example Usage (Option_scale_bmp)
 
    In this code snippet, a window titled `Drawing` is initialized with dimensions of `800` pixels in width and `600` pixels in height using the open_window function. Next, a bitmap named `my_bitmap` is loaded from the file path `bitmap.png` using the load_bitmap function. Drawing options are applied to scale the bitmap to `150%` of its original size using the `option_scale_bmp` function. Finally, the scaled bitmap is drawn onto the initialized window at coordinates (100, 100) using the `draw_bitmap` function.
 
    ```cpp
    #include "spalshkit.h"
    int main()
-    {
+   {
        open_window("Drawing", 800, 600);
        
        bitmap bmp = load_bitmap("my_bitmap", "bitmap.png");
@@ -140,13 +142,14 @@ In this example, we'll illustrate how to use 'Option Scale Bmp' to scale a bitma
 
        close_all_windows();
        return 0;
-    }
+   }
+   ```
 
-## Example 4: Combining Options
+### Example 4: Combining Options
 
 In this example, we'll combine drawing option functions to create dynamic animations with depth.
 
-1. **Example Usage:**
+#### Example Usage (Combining_options)
 
    In this code snippet, a window titled `Drawing` is initialized with dimensions of `800` pixels in width and `600` pixels in height using the `open_window` function. Next, a bitmap named `my_bitmap` is loaded from the file path `bitmap.png` using the load_bitmap function. Three sets of drawing options are created: `opts_rotate` applies a rotation of 90 degrees to the bitmap using the `option_rotate_bmp` function, `opts_scale` scales the bitmap to 150% of its original size using the `option_scale_bmp` function, and `opts_part` draws a part of the bitmap using the `option_part_bmp` function. Finally, the bitmap is drawn three times onto the initialized window at coordinates (100, 100), (200, 200), and (300, 300) using the `draw_bitmap` function, with the rotation, scaling, and partial drawing effects applied accordingly.
 
@@ -169,7 +172,8 @@ In this example, we'll combine drawing option functions to create dynamic animat
 
        close_all_windows();
        return 0;
-    }
+   }
+   ```
 
 ## Conclusion
 
