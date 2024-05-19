@@ -11,17 +11,13 @@ This tutorial aims to demonstrate the usage of three essential drawing options f
 To follow along with this tutorial, readers should have:
 
 - Basic knowledge of programming concepts.
-
 - Familiarity with the Splashkit library.
-
 - Installed Splashkit (<<https://splashkit.io/installation/>) and set up their development   environment.
 
 ## Functions Used
 
 - [Option Part Bmp](https://splashkit.io/api/graphics/#option-part-bmp)
-
 - [Option Rotate Bmp](https://splashkit.io/api/graphics/#option-rotate-bmp)
-
 - [Option Scale Bmp](https://splashkit.io/api/graphics/#option-scale-bmp)
 
 ## Table of Contents
@@ -29,17 +25,13 @@ To follow along with this tutorial, readers should have:
 1. Tutorial Details
 
     - Tutorial Structure
-
     - Level of Difficulty
 
 2. Drawing Options Functions
 
     - Example 1: Applying Option Part Bmp
-
     - Example 2: Applying Option Rotate Bmp
-
     - Example 3: Applying Option Scale Bmp
-
     - Example 4: Combining Options
 
 ## Tutorial Details
@@ -75,9 +67,7 @@ This tutorial is aimed at intermediate programmers with some familiarity with gr
 After completing this tutorial, readers will be able to:
 
 - Understand the purpose and usage of Option Part Bmp, Option Rotate Bmp, and Option Scale Bmp.
-
 - Apply these drawing options functions to manipulate bitmap drawings in Splashkit projects.
-
 - Create dynamic and visually appealing graphics by combining different drawing options.
 
 ## Conclusion
