@@ -95,8 +95,7 @@ GPIO Pin 11, while the anode is connected to ground pin 6 through a resistor.
 
 <img
     alt="Circuit Diagram for Blinking an LED"
-    src="/images/articles/gpio/circuits/blinkled.png"
-    width="480" height="360">
+    src="/images/articles/gpio/circuits/blinkled.png">
 </img>
 
 And the physical circuit looks like the following image, in which we've connected an M/F jumper wire
@@ -105,8 +104,7 @@ then connected to the ground pin through another M/F jumper wire.
 
 <img
     alt="Photograph of a circuit to blink an LED"
-    src="/images/articles/gpio/circuits/blink_led_circuit.jpg"
-    width="480" height="360">
+    src="/images/articles/gpio/circuits/blink_led_circuit.jpg">
  </img>
 
 ### Starting the Daemon
@@ -159,19 +157,17 @@ blinks an LED on and off.
         pins led_pin = PIN_11;
         raspi_set_mode(led_pin, GPIO_OUTPUT);
 
-        timer run_timer = create_timer("run_timer");
-        start_timer(run_timer);
-
-        while(timer_ticks(run_timer) < 10000)
+        open_window("dummy_window", 1, 1);
+        while(!any_key_pressed())
         {
+            process_events();
             raspi_write(led_pin, GPIO_HIGH);
             delay(500);
             raspi_write(led_pin, GPIO_LOW);
             delay(500);
         }
 
-        stop_timer(run_timer);
-        free_all_timers();
+        close_all_windows();
         raspi_cleanup();
         return 0;
     }
@@ -182,34 +178,33 @@ blinks an LED on and off.
 
     <TabItem label="C#">
     ```csharp
-        using SpaskKitSDK;
+    using SpaskKitSDK;
 
-        namespace BlinkLED
+    namespace BlinkLED
+    {
+        public class Program
         {
-            public class Program
+            public static void Main()
             {
-                public static void Main()
+                SplashKit.RaspiInit();
+                SplashKitSDK.Pins ledPin = (SplashKitSDK.Pins)11;
+                SplashKit.RaspiSetMode(led_pin, (SplahKitSDK.PinModes) 1);
+
+                SplashKit.OpenWindow("dummy_window", 1, 1);
+                while(!SplashKit.AnyKeyPressed())
                 {
-                    SplashKit.RaspiInit();
-                    SplashKitSDK.Pins ledPin = (SplashKitSDK.Pins)11;
-                    SplashKit.RaspiSetMode(led_pin, (SplahKitSDK.PinModes) 1);
-
-                    var run_timer = SplashKit.CreateTimer("run_timer");
-                    SplashKit.StartTimer(run_timer);
-
-                    while(SplashKit.TimerTicks(run_timer) < 10000)
-                    {
-                        SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinState) 1);
-                        SplashKit.Delay(500);
-                        SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinState) 0);
-                        SplashK.Delay(500);
-                    }
-                    SplashKit.StopTimer(run_timer);
-                    SplashKit.FreeAllTimers();
-                    SplashKit.RaspiCleanup();
+                    SplashKit.ProcessEvents();
+                    SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinState) 1);
+                    SplashKit.Delay(500);
+                    SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinState) 0);
+                    SplashK.Delay(500);
                 }
+
+                SplashKit.CloseAllWindows();
+                SplashKit.RaspiCleanup();
             }
         }
+    }
     ```
     </TabItem>
 
@@ -221,16 +216,16 @@ To understand this code better, lets break it down and explore each section.
     <Tabs>
         <TabItem label="C++">
         ```cpp
-            raspi_init();
-            pins led_pin = PIN_11;
-            raspi_set_mode(led_pin, GPIO_OUTPUT);
+        raspi_init();
+        pins led_pin = PIN_11;
+        raspi_set_mode(led_pin, GPIO_OUTPUT);
         ```
         </TabItem>
         <TabItem label="C#">
         ```csharp
-            SplashKit.RaspiInit();
-            SplashKitSDK.Pins ledPin = (SplashKitSDK.Pins)11;
-            SplashKit.RaspiSetMode(led_pin, (SplahKitSDK.PinModes) 1);
+        SplashKit.RaspiInit();
+        SplashKitSDK.Pins ledPin = (SplashKitSDK.Pins)11;
+        SplashKit.RaspiSetMode(led_pin, (SplahKitSDK.PinModes) 1);
         ```
         </TabItem>
     </Tabs>
@@ -244,46 +239,45 @@ To understand this code better, lets break it down and explore each section.
     <Tabs>
         <TabItem label="C++">
         ```cpp
-            timer run_timer = create_timer("run_timer");
-            start_timer(run_timer);
+        open_window("dummy_window", 1, 1);
+        while(!any_key_pressed())
+        {
+            process_events();
+            ...
+        }
 
-            while(timer_ticks(run_timer) < 10000)
-            {
-                ...
-            }
         ```
         </TabItem>
         <TabItem label="C#">
         ```csharp
-            var run_timer = SplashKit.CreateTimer("run_timer");
-            SplashKit.StartTimer(run_timer);
-
-            while(SplashKit.TimerTicks(run_timer) < 10000)
-            {
-                ...
-            }
+        SplashKit.OpenWindow("dummy_window", 1, 1);
+        while(!SplashKit.AnyKeyPressed())
+        {
+            SplashKit.ProcessEvents();
+            ...
+        }
         ```
         </TabItem>
     </Tabs>
 
-    Here we're first creating a [timer](/api/timers/#timer) called "run_timer" with the [`create_timer()`](/api/timers/#create-timer) function. The timer is then passed to [`start_timer`](/api/timers/#start-timer) and then we enter the while loop. At the start of every loop we get the timer ticks, or number of milliseconds since we started the timer, using the [`timer_ticks()`](/api/timers/#timer-ticks) function. Once this exceeds 10000 milliseconds, or 10 seconds, the program exits the while loop.
+    This is a small trick we can do to recognise keyboard inputs. We open up a dummy window using [`open_window`](/api/windows/#open-window()) and this initialises the backend so that we can detect input. We'll create  a loop that runs while [`any_key_pressed()`](/api/input/#any-key-pressed) returns false. We use [`process_events()`](/api/input/#process-events) at the start of the loop to actually detect any user input. We can now press a key to end the program and ensure we cleanup correctly.
 
 3.
     <Tabs>
         <TabItem label="C++">
         ```cpp
-            raspi_write(led_pin, GPIO_HIGH);
-            delay(500);
-            raspi_write(led_pin, GPIO_LOW);
-            delay(500);
+        raspi_write(led_pin, GPIO_HIGH);
+        delay(500);
+        raspi_write(led_pin, GPIO_LOW);
+        delay(500);
         ```
         </TabItem>
         <TabItem label="C#">
         ```csharp
-            SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinState) 1);
-            SplashKit.Delay(500);
-            SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinState) 0);
-            SplashK.Delay(500);
+        SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinState) 1);
+        SplashKit.Delay(500);
+        SplashKit.RaspiWrite(led_pin, (SplashKitSDK.PinState) 0);
+        SplashK.Delay(500);
         ```
         </TabItem>
     </Tabs>
@@ -294,28 +288,24 @@ To understand this code better, lets break it down and explore each section.
     <Tabs>
         <TabItem label="C++">
         ```cpp
-            stop_timer(run_timer);
-            free_all_timers();
-            raspi_cleanup();
-            return 0;
+        close_all_windows();
+        raspi_cleanup();
+        return 0;
         ```
         </TabItem>
         <TabItem label="C#">
         ```csharp
-            SplashKit.StopTimer(run_timer);
-            SplashKit.FreeAllTimers();
-            SplashKit.RaspiCleanup();
+        SplashKit.CloseAllWindows();
+        SplashKit.RaspiCleanup();
         ```
         </TabItem>
     </Tabs>
 
-    Finally, as we exit the program we must ensure that we cleanup our program properly. We must stop the timers we've used and free them by using [`stop_timer()`](api/timers/#stop-timer) and [`free_all_timers()`](api/timers/#free-all-timers). We then call [`raspi_cleanup()`](/api/raspberry/raspi-cleanup) to ensure our pins are turned off and cleaned.
+    Finally, as we exit the program we must ensure that we cleanup our program properly. We must first close the dummy window we opened use [`close_all_windows()`](/api/windows/#close-all-windows). We then call [`raspi_cleanup()`](/api/raspberry/raspi-cleanup) to ensure our pins are turned off and cleaned.
 
 
 :::tip[Program Shutdown]
-It is crucial we plan for the program's shutdown procedure, because if we instead used `ctrl+c` to
-stop the program then cleanup is not performed and the GPIO pins remain in the same state they were
-in when the program was stopped. We do not want to unintentionally keep pins active.
+It is crucial we plan for the program's shutdown procedure, because if we instead used `ctrl+c` to stop the program then cleanup is not performed and the GPIO pins remain in the same state they were in when the program was stopped. We do not want to unintentionally keep pins active.
 :::
 
 We can build this program with the following command:

@@ -37,11 +37,6 @@ Breadboards are invaluable for testing and building circuits without the need fo
 
 A push button allows electricity to flow between its two contacts by physically moving strips of metal together when pressed. This connects the circuit and provides power to our input pin. This pushbutton has four pins and each diagonal pin is paired with each other. It's a simple switch mechanism which we can detect and use.
 
-<img
-  alt="Push button with connections highlighted."
-  src="/images/articles/gpio/components/pushbutton.png"
-></img>
-
 #### Jumper Wires
 
 Jumper wires connect our components on the breadboard to the Raspberry Pi and each other. We use M/F jumper wires for this setup. See [Blink LED Tutorial](/guides/gpio/10-00-blink-led/#components) for more details.
@@ -53,13 +48,17 @@ Below is the circuit diagram for this project. We connect the power and ground t
 <img
   alt="Circuit Diagram for reading a button press"
   src="/images/articles/gpio/circuits/buttonpush.png"
+  width="480"
+  height="360"
 ></img>
 
 The physical circuit is show in the below image, where we can see the physical implementation of the provided circuit diagram. Note: The power and ground rail connections are swapped in the below image due to the orientation of the breadboard, ensure your connections are correct.
 
 <img
   alt="Photograph of circuit for reading a button press"
-  src="/images/articles/gpio/circuits/push_button_circuit.jpg"
+  src="/images/articles/gpio/circuits/push_button_circuit.png"
+  width="480"
+  height="360"
 ></img>
 
 ### The Code
@@ -85,10 +84,10 @@ This code requires the `pigpio` daemon, so make sure it is running! For more inf
 
         raspi_set_pull_up_down(button_pin, PUD_DOWN);
 
-        timer run_timer = create_timer("run_timer");
-        start_timer(run_timer);
-        while(timer_ticks(run_timer) < 30000)
+        open_window("dummy_window", 1, 1);
+        while(!any_key_pressed())
         {
+            process_events();
             if(raspi_read(button_pin) == GPIO_HIGH)
             {
                 led_state = raspi_read(led_pin);
@@ -103,8 +102,7 @@ This code requires the `pigpio` daemon, so make sure it is running! For more inf
             }
         }
 
-        stop_timer(run_timer);
-        free_all_timers();
+        close_all_windows();
         raspi_cleanup();
         return 0;
     }
@@ -130,11 +128,10 @@ This code requires the `pigpio` daemon, so make sure it is running! For more inf
 
                 SplashKit.RaspiSetPullUpDown(button_pin, (SplashKitSDK.PullUpDown) 1);
 
-                var run_timer = SplashKit.CreateTimer("run_timer");
-                SplashKit.StartTimer(run_timer);
-
-                while(SplashKit.TimerTicks(run_timer) < 30000)
+                SplashKit.OpenWindow("dummy_window", 1, 1);
+                while(!SplashKit.AnyKeyPressed())
                 {
+                    SplashKit.ProcessEvents();
                     if(SplashKit.RaspiRead(button_pin) == (SplashKitSDK.PinValues) 1)
                     {
                         led_state = SplashKit.RaspiRead(led_pin);
@@ -148,8 +145,8 @@ This code requires the `pigpio` daemon, so make sure it is running! For more inf
                         }
                     }
                 }
-                SplashKit.StopTimer(run_timer);
-                SplashKit.FreeAllTimers();
+
+                SPlashKit.CloseAllWindows();
                 SplashKit.RaspiCleanup();
             }
         }
@@ -207,21 +204,20 @@ Lets break down this code and analyse it in sections.
     <Tabs>
         <TabItem label="C++">
         ```cpp
-        timer run_timer = create_timer("run_timer");
-        start_timer(run_timer);
-        while(timer_ticks(run_timer) < 30000)
+        open_window("dummy_window", 1, 1);
+        while(!any_key_pressed())
         {
+            process_events();
             ...
         }
         ```
         </TabItem>
         <TabItem label="C#">
         ```csharp
-        var run_timer = SplashKit.CreateTimer("run_timer");
-        SplashKit.StartTimer(run_timer);
-
-        while(SplashKit.TimerTicks(run_timer) < 30000)
+        SplashKit.OpenWindow("dummy_window", 1, 1);
+        while(!SplashKit.AnyKeyPressed())
         {
+            SplashKit.ProcessEvents();
             ...
         }
         ```
@@ -272,16 +268,14 @@ Lets break down this code and analyse it in sections.
     <Tabs>
         <TabItem label="C++">
         ```cpp
-        stop_timer(run_timer);
-        free_all_timers();
+        close_all_windows();
         raspi_cleanup();
         return 0;
         ```
         </TabItem>
         <TabItem label="C#">
         ```csharp
-        SplashKit.StopTimer(run_timer);
-        SplashKit.FreeAllTimers();
+        SplashKit.CloseAllWindows();
         SplashKit.RaspiCleanup();
         ```
         </TabItem>
