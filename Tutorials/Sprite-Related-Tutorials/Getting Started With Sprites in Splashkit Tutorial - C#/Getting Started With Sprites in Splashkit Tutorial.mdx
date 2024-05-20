@@ -23,47 +23,84 @@ don't interact with those.
 In order to be able to draw an image to a screen, we first have to provide some information to
 Splashkit. We have to have Bitmap images to pass into our
 [Create Sprite](https://splashkit.io/api/sprites/#create-sprite) function so that it can create a
-workable _Sprite_ file type for us. This looks something like this inside our Main() method:
-  
-```bash
-Private Bitmap happySun;
-Private Sprite happySunSprite;
-```
+workable _Sprite_ file type for us.
 
 Line by line, this can be broken down as:
 
 1. Instantiate a new Object happySun, of Type [Bitmap](https://splashkit.io/api/types/#bitmap)
 
-```csharp
+<Tabs>
+  <TabItem label="C#">
+  ```csharp
 Bitmap happySun;
 ```
+  </TabItem>
+
+  <TabItem label="C++">
+  ```c++
+    bitmap HappySun = load_bitmap("Happy Sun", "sprite01.png");
+   ```
+  </TabItem>
+
+</Tabs> 
 
 Relevant overloads are shown below, we pass in a string name, and we can either give a filename to
 assign from a file or URL we have access to, or denote an int for width and height to have a
 workable 'empty' sprite.
 
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 Bitmap(string name, string file);
 ```
-
 ```csharp
 Bitmap(string name, int width int height);
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+bitmap load_bitmap(string name, string filename)
+bitmap create_bitmap(string name, int width, int height)
+```
+</TabItem>
+</Tabs> 
 
-2. Instantiate a new `Object happySunSprite`, of `Type Sprite`
 
+
+<Tabs>
+  <TabItem label="C#">
    ```csharp
    Sprite happySunSprite;
    ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+    sprite happySunSprite;
+```
+</TabItem>
+</Tabs> 
 
-1. Assign to `Object happySunSprite` the loaded `Bitmap happySun`, using one of the overloaded
-   [Create Sprite](https://splashkit.io/api/sprites/#create-sprite) methods, specifically
-   [the method where we provide a String and a Bitmap object](https://splashkit.io/api/sprites/#create-sprite-named)
+2. Instantiate a new `Object happySunSprite`, of `Type Sprite`
 
+
+<Tabs>
+  <TabItem label="C#">
 ```csharp
          happySun = new Bitmap("Happy Sun", "sprite01.png");
          happySunSprite = SplashKit.CreateSprite("Happy Sun", happySun);
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+    sprite happySunSprite = create_sprite("Happy Sun", HappySun);
+```
+</TabItem>
+</Tabs> 
+
+2. Assign to `Object happySunSprite` the loaded `Bitmap happySun`, using one of the overloaded
+   [Create Sprite](https://splashkit.io/api/sprites/#create-sprite) methods, specifically
+   [the method where we provide a String and a Bitmap object](https://splashkit.io/api/sprites/#create-sprite-named)
+
 
 After these steps, we now have an instantiated Bitmap and Sprite for us to play with.
 
@@ -73,10 +110,20 @@ So we have a Sprite, `happySunSprite` (or whatever you have named yours.) Let's 
 to show it off. We'll start with creating a `Window` object for us to draw it onto. This can follow
 after the pervious lines in our Main() method.
 
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 Window SpriteWindow;
 spriteWindow = new Window("Learning Sprites!, 800, 800);
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+Window spriteWindow;
+spriteWindow = open_window("Learning Sprites!, 800, 800);
+```
+</TabItem>
+</Tabs> 
 
 As above, we create a new `Object` of type `Window` (this is important because Splashkit has
 specific implementation for multi-window and window-specific method handling), and then we assign
@@ -88,10 +135,22 @@ title 'Learning Sprites!', but with nothing on the screen. In order to remedy th
 of the [Move Sprite To](https://splashkit.io/api/sprites/#move-sprite-to) and
 [Draw Sprite](https://splashkit.io/api/sprites/#group-draw-sprite) methods as below:
 
+
+
+<Tabs>
+  <TabItem label="C#">
 ```csharp
-SplashKit.MoveSpriteTo(happySunSprite, 400, 400);
-SplashKit.DrawSprite(happySunSprite);
+  SplashKit.MoveSpriteTo(happySunSprite, 400, 400);
+  SplashKit.DrawSprite(happySunSprite);
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+    move_sprite_to(HappySunSprite, 400, 400);
+    draw_sprite(HappySunSprite);
+```
+</TabItem>
+</Tabs> 
 
 You might be wondering why we _move_ our sprite _before_ we draw it. In this instance, this is just
 for clarity purposes and to have our image pop up in the middle of our window, but for future
@@ -105,21 +164,32 @@ is because we still have to do a basic
 [Window Refresh](https://splashkit.io/api/windows/#refresh-window) to 'update' or 'paint' what
 Sprites and where we have told SplashKit to put them. After you add these lines to our Main() :
 
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 spriteWindow.Refresh(60);
 SplashKit.Delay(5000);
 ```
-
+  </TabItem>
+  <TabItem label="C++">
+```c++
+  refresh_screen(60);
+  delay(5000);
+```
+</TabItem>
+</Tabs> 
 You will see our little `Sprite` sitting there in the window.
 
 <img
   alt="Window with Sprite drawn"
-  src="/drawnSun.png"
+  src="/images/articles/starter/sprites/FirstDraw.png"
   style="width: 700px"
 ></img>
 
-At this point, our Main() method should look something like this:
+At this point, our code should look something like this:
 
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 using System;
 using SplashKitSDK;
@@ -154,6 +224,36 @@ namespace learningSprites
       }
 }
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+#include "splashkit.h"
+
+int main()
+{
+    // Instantiation of Bitmap Object
+    bitmap HappySun = load_bitmap("Happy Sun", "sprite01.png");
+
+    // Instantiation of Sprite Object(s)
+    sprite HappySunSprite = create_sprite("Happy Sun", HappySun);
+
+    // Creation of Window
+    Window spriteWindow = open_window("Learning Sprites!", 800, 800);
+    
+    // Set Sprite position, then draw it to the window
+    move_sprite_to(HappySunSprite, 400, 400);
+    draw_sprite(HappySunSprite);
+
+    // Update the screen and hold for 5 seconds
+    refresh_screen();
+    delay(5000);
+    return 0;
+}
+```
+</TabItem>
+</Tabs> 
+
+
 
 ## Using Splashkit to move our Sprite around
 
@@ -164,6 +264,8 @@ this method is mostly for simplicity and readability.
 
 Let's just start with our simple code:
 
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 for (int i = 0; i < 150; i++)
 {
@@ -173,9 +275,25 @@ for (int i = 0; i < 150; i++)
       SplashKit.DrawSprite(happySunSprite);
 
       spriteWindow.Refresh();
-      SplashKit.Delay(10);
+      SplashKit.Delay(5000);
 }
 ```
+  </TabItem>
+  <TabItem label="C++">
+```csharp
+for (int i = 0; i < 150; i++)
+{
+      move_sprite_to(happySunSprite, (sprite_y(happySunSprite) - 3), (sprite_x(happySunSprite)));
+
+      drawsprite(happySunSprite);
+
+      refresh_screen();
+      delay(5000);
+}
+```
+</TabItem>
+</Tabs> 
+
 
 Let's break down what this code is going to do. Until our checking integer `i` reached 150, we will
 call `MoveSpriteTo` on `happySunSprite` and move it's respective location to the X position of
@@ -185,7 +303,7 @@ it repeats this. This ends up looking like:
 
 <img
   alt="Window with Sprite drawn"
-  src="/noClear.png"
+  src="/images/articles/starter/sprites/NoClear.png"
   style="width: 700px"
 ></img>
 
@@ -195,13 +313,26 @@ reading on ahead. What specific process are we missing that would cause _every_ 
 
 Truth is it's just a single line, if we add in
 
-```
+<Tabs>
+  <TabItem label="C#">
+```csharp
   spriteWindow.Clear(Color.White);
 ```
+  </TabItem>
+  <TabItem label="C++">
+```c++
+clear_window(COLOR_WHITE)
+```
+</TabItem>
+</Tabs> 
+
+
+
 
 to the start of our for loop, before every iteration of calling `MoveSpriteTo` and `DrawSprite`, we
 clear the window and subsequently the last drawn Sprite of the sun. With our updated code below:
-
+<Tabs>
+  <TabItem label="C#">
 ```csharp
 for (int i = 0; i < 150; i++)
 {
@@ -215,12 +346,29 @@ for (int i = 0; i < 150; i++)
       SplashKit.Delay(10);
 }
 ```
+  </TabItem>
+  <TabItem label="C++">
+```csharp
+for (int i = 0; i < 150; i++)
+{
+      clear_window(window wind, color clr)
+      move_sprite_to(happySunSprite, (sprite_y(happySunSprite) - 3), (sprite_x(happySunSprite)));
+
+      drawsprite(happySunSprite);
+
+      refresh_screen();
+      delay(5000);
+}
+```
+</TabItem>
+</Tabs> 
+
 
 we get:
 
 <img
   alt="Window with Sprite drawn"
-  src="movingSun.gif"
+  src="/images/articles/starter/sprites/MovingSun.gif"
   style="width: 700px"
 ></img>
 
@@ -233,6 +381,7 @@ Our final code snippet:
 
 <Tabs>
   <TabItem label="C# 'OOP'">
+
 
 ```csharp
 using System;
@@ -281,14 +430,48 @@ public class Program{
       }
 }
 ```
-
   </TabItem>
-<TabItem label="C# 'pure'">
+    <TabItem label="C# 'pure'">
   **Coming soon**
   </TabItem>
 
-<TabItem label="C++">
-  **Coming soon, requires full tutorial re-write**
+  <TabItem label="C++">
+```cpp
+#include "splashkit.h"
+
+int main()
+{
+    // Instantiation of Bitmap Object
+    bitmap HappySun = load_bitmap("Happy Sun", "sprite01.png");
+
+    // Instantiation of Sprite Object(s)
+    sprite HappySunSprite = create_sprite("Happy Sun", HappySun);
+
+    // Creation of Window
+    open_window("Learning Sprites!", 800, 800);
+
+    // Set Sprite position, then draw it to the window
+    move_sprite_to(HappySunSprite, 400, 400);
+    draw_sprite(HappySunSprite);
+
+    // Update the screen and hold for 5 seconds
+    refresh_screen();
+    delay(5000);
+
+    for (int i = 0; i < 150; i++)
+  {
+    clear_window(current_window(), COLOR_WHITE);
+    move_sprite_to(HappySunSprite, (sprite_x(HappySunSprite)), (sprite_y(HappySunSprite)));
+
+    draw_sprite(HappySunSprite);
+
+    refresh_screen();
+    delay(10);
+  }
+    return 0;
+  }
+```
   </TabItem>
+
 
 </Tabs>
