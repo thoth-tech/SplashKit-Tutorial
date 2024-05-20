@@ -1,0 +1,213 @@
+---
+title: Writing JSON Data in SplashKit
+description: Having covered how to read JSON data in SplashKit, this part of the tutorial focuses on creating and writing data to JSON files. This functionality is crucial for features like saving game settings or player progress and information.
+category: Guides
+author: Jonathan Tynan
+lastupdated: May 11 2024
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+**{frontmatter.description}**
+
+_Written by {frontmatter.author} on {frontmatter.lastupdated}_
+
+### Creating JSON Objects and Arrays
+
+In SplashKit, you can programmatically create JSON objects and arrays, which then can be populated with data. Lets see how we can create the example JSON file from previous tutorials with this method.
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    json new_game_data = create_json();
+    json_set_string(new_game_data, "gameTitle", "My New Game");
+    json_set_bool(new_game_data, "fullScreenMode", false);
+    json_set_number(new_game_data, "numPlayers", 1);
+    ```
+    </TabItem>
+</Tabs>
+
+First we create the new JSON object using [`create_json()`](/api/json/#create-json), then we add basic data to **gameTitle**, **fullScreenMode**, and **numPlayers** using [`json_set_string()`](/api/json/#json-set-string), [`json_set_bool()`](/api/json/#json-set-bool) and [`json_set_number()`](/api/json#json-set-number).
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    vector<string> levels_array;
+
+    levels_array.push_back("level1");
+    levels_array.push_back("level2");
+    levels_array.push_back("level3");
+
+    json_set_array(new_game_data, "levels", levels_array);
+    ```
+    </TabItem>
+</Tabs>
+
+Next we add the levels array to the JSON object. We create a vector to store the strings, and push back each string that we want. Finally we use [`json_set_array()`](/api/json/#json-set-array) to store this data in JSON format.
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    json screen_size_data = create_json();
+
+    json_set_number(screen_size_data, "width", 800);
+    json_set_number(screen_size_data, "height", 600);
+
+    json_set_object(new_game_data, "screenSize", screen_size_data);
+    ```
+    </TabItem>
+</Tabs>
+
+Then we tackle the nested JSON object, the screen size object. We use [`create_json()`](/api/json/#create-json) to create a new object for this data, and then we add the width and the height to the object using [`json_set_number()`](/api/json/#json-set-number). Now that we have this JSON object filled with the data we want, we add it to the `new_game_data` object with [`json_set_object()`](/api/json/#json-set-object).
+
+### Writing JSON Data to a File
+
+Now that we have the `new_game_data` object that stores the same values as the JSON file used previously. Now, we can save this using [`json_to_file()`](/api/json/#json-to-file) like in the code below.
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    json_to_file(new_game_data, "new_game_data.json");
+    ```
+    </TabItem>
+</Tabs>
+
+By combining all these examples we can create the full program shown below.
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    #include "splashkit.h"
+
+    int main() {
+        json new_game_data = create_json();
+
+
+        json_set_string(new_game_data, "gameTitle", "My New Game");
+        json_set_bool(new_game_data, "fullScreenMode", false);
+        json_set_number(new_game_data, "numPlayers", 1);
+
+        json screen_size_data = create_json();
+
+        json_set_number(screen_size_data, "width", 800);
+        json_set_number(screen_size_data, "height", 600);
+
+        json_set_object(new_game_data, "screenSize", screen_size_data);
+
+        vector<string> levels_array;
+
+        levels_array.push_back("level1");
+        levels_array.push_back("level2");
+        levels_array.push_back("level3");
+
+        json_set_array(new_game_data, "levels", levels_array);
+
+        json_to_file(new_game_data, "new_game_data.json");
+
+        free_all_json();
+    }
+    ```
+    </TabItem>
+</Tabs>
+
+Running this program results in a file named `new_game_data.json` being written to the `Resources/json/` folder. Open this up and you'll see something very similar or identical to the example JSON file we've been using previously. It should look something like this:
+
+```json
+{
+    "numPlayers": 1,
+    "fullScreenMode": false,
+    "gameTitle": "My New Game",
+    "levels": [
+        "level1",
+        "level2",
+        "level3"
+    ],
+    "screenSize": {
+        "height": 600,
+        "width": 800
+    }
+}
+```
+
+Some of the keys can be in different positions, but this does not affect how we use it as we look for the key when retrieving values, not a particular data position in the JSON file. This new file is effectively the same JSON that we've used in previous JSON tutorials.
+
+### Modifying Existing JSON Data
+
+You can also load an existing JSON file, modify its contents, and save the changes back to the file. To demonstrate this, lets add the details of a player character to our game data.
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    json player_data = create_json();
+    json_set_string(player_data, "name", "Hero");
+
+    json stats_data = create_json();
+    json_set_number(stats_data, "health", 100);
+    json_set_number(stats_data, "mana", 50);
+    json_set_number(stats_data, "strength", 75);
+
+    json_set_object(player_data, "stats", stats_data);
+    ```
+    </TabItem>
+</Tabs>
+
+First we create the player JSON object to store the data for an entire character, then we create an individual object to hold the stats for the character. After this we add the stats object and nest it in the `player_data` object we created earlier.
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    json existing_data = json_from_file("new_game_data.json")
+    json_set_object(existing_data, "character", player_data);
+
+    json_to_file(existing_data, "modified_game_data.json");
+    ```
+    </TabItem>
+</Tabs>
+
+Next we load the game data we saved previously, add our `player_data` object to the existing data and save it. If we add this code to our previous program and run it a file is created in the `Resources/json/` folder named `modified_game_data.json`. Open it, and you should see something like the following:
+
+```json
+{
+    "character": {
+        "name": "Hero",
+        "stats": {
+            "health": 100,
+            "mana": 50,
+            "strength": 75
+        }
+    },
+    "fullScreenMode": false,
+    "numPlayers": 1,
+    "gameTitle": "My New Game",
+    "levels": [
+        "levels1",
+        "levels2",
+        "levels3"
+    ],
+    "screenSize": {
+        "height": 600,
+        "width": 800
+    }
+}
+```
+
+Now we have a character object stored with this JSON file. We also now have multiple levels of nesting. When this is the case and we want to access the innermost key we must get these JSON objects. So, to access the health stat we can use the following code:
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    // Load our JSON
+    json modified_game_data = json_from_file("modified_game_data.json");
+    // Retrieve Character JSON object from the file.
+    json character = json_read_object(modified_game_data, "character");
+    // Retrieve the Stats JSON object from the Character JSON
+    json stats = json_read_object(character, "stats");
+    // Retrieve the value of health from the stats JSON object
+    int hp = json_read_number_as_int(stats, "health");
+    ```
+    </TabItem>
+</Tabs>
+
+### Conclusion
+
+By following this tutorial, you're now equipped with the foundational skills necessary to create, read and write JSON data objects with SplashKit. These examples have been focused around game development, but the JSON skills you've learnt extends beyond this as JSON is a versatile tool for any software development project.

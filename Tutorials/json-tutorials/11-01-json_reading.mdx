@@ -1,0 +1,96 @@
+---
+title: Reading JSON Data in SplashKit
+description: After understanding the basics of JSON in SplashKit, this part of the tutorial focuses on how to read and parse JSON data. Reading JSON data is essential for game development tasks such as loading game settings, level configurations, or player data.
+category: Guides
+author: Jonathan Tynan
+lastupdated: May 11 2024
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+**{frontmatter.description}**
+
+_Written by {frontmatter.author} on {frontmatter.lastupdated}_
+
+## Reading JSON Objects
+
+
+
+In the previous tutorial we loaded the following [JSON](/api/json/) file and read the game title from it. Lets extend this a little, and dive a further into extracting values from this structure.
+
+```json
+{
+  "gameTitle": "My New Game",
+  "fullScreenMode": false,
+  "numPlayers": 1,
+  "screenSize": {
+    "width": 800,
+    "height": 600
+  },
+  "levels": ["level1", "level2", "level3"]
+}
+```
+
+### Accessing Values
+
+To access values in JSON objects like strings, numbers, or booleans, you can use functions like [`json_read_string()`](/api/json/#json-read-string), [`json_read_number_as_int()`](/api/json/#json-read-number-as-int), or [`json_read_bool()`](/api/json/#json-read-bool). We use these functions like the following code snippet.
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    string title = json_read_string(game_data, "gameTitle");
+    int numPlayers = json_read_number_as_int(game_data, "numPlayers");
+    bool isFullScreen = json_read_bool(game_data, "fullScreenMode");
+    ```
+    </TabItem>
+</Tabs>
+
+### Working with JSON Arrays
+
+If the data is an array, like the value stored for the `levels` key, we can obtain the data through [`json_read_array()`](/api/json/#json-read-array) and store it into a vector. Then we can loop through the entries in the vector, and do some action with the stored data. To know when to finish looping through the vector we'll use the in-built vector function [`size()`](https://en.cppreference.com/w/cpp/container/vector/size) Below is an example of this.
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    vector<string> levels;
+    json_read_array(game_data, "levels", levels);
+    int num_levels = levels.size();
+    for(int i = 0; i < num_levels; i++)
+    {
+        write("Got level: ");
+        write_line(levels[i]);
+    }
+
+    ```
+    </TabItem>
+</Tabs>
+
+Running this prints the following to the terminal:
+
+```plaintext
+Got level: level1
+Got level: level2
+Got level: level3
+```
+
+### Extracting Nested JSON Objects
+
+SplashKit's JSON functionality allows you to extract various types of data, including basic types mentioned previously, but also even nested JSON objects. In our example file the value for the `screenSize` key is a JSON object. The following code demonstrates how to extract this object:
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    json game_screen_size = json_read_object(game_data, "screenSize");
+    int width = json_read_number_as_int(game_screen_size, "width");
+    int height = json_read_number_as_int(game_screen_size, "height");
+    ```
+    </TabItem>
+</Tabs>
+
+In this example, [`json_read_object()`](/api/json/#json-read-object) is used to extract the nested JSON object, and then the values are read from this nested object. These variables can then be used to define the window size for this game.
+
+### Conclusion
+
+Reading JSON data with SplashKit is a straightforward process that can greatly enhance the flexibility and functionality of your game. It enables dynamic loading of game content and configurations, making your game more adaptable and easier to manage.
+
+In the next part of this tutorial, we explore how to write and modify JSON data, allowing you to save game states, configurations, and player preferences.

@@ -1,0 +1,125 @@
+---
+title: Introduction to JSON in SplashKit
+description: JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write, and for machines to parse and generate.
+category: Guides
+author: Jonathan Tynan
+lastupdated: May 11 2024
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+**{frontmatter.description}**
+
+_Written by {frontmatter.author} on {frontmatter.lastupdated}_
+
+### What is JSON?
+
+[JSON](/api/json/) is often used in various programming environments, including game development, for data storage and configuration. In SplashKit, JSON functionality allows developers to efficiently manage game settings, level data, and more. This part of the tutorial introduces JSON and its basic structure, with an overview of its application in SplashKit.
+
+### Basic Structure of a JSON File
+
+A basic JSON file might look like this:
+
+```json
+{
+  "gameTitle": "My New Game",
+  "screenSize": {
+    "width": 800,
+    "height": 600
+  },
+  "levels": ["level1", "level2", "level3"]
+}
+```
+
+JSON objects are made up of values associated with keys. In this example, `gameTitle` is the key associated with the string `"My New Game"`, `screenSize` is the key for an object with two numeric values (width and height), and an array of strings is assigned as the value for the key `levels`.
+
+### Overview of JSON in SplashKit
+
+SplashKit simplifies the process of working with JSON files in your games. Functions are provided for reading JSON files, so that we can easily read values and load configurations or game data. Additional functions are provided for writing JSON files, so that we can save configurations and game data.
+
+### Getting Started with JSON in SplashKit
+
+To begin using JSON in SplashKit, we must have our files in the correct locations. Run the following command in your project directory to generate the resources folder.
+
+```shell
+skm resources
+```
+
+This command creates sub-folders for each type of resource. One of these is named `json` and that is where we place our JSON files. To begin lets take the example JSON file above and place it into the `json` folder with the name `game_data.json`. To access the values in this file we can now do the following:
+
+<Tabs>
+    <TabItem label="C++">
+    ```cpp
+    #include "splashkit.h"
+    int main()
+    {
+        json game_data;
+        game_data = json_from_file("game_data.json");
+        string game_title = json_read_string(game_data, "gameTitle");
+        write("Game Title: ");
+        write_line(game_title);
+        free_json(game_data);
+        return 0;
+    }
+
+    ```
+    </TabItem>
+</Tabs>
+
+In this code example, we're first using [`json_from_file`](/api/json/#json-from-file) to load a JSON object with the details from the `game_data.json` file.
+Then we are getting the value of the key that matches `gameTitle` using [`json_read_string`](/api/json/#json-read-string). We write this to the console and free the JSON object using [`free_json()`](/api/json/#free-json) as we exit. By freeing the JSON object we are deallocating any memory that has been assigned to it, preventing any memory-related errors such as a `Segmentation Fault`. We can build this program with the following command.
+
+<Tabs>
+    <TabItem label="C++">
+    ```shell
+    g++ program.cpp -lSplashKit -o json_program
+    ```
+    </TabItem>
+</Tabs>
+
+And run it with:
+
+<Tabs>
+    <TabItem label="C++">
+    ```shell
+    ./json_program
+    ```
+    </TabItem>
+</Tabs>
+
+When we run this program it should output the following to the console:
+
+```plaintext
+Game Title: My New Game
+```
+
+### Checking Keys
+
+But what if we didn't have a `gameTitle` key in our JSON? Well, error messages will be produced indicating that this key is `null`. To prevent this, we can use the [`json_has_key()`](/api/json/#json-has-key) function to check if the key is present and then do actions based on whether it has been found or not. We could then turn the previous example into the following code:
+
+<Tabs>
+  <TabItem label="C++">
+      ```cpp
+    #include "splashkit.h"
+    int main()
+    {
+        json game_data;
+        game_data = json_from_file("game_data.json");
+        if(json_has_key(game_data, "gameTitle"))
+        {
+          string game_title = json_read_string(game_data, "gameTitle");
+          write("Game Title: ");
+          write_line(game_title);
+        }
+        else
+        {
+          write_line("Key \"gameTitle\" not found.");
+        }
+        free_json(game_data);
+        return 0;
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+We have now loaded up our JSON file and retrieved the value stored with the `gameTitle` key. In the next tutorial we explore further how we can retrieve values stored in a JSON object.
