@@ -77,7 +77,7 @@ There is no right or wrong way to choose your audio and sound effects. The choic
 Let's begin with making your main background audio.
 This will be the music that loops throughout the level until its finished. You'll notice this in many games; amongst your sound affects, you have a jingle in the background. For example, the iconic Mario soundtrack. 
 
-First: Lets get our audio into it's correct folders.
+First: let's get our audio into it's correct folders.
 We want our audio file, which can be ogg, wav, mod, flac, and mp3 files, into our 'sounds' folder.
 Our code for background audio is only 3 lines of code.
 

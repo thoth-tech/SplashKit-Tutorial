@@ -2,7 +2,7 @@
 
 ## Recapping
 
-Before we dive into creating an important and vital part of any game, lets recap from the previous tutorial, to provide a foundation of what we'll need before continuing:
+Before we dive into creating an important and vital part of any game, let's recap from the previous tutorial, to provide a foundation of what we'll need before continuing:
 
 ### Basic drawing and Graphics (From Tutorial 2, by Josh Kilinc)
 
