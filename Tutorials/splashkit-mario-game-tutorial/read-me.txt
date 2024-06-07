@@ -1,3 +1,5 @@
+Edit: Formatting to be fixed and tutorial will need an in-depth review.
+
 ***
 
 the game files icluding the animation scripts, sprites, audios etc for this tutorial are in a github repository.
